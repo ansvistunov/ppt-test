@@ -19,7 +19,7 @@
 
 			<div class="slides size">
                 <!-- Slides are separated by three dashes (the default) -->
-                <section data-markdown="markdown.md"></section>
+                <section data-markdown="markdown.md" data-transition="convex"></section>
             </div>
 		</div>
 
@@ -36,8 +36,22 @@
 				progress: true,
 				history: true,
 				center: true,
-				slideNumber: true, 
-				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealMath.KaTeX ]
+				slideNumber: 'c/t',
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealMath.KaTeX ],
+				notes_pointer: {
+        		pointer: {
+            		size: 15,  // in pixels (scaled like the rest of reveal.js)
+            		color: 'rgba(255, 0, 0, 0.8)',  // something valid for css background-color
+            		key: 'A'
+        				},
+        		},
+
+    			dependencies: [
+        		// ...
+
+		        {src: '../../node_modules/reveal.js-notes-pointer/notes-pointer.js'}
+        			// async is optional
+    			]
 			});
 
 		</script>
