@@ -1,3 +1,131 @@
+### Примеры
+* Свойство, скрытое для for…in:​​
+
+```js 
+let user = {​
+    name: "Вася",​
+    toString: function() { return this.name; }​
+};​
+
+// помечаем toString как не подлежащий перебору в for..in​
+Object.defineProperty(user, "toString", ​{enumerable: false});​
+
+for(let key in user) alert(key);  // name​
+```
+---
+### Примеры
+* Свойство-функция:​
+
+```js 
+let user = {​
+    firstName: "Вася",  
+    surname: "Петров"​
+}​
+
+Object.defineProperty(user, "fullName", 
+    {​
+        get: function() {return this.firstName + ' ' + this.surname;​ } ​
+    }
+);​
+
+alert(user.fullName); // Вася Петров​
+```
+---
+### Примеры
+* get и set можно создать при объявлении объекта:​
+
+```js 
+let user = { firstName: "Вася",surname: "Петров",​
+    get fullName() {​
+        return this.firstName + ' ' + this.surname;​
+    },​
+    set fullName(value) { 
+        var split = value.split(' ');​
+        this.firstName = split[0]; 
+        this.surname = split[1]; }​
+};​
+
+alert( user.fullName ); // Вася Петров (из геттера)​
+user.fullName = "Петя Иванов";​
+alert( user.firstName ); // Петя  (поставил сеттер)​
+alert( user.surname ); // Иванов (поставил сеттер)​
+```
+---
+### Другие методы работы со свойствами​
+* Object.defineProperties(obj, descriptors) - позволяет объявить несколько свойств сразу​
+* Object.keys(obj) - возвращает массив – список свойств объекта (только enumerable-свойства) ​
+* Object.getOwnPropertyNames(obj) -  возвращает массив – список свойств объекта (все свойства) ​
+* Object.getOwnPropertyDescriptor(obj, prop) - возвращает дескриптор для свойства obj[prop].​
+*И др..​
+
+---
+### Статические свойства и методы​
+* Свойства и методы, «записанные» в саму функцию-конструктор называются статическими​
+
+```js 
+function Article() {​
+    Article.count++;​
+}​
+
+Article.count = 0; // статическое свойство-переменная​
+Article.DEFAULT_FORMAT = "html"; // статическое свойство-константа​
+```
+---
+### Статические свойства и методы​
+* Свойства и методы, «записанные» в саму функцию-конструктор называются статическими​
+
+```js 
+function Article() { 
+    Article.count++;
+}
+Article.count = 0;​
+Article.showCount = function() {​
+    alert( this.count );​
+}​
+
+// использование​
+new Article();​
+new Article();​
+Article.showCount(); // (2)​​
+```
+---
+### Метод call​
+* Синтаксис метода call:​
+```js 
+func.call(context, arg1, arg2, ...)​
+```
+* При этом вызывается функция func, первый аргумент call становится её this, а остальные передаются в func согласно списку аргументов (arg1, arg2,).​
+* Вызов func.call(context, a, b...) – то же, что обычный вызов func(a, b...), но с явно указанным this(=context)
+
+---
+### Метод call​
+
+```js 
+let user = {​
+  firstName: "Василий",​
+  surname: "Петров",​
+  patronym: "Иванович"​
+};​
+
+function showFullName(firstPart, lastPart) {​
+  alert( this[firstPart] + " " + this[lastPart] );​
+}​
+
+showFullName.call(user, 'firstName', 'surname’) ​
+// "Василий Петров"​
+showFullName.call(user, 'firstName', 'patronym’) ​
+// "Василий Иванович"​
+```
+---
+### Метод apply
+* Вызов функции при помощи func.apply работает аналогично func.call, но принимает массив аргументов вместо списка.​
+* Используется, когда спиcок параметров нужно формировать динамически​
+```js 
+func.call(context, arg1, arg2);​
+// идентичен вызову​
+func.apply(context, [arg1, arg2]);​
+```
+---
 ### Объекты и их прототипы
 * Объекты в JavaScript можно организовать в цепочки так, чтобы свойство, не найденное в одном объекте, автоматически искалось бы в другом.​
 * Если один объект имеет специальную ссылку \__proto__ на другой объект, то при чтении свойства из него, если свойство отсутствует в самом объекте, оно ищется в объекте \__proto__
