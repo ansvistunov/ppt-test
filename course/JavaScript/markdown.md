@@ -56,7 +56,7 @@ alert( user.surname ); // Иванов (поставил сеттер)​
 * Object.keys(obj) - возвращает массив – список свойств объекта (только enumerable-свойства) ​
 * Object.getOwnPropertyNames(obj) -  возвращает массив – список свойств объекта (все свойства) ​
 * Object.getOwnPropertyDescriptor(obj, prop) - возвращает дескриптор для свойства obj[prop].​
-*И др..​
+* И др..​
 
 ---
 ### Статические свойства и методы​
@@ -203,7 +203,7 @@ alert( obj.__proto__.__proto__ ); // null, нет​
 * Встроенные прототипы можно изменять
 ```js 
 String.prototype.repeat = function(times) {​
-  return new Array(times + 1).join(this);​
+    return new Array(times + 1).join(this);​
 };​
 alert( "ля".repeat(3) ); // ляляля​
 ```
