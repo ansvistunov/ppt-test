@@ -5,3 +5,11 @@
   .size {
     font-size: 80%;
   }
+
+  .reveal ul {
+    display: block;
+  }
+
+  .big_image {
+    width: 80%;
+  }
