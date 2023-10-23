@@ -13,6 +13,10 @@ function getDate()
   return today;
 }
 
-let footer = document.getElementById("footer-left");
-console.log(footer);
-footer.innerHTML = getDate();
+console.log("footer loaded");
+document.addEventListener("DOMContentLoaded", (event) => {
+  let footer = document.getElementById("footer-left");
+  console.log(footer);
+  footer.innerHTML = getDate();
+});
+
