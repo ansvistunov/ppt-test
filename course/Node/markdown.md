@@ -474,23 +474,23 @@ app.listen(3000)
 ```html  
 ...
 <h1><%=title %> в EJS</h1>
-<% if(emailsVisible) {%>
+<% if(emailsVisible) { %>
 <h3>Адреса электронной почты</h3>
 <table>
     <thead>
     <th>#</th> <th>email</th>
     </thead>
     <tbody>
-    <% for(let i=0; i<emails.length;i++) {%>
+    <% for(let i=0; i<emails.length;i++) { %>
     <tr>
         <td><%=i %></td> <td><%=emails[i] %></td>
     </tr>
-    <%} %>
+    <% } %>
     </tbody>
 </table>
-<% }else {%>
+<% }else { %>
 <h3>Электронный адрес отсутствует</h3>
-<%} %>
+<% } %>
 <p>Телефон: <%=phone %></p>
 </body>
 <html>
@@ -614,11 +614,39 @@ https://learn.microsoft.com/en-us/archive/msdn-magazine/2013/november/images/dn4
 https://ru.wikipedia.org/wiki/AJAX <!-- .element: class="copyright-reference"  -->
 ---
 #### AJAX
-* SPA, как  подход к построению приложения перекликается с моделью AJAX
-* При использовании AJAX необходимо иметь специальные имена ресурсов на сервере, при доступе к которым возвращаются необходимые данные
+  - SPA, как  подход к построению приложения перекликается с моделью AJAX. При использовании AJAX необходимо иметь специальные имена ресурсов на сервере, при доступе к которым возвращаются необходимые данные <!-- .element: class="left small_font"  -->
 
-![AJAX](https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Ajax-model-ru.svg/750px-Ajax-model-ru.svg.png)<!-- .element: width="50%"  -->
+![AJAX](https://www.cs.put.poznan.pl/jkobusinski/ajax/model.png)<!-- .element: width="40%"  -->
      
-
-https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Ajax-model-ru.svg/750px-Ajax-model-ru.svg.png<!-- .element: class="copyright-reference"  -->
+https://www.cs.put.poznan.pl/jkobusinski/ajax/model.png<!-- .element: class="copyright-reference"  -->
 ---
+#### AJAX. XMLHttpRequest
+  ДОПИСАТЬ!!!!
+---
+#### AJAX. Пример
+```js  
+var oReq = new XMLHttpRequest();
+var request= “http://localhost:3000/country”; 
+console.log(request);
+oReq.addEventListener("load", reqListener);
+oReq.open("GET", request);
+oReq.send();
+
+function reqListener(event) {
+    var data = JSON.parse(this.responseText);
+   …
+}
+``` 
+---
+#### AJAX. fetch
+ - Использование fetch (есть поддержка во всех современных браузерах):
+     - fetch(url, [options]) - Выполняет запрос на ресурс url (по умолчанию GET), с использованием (необязательно) опций. Возвращает Promise c объектом response, содержащий ответ сервера.
+     - Объект Responce:
+
+ДОПИСАТЬ!!!
+
+---
+#### AJAX. Использование fetch
+  - При необходимости выполнить запрос с другим методом протокола HTTP (например, POST) используются дополнительные параметры:
+  
+Дописать!!!
