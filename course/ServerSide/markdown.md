@@ -12,7 +12,7 @@
 ### Схема типичного приложения
 
 ![Web App](https://developer.mozilla.org/en-US/docs/Learn/Server-side/First_steps/Introduction/web_application_with_html_and_steps.png)
-https://developer.mozilla.org/en-US/docs/Learn/Server-side/First_steps/Introduction/web_application_with_html_and_steps.png
+https://developer.mozilla.org/en-US/docs/Learn/Server-side/First_steps/Introduction/web_application_with_html_and_steps.png <!-- .element: class="copyright-reference"  -->
 ---
 ### 
  - Чем отличается программирование на сервере от программирования на клиенте:
@@ -37,7 +37,8 @@ https://developer.mozilla.org/en-US/docs/Learn/Server-side/First_steps/Introduct
      - Командная строка
 
 ![CGI](https://dit.isuct.ru/IVT/BOOKS/DBMS/DBMS1/_pic_/cgi.gif)
-             - https://dit.isuct.ru/IVT/BOOKS/DBMS/DBMS1/_pic_/cgi.gif
+
+https://dit.isuct.ru/IVT/BOOKS/DBMS/DBMS1/_pic_/cgi.gif <!-- .element: class="copyright-reference"  -->
 
 ---
 ### Переменные окружения
@@ -192,7 +193,7 @@ http://localhost:8080/tests/ex1.jsp
 ---
 ### Принцип работы
 ![JSP](https://findout.su/findoutsu/baza3/1203618253253.files/image004.png)
-https://findout.su/findoutsu/baza3/1203618253253.files/image004.png
+https://findout.su/findoutsu/baza3/1203618253253.files/image004.png<!-- .element: class="copyright-reference"  -->
 ---
 ### Трансляция JSP-файла
  - JSP-файл транслируется в файл java
