@@ -230,9 +230,20 @@ http.get('http://www.unn.ru', function(response) {
  - Извлечь из строки URL отдельные элементы:
      - url.parse(<строка URL>, [сформировать объект])
      - http://localhost:4848/echo?message=Hello
-
-
-     ДОПИСАТЬ!!!!!
+```js
+Url {protocol: null,
+    slashes: null,
+	auth: null,
+	host: null,
+	port: null,
+	hostname: null,
+	hash: null,
+	search: '?message=Hello',
+	query: [Object: null prototype] { message: 'Hello' },
+	pathname: '/echo',
+	path: '/echo?message=Hello',
+	href: '/echo?message=Hello'}
+```
 ---
 ### Часто используемые модули. url
 ```js 
@@ -373,7 +384,17 @@ app.get("/error", function(req,res, next) {
 ### Часто используемые модули. Express
 Методы объекта response
 
-ДОПИСАТЬ!!!! 
+|Метод|Описание|
+|-----|--------|
+|res.download()|	Приглашение загрузки файла.|
+|res.end()|	Завершение процесса ответа.|
+|res.json()|	Отправка ответа JSON.|
+|res.jsonp()|	Отправка ответа JSON с поддержкой JSONP.|
+|res.redirect()|	Перенаправление ответа.|
+|res.render()|	Вывод шаблона представления.|
+|res.send()|	Отправка ответа различных типов.|
+|res.sendFile()|	Отправка файла в виде потока октетов.|
+|res.sendStatus()|	Установка кода состояния ответа и отправка представления в виде строки в качестве тела ответа.|
 ---
 ### Часто используемые модули. Express
  - Работа со статическим содержимым
@@ -621,7 +642,25 @@ https://ru.wikipedia.org/wiki/AJAX <!-- .element: class="copyright-reference"  -
 https://www.cs.put.poznan.pl/jkobusinski/ajax/model.png<!-- .element: class="copyright-reference"  -->
 ---
 #### AJAX. XMLHttpRequest
-  ДОПИСАТЬ!!!!
+Методы
+|Метод|	Описание|
+|-----|---------|
+|abort()|	Отменяет текущий запрос, удаляет все заголовки, ставит текст ответа сервера в null.|
+|getAllResponseHeaders()|	Возвращает полный список HTTP-заголовков в виде строки. Заголовки разделяются знаками переноса (CR+LF). Если флаг ошибки равен true, возвращает пустую строку. Если статус 0 или 1, вызывает ошибку INVALID_STATE_ERR.|
+|getResponseHeader(headerName)|	Возвращает значение указанного заголовка.Если флаг ошибки равен true, возвращает null.Если заголовок не найден, возвращает null. Если статус 0 или 1, вызывает ошибку INVALID_STATE_ERR.|
+|open(method, URL, async, userName, password)|	Определяет метод, URL и другие опциональные параметры запроса; параметр async определяет, происходит ли работа в асинхронном режиме. Последние два параметра необязательны.|
+|send(content)|	Отправляет запрос на сервер.|
+|setRequestHeader(label, value)|	Добавляет HTTP-заголовок к запросу.|
+
+Свойства
+|Свойство|	Тип	|Описание|
+|--------|------|--------|
+|onreadystatechange|	EventListener|	Обработчик события, которое происходит при каждой смене состояния объекта. Имя должно быть записано в нижнем регистре.|
+|readyState	|unsigned short|	Текущее состояние объекта (0 — не инициализирован, 1 — открыт, 2 — отправка данных, 3 — получение данных и 4 — данные загружены)|
+|responseText|	DOMString|	Текст ответа на запрос. Если состояние не 3 или 4, возвращает пустую строку.|
+|responseXML|	Document|	Текст ответа на запрос в виде XML, который затем может быть обработан посредством DOM. Если состояние не 4, возвращает null.|
+|status|	unsigned short|	HTTP-статус в виде числа (404 — «Not Found», 200 — «OK» и т. д.)|
+|statusText|	DOMString|	Статус в виде строки («Not Found», «OK» и т. д.). Если статус не распознан, браузер пользователя должен вызвать ошибку INVALID_STATE_ERR.
 ---
 #### AJAX. Пример
 ```js  
@@ -641,12 +680,786 @@ function reqListener(event) {
 #### AJAX. fetch
  - Использование fetch (есть поддержка во всех современных браузерах):
      - fetch(url, [options]) - Выполняет запрос на ресурс url (по умолчанию GET), с использованием (необязательно) опций. Возвращает Promise c объектом response, содержащий ответ сервера.
-     - Объект Responce:
-
-ДОПИСАТЬ!!!
-
+Объект Responce:
+|Метод/Свойство|Описание|
+|--------------|--------|
+|responce.status|Код возврата РЕЕЗ-запроса (200 при удачном завершении)|
+|response.text()| читает ответ и возвращает как обычный текст|
+|response.json()| декодирует ответ в формате JSON|
+|response.formData()| возвращает ответ как объект FormData|
+|response.blob()| возвращает объект как Blob (бинарные данные с типом)|
+|response.arrayBuffer()| возвращает ответ как ArrayBuffer (низкоуровневое представление бинарных данных)|
+|response.body|  возвращает объект ReadableStream, с помощью которого можно считывать тело запроса по частям|
 ---
 #### AJAX. Использование fetch
   - При необходимости выполнить запрос с другим методом протокола HTTP (например, POST) используются дополнительные параметры:
   
 Дописать!!!
+---
+#### AJAX
+ - Существует множество библиотек, которые предоставляют более удобное API, чем XMLHttpRequest (jQuery, Prototype, …)
+ - Есть ограничения безопасности при выполнении AJAX – запросов
+     - Нельзя выполнять запросы из страниц, загруженных локально (с жесткого диска)
+     - Особенности при обработке файлов cookes
+---
+#### REST API
+ - REST (Representational State Transfer) — архитектурный стиль взаимодействия компонентов распределённого приложения в сети. 
+ - Основные идеи:
+     - Каждый «объект» однозначно описывается своим url (http://localhost/country/Russia или http://localhost/country/7 )
+     - Для манипуляций с объектом достаточно CRUD операций
+     - Все CRUD операции можно выразить методами протокола HTTP
+---
+#### REST API
+|HTTP Meth	|CRUD	|Entire Collection (e.g. /customers)	|Specific Item (e.g. /customers/{id})|
+|-----------|-------|---------------------------------------|------------------------------------|
+|POST	|Create	|201 (Created), 'Location' header with link to /customers/{id} containing new ID.	|404 (Not Found), 409 (Conflict) if resource already exists..|
+|GET	|Read	|200 (OK), list of customers. Use pagination, sorting and filtering to navigate big lists.	|200 (OK), single customer. 404 (Not Found), if ID not found or invalid.|
+|PUT	|Update/Replace	|405 (Method Not Allowed), unless you want to update/replace every resource in the entire collection.	|200 (OK) or 204 (No Content). 404 (Not Found), if ID not found or invalid.|
+|PATCH	|Update/Modify	|405 (Method Not Allowed), unless you want to modify the collection itself.	|200 (OK) or 204 (No Content). 404 (Not Found), if ID not found or invalid.|
+|DELETE	|Delete	|405 (Method Not Allowed), unless you want to delete the whole collection—not often desirable.	|200 (OK). 404 (Not Found), if ID not found or invalid.|
+---
+#### REST API. Пример (сервер)
+```js
+const express = require("express");
+const app = express();
+const db = require("mysql");
+const connection = db.createConnection({
+    host:"localhost",   user:"alex",
+    password:"Qwerty123",    database:"world"
+});
+connection.connect(function(err){
+    if (err) { console.log(err); return;}
+    console.log("connection established");
+});
+app.get("/country",function(req,res){
+connection.query("select * from country", 
+        function(err, rows){ 
+            if (err){console.log(err);return;}
+            res.end(JSON.stringify(rows));
+        });
+}); 
+app.listen(3000);
+```
+---
+#### REST API. Пример (клиент)
+```js [1-25]
+function queryHandbook(request, rowHandler) {
+    function reqListener(event) {
+        var data = JSON.parse(this.responseText);
+        var table = document.getElementById("table_data");
+        table.innerHTML=‘’;
+        if (data.length > 0) {
+            var header = table.createTHead();   var hrow = header.insertRow();
+            for (var k in data[0]) {
+                var cell = hrow.insertCell();   cell.innerHTML= k;
+            }
+        }
+        for (var i =0; i<data.length;i++ ){
+            var newRow = table.insertRow();
+            for (j in data[i]){
+                var cell = newRow.insertCell();  cell.innerHTML = data[i][j];
+            }
+        }
+    }
+    var oReq = new XMLHttpRequest();
+    oReq.addEventListener("load", reqListener);
+    oReq.open("GET", request);    oReq.send();
+}
+```
+---
+#### REST API. Пример (сервер)
+ - Развиваем сервер, добавляем дополнительные операцию получения списка городов по коду страны
+
+```js 
+const bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({ extended: true }));
+…
+app.get("/city/:countrycode",function(req,res){
+    console.log(req.params.countrycode);
+    connection.query("select * from city where countryCode=?", req.params.countrycode, 
+            function(err, rows){
+                if (err){  console.log(err);  return;}
+                res.end(JSON.stringify(rows));
+            });
+});
+```
+---
+#### REST API. Пример (клиент)
+ - Развиваем клиента, добавляем запрос на города при нажатии на строку со страной
+
+```js 
+let countryHandler = function(){
+  queryHandbook('http://localhost:3000/city/'+ 
+                    this.cells[0].innerHTML, cityHandler);
+};
+
+//…
+
+newRow.onclick = countryHandler;
+```
+---
+#### REST API. Пример (сервер)
+ - Развиваем сервер, добавляем операцию редактирования сведений о городе
+
+```js 
+var bodyParser = require('body-parser');
+
+app.use(bodyParser.json());
+
+app.put("/city", function(req,res){
+    console.log("PUT /city called");
+    console.log(req.body);
+    connection.query("update city set name=?, CountryCode=?,"
+                            +" District=?, Population=? where id=?", 
+                    [req.body.Name, req.body.CountryCode, 
+                        req.body.District, req.body.Population, req.body.ID], 
+                        function(err, rows){
+                            if (err){
+                                console.log(err);
+                                return;
+                            }
+                            //console.log(rows);
+                            //res.end(JSON.stringify(rows));
+                        });
+});
+```
+---
+#### REST API. Пример (клиент)
+ - Развиваем клиента, добавляем редактируемые поля в таблицу и запрос к REST-сервису
+
+```js 
+function editCityHandler(){
+    var edits =  document.getElementsByName("dynamic_form");
+    var city = new Object();
+    var table = document.getElementById("table_data");
+    var colls = table.tHead.rows[0].cells;
+    for (var i = 0; i< edits.length;i++){
+        city[colls[i].innerHTML] = edits[i].value;
+        console.log();
+    }
+    console.log(city);
+
+    var oReq = new XMLHttpRequest();
+    //oReq.addEventListener("load", reqListener);
+    oReq.open("PUT", "http://localhost:3000/city/");
+    oReq.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+    oReq.send(JSON.stringify(city));
+    console.log("sended");
+}
+```
+---
+#### Сессии
+ - Протокол HTTP не поддерживает состояние (Stateless protocol)
+ - Это означает, что 
+     - Не сохраняет состояния между вызовами
+     - Все взаимодействие имеет короткий жизненный цикл (запрос - ответ)
+     - КАЖДЫЙ ресурс, доступ к которому осуществляется через HTTP, получается отдельным запросом, без какой-либо связи с предыдущими запросами (в HTTP 1.1 добавлен механизм постоянного соединения)
+---
+#### Сессии
+ - Часто приложениям необходим механизм поддержки состояния приложения (соединения пользователя)
+     - Пользователь уже заходил на этот сайт
+     - Пользователь аутентифицировался
+     - Пользователь сохранил свои настройки
+     - Пользователь сохранил данные (корзину при покупке в магазине)
+     - …
+ - => Такой механизм должен реализовываться поверх протокола HTTP
+---
+#### Сессии
+ - Как реализовать состояние?
+ - Как клиенту однозначно идентифицировать себя на сервере?
+ - Как серверу предоставить конкретный контент для каждого клиента?
+---
+#### Добавление состояния в HTTP (версии 1.0 и младше)
+ - Существуют различные способы поддержания состояний с использованием HTTP (не являющиеся частью протокола). Например,
+ - Клиентские механизмы:
+     - Куки (Cookies)
+     - Скрытые переменные
+     - Локальное хранилище
+ - Серверные механизмы:
+     - сеансы
+---
+#### Куки
+ - Небольшой объем информации, отправляемой сервером клиенту (браузеру), который сохраняется на клиенте и затем отправляется обратно клиентом при запросах
+ - Используется для:
+     - проверки подлинности
+     - отслеживания пользователей
+     - сохранение пользовательских настроек, корзин и т.д.
+---
+#### Куки
+ - Формируется сервером
+ - Отправляется клиенту с заголовком HTTP-ответа
+ - Возвращается браузером серверу в HTTP-запросе
+
+![Cookies](https://upload.wikimedia.org/wikipedia/commons/b/bc/HTTP_cookie_exchange.svg)
+https://upload.wikimedia.org/wikipedia/commons/b/bc/HTTP_cookie_exchange.svg<!-- .element: class="copyright-reference"  -->
+
+---
+#### Куки. HTTP запросы
+```txt
+GET /index.html HTTP/1.1                браузер -> сервер (запрос)
+Host: www.example.org
+
+HTTP/1.1 200 OK                         сервер -> браузер (ответ)
+Content-type: text/html
+Set-Cookie: name=value                  установка куки
+
+(содержимое страницы)
+
+
+
+GET /spec.html HTTP/1.1                 браузер -> сервер (запрос)
+Host: www.example.org
+Cookie: name=value                      все последующие запросы содержат 
+Accept: */*                                 установленную куки
+
+```
+---
+#### Поддержка куки (node.js)
+```js
+const http = require("http");
+http.createServer(function(req,res){
+    res.writeHead(200, {
+        "Set-Cookie":"testcookie=test",
+        "Context-type":"text/plain"
+    })
+    res.end("Hello world");
+}).listen(3000);
+```
+---
+#### Куки
+![CookieBrowser](../img/Cookie.png)
+---
+#### Доступ к куки на стороне клиента
+ - Из JavaScript (браузер) доступно поле document.cookie
+ - Поле можно устанавливать/читать вручную
+```js
+document.cookie = "username=ivan;password=12345";
+```
+ - Или с использованием функции
+```js
+Cookies.set("username", “ivan");
+...
+alert(Cookies.get("username")); // ivan
+```
+---
+#### Время жизни куки
+ - session cookie - тип по умолчанию 
+     - временный файл, который хранится только в памяти браузера
+     - когда браузер закрыт, временные файлы куки уничтожаются
+     - не может использоваться для сохранения долгосрочной информации
+     - безопаснее, поскольку никакие другие программы, кроме браузера не могут получить к ним доступ
+---
+#### Время жизни куки
+ - persistent cookie: куки, которые хранятся в файловой системе компьютера
+     - может сохранять информацию между перезагрузками браузера
+     - потенциально менее безопасный, поскольку пользователи (или программы) могут открывать файлы куки, видеть/изменять значения файлов куки и т. д.
+     - Для куки может быть определено время устаревания:
+
+```js
+document.cookie="username=Ivan Drago; expires=Thu, 17 Jul 2017 15:00:00 GMT";
+```
+---
+#### Сессии на сервере
+ - Текущее состояние сохраняется на сервере (в файле, база данных, в памяти)
+ - Каждый запрос включает в себя токен, идентифицирующий сессию браузера (токены могут быть переданы через куки, скрытые переменные, переписывание URL-адресов).
+ - При каждом запросе исполняющий скрипт использует токен для получения состояния сеанса
+---
+#### Сессии в Node.js
+ - Имеется большое количество модулей, упрощающих работу с сессиями
+ - При использовании express можно использовать модуль express-session
+ - Сессии можно хранить либо в памяти сервера
+     - Занимают оперативную память
+     - Теряются при перезапуске сервера
+ - Либо в базе данных
+ - При использовании СУБД MySQL для хранения сессий можно использовать модуль express-mysql-session
+---
+#### Сессии. пример
+```js
+const express = require("express");
+const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
+const SessionStore = require('express-mysql-session');
+
+const app = express();
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(express.static('public'));
+app.use(cookieParser());
+```
+---
+#### Сессии. пример
+ - Модуль express-session использует куки для формирования токенов сессии. 
+ - Для обеспечения удобного механизма работы с куки подключаем модуль  cookie-parser
+ - Инициализируем наше приложение, передавая ему cookie-parser
+---
+#### Сессии. пример
+```js
+const options = {
+    host: 'localhost',
+    user: 'alex',
+    password: 'Qwerty123',
+    database: 'world'
+};
+
+
+app.use(session({
+    key: 'session_cookie_name',
+    secret: 'session_cookie_secret',
+    store: new SessionStore(options),
+    resave: true,
+    saveUninitialized: true
+}))
+```
+---
+#### Сессии в Node.js
+ - Инициализируем хранилище сессий, используя в качестве СУБД MySQL
+ - Параметры подключения указываем в options
+     - Secret – ключ, используемый для подписи файла куки
+     - Store – используемое хранилище
+     - Resave – принудительная запись сеанса в хранилище, даже если он не изменялся
+     - saveUninitialized – в хранилище записываются в том числе неинициализированные сессии
+---
+#### Сессии. пример
+```js
+app.get('/', function(req, res, next) {
+    req.session.number = req.session.number + 1 || 1;
+    console.log(req.session.number)
+    res.end("You read this page "+req.session.number.toString()+" times");
+    next();
+})
+
+app.listen(3000);
+```
+Сессия - обычный объект, в который можно добавлять свойства
+---
+#### Практическое использование сессий
+ - Разработаем систему, позволяющую закрыть доступ к «секретной» информации всем «неавторизованным» пользователям
+ - Система при запросе секретных данных должна позволить пользователю авторизоваться (ввести логин/пароль), а в случае, если он уже авторизовался – предоставить данные
+ - Сессия пользователя (авторизация) должна сохраняться при запросе к другим документам
+---
+#### Пример. Подключение модулей
+```js
+const express = require("express");
+const bodyParser = require('body-parser’);
+const cookieParser = require('cookie-parser’);
+const session = require('express-session’);
+const SessionStore = require('express-mysql-session’);
+const connection = require("./db");
+const app = express();
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(express.static('public'));
+app.use(cookieParser());
+```
+---
+#### Пример. Настройка сессий
+```js
+const options = {
+    host: 'localhost',
+    user: 'alex',
+    password: 'Qwerty123',
+    database: 'world'
+};
+app.use(session({
+    key: 'session_cookie_name',
+    secret: 'session_cookie_secret',
+    store: new SessionStore(options),
+    resave: true,
+    saveUninitialized: true
+}))
+```
+---
+#### Пример. Доступ к данным
+```js
+app.get('/topsecret/:document', checkUser, function(req, res) {
+    res.end("Вы получили доступ к секретным данным "+ req.params.document);
+});
+
+app.listen(3000);
+```
+---
+#### Пример. Проверка пользователя
+```js
+function checkUser(req, res, next) {
+    if (req.session.user_id) {
+        connection.query("select count(*) cnt from users where user_name=?"
+                                                            +" and passwd=?", 
+            [req.session.user_id,req.session.password], function(err, rows){
+            if (err){
+                console.log(err);
+                return;
+            }
+            if (rows[0].cnt == 1) next();
+            else {
+                req.session.url = req.url;
+                res.redirect('/login.html');
+            }
+        });
+    } else {
+        req.session.url = req.url;
+        res.redirect('/login.html');
+    }
+}
+```
+---
+#### Пример. Операции с сессиями
+```js
+app.post('/session/create', function(req, res) {
+    req.session.user_id = req.body.login;
+    req.session.password = req.body.password;
+
+    if (req.session.url)
+        res.redirect(req.session.url);
+});
+
+app.get('/session/del', function(req, res) {
+    if (req.session) {
+        req.session.destroy(function() {});
+    }
+    res.end("Session deleted");
+});
+```
+---
+#### Пример. Login.html
+```html
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+<body>
+<form action="/session/create" method="POST">
+    <fieldset class="fieldset-auto-width">
+        <legend>Вход в систему</legend>
+        <label for="login">Имя пользователя</label>
+        <input type="text" name="login">
+        <label for="password">Пароль</label>
+        <input type="text" name="password">
+        <input type="submit">
+    </fieldset>
+</form>
+</body>
+</html>
+```
+---
+#### Взаимодействие клиента и сервера
+ - Протокол HTTP предполагает сценарий взаимодействия, при котором инициатором акта обмена данными выступает клиент (клиент посылает запрос серверу)
+ - Часто встречаемая ситуация –сервер должен отправить какие-то данные клиенту (должен выступить инициатором взаимодействия)
+     - Обмен сообщениями между клиентами
+     - Игры
+     - Оповещения о событиях
+     - …
+---
+#### Варианты реализации
+ - Периодические запросы к серверу (не появились ли у сервера новые данные)
+ - LongPooling
+ - WebSocket
+ - HTML5 Server Sent Events(SSE)
+ - …
+ - Многочисленные библиотеки, в реальности использующие один из описанных выше механизмов
+---
+#### Long pooling
+ - Клиент запрашивает страницу у сервера, используя обычный http
+ - На странице (обычно) выполняется JavaScript, который запрашивает ресурс у сервера.
+ - Сервер НЕ реагирует на запрос (не формирует ответ и не закрывает соединение) и ждет, пока не появится необходимость в пересылке сообщения клиенту
+ - Когда появляется новая информация, сервер отсылает ее клиенту
+ - Клиент получает новую информацию и НЕМЕДЛЕННО отсылает другой запрос серверу, запуская процесс ожидания на нем снова.
+---
+#### Long pooling
+![LongPooling](https://javascript.info/article/long-polling/long-polling.svg)<!-- .element: class="big_image"  -->
+
+https://javascript.info/article/long-polling/long-polling.svg<!-- .element: class="copyright-reference"  -->
+---
+#### Long pooling. Шаблон клиента
+```js
+<script>
+//    …
+    request();
+    function request() {
+        var req = new XMLHttpRequest();
+        req.open("GET", "/messages", true);
+        req.onload = function () {
+            //обрабатываем событие сервера
+            request();//снова запрос 
+        }
+        req.send('');
+    }
+</script>
+```
+---
+#### Long pooling. Сервер
+```js
+let clients = [];
+
+app.post('/publish', function(req, res) {
+    console.log("get request for publlish "+ req.body.message);
+    //console.log(req);
+    for (let i=0; i<clients.length;i++){
+        clients[i].end(req.body.message);
+    }
+    clients = [];
+
+})
+
+app.get('/messages', function(req, res) {
+    console.log("get request for messages...");
+    clients.push(res);
+})
+```
+---
+#### Server-sent events (часть HTML5)
+ - Клиент запрашивает ресурс у сервера, используя обычный http
+ - Сервер отдает поток данных (для этого он отправляет клиенту специальные заголовки, показывающие, как он должен обработать этот поток), не закрывая соединения
+ - Клиент использует специальный объект (EventSource) для того, чтобы обработать поток данных с сервера
+ - Поток данных структурирован на сообщения, у каждого из которых может быть уникальный идентификатор и тип и должна быть содержательная часть (данные)
+---
+#### SSE. Шаблон клиента
+```html
+<div id="chat">
+    <h1 id="message">0</h1>
+    <button onclick="send()">Start</button>
+</div>
+<ul id="messages"></ul>
+<script>
+    function send(){
+        console.log("begin script");
+        let eventSource = new EventSource("/sse")
+        eventSource.addEventListener("message", (e)=>{
+            try {
+                console.log(e.data);
+                message.innerHTML = Math.round(e.data);
+            }catch{
+                console.log("error");
+            }
+        })
+    }
+</script>
+```
+---
+#### SSE. Шаблон сервера
+```js
+app.get("/sse", (req, res) => {
+    res.set("Content-Type","text/event-stream")
+    res.set("Connection","keep-alive");
+    res.set("Cache-Control","no-cache");
+    res.set("Access-Control-Allow-Origin","*");
+    console.log("client connected");
+
+    let id = 0;
+    let timer = setInterval(() => {
+        res.status(200);
+        let value = Math.random() * 100;
+        let data = 'id:' + (id++) + '\n' + 'data: ' + value + '\n\n';
+        res.write(data); // НЕ send!!!
+        console.log("data send: " + data);
+    }, 1000);
+
+    req.on('close', () =>{
+        console.log("close connection" );
+        clearInterval(timer);
+    })
+})
+```
+---
+#### «Чат» с использованием SSE 
+ - Клиент создает соединение и читает поток данных (сообщений) с сервера
+ - Новое введенное сообщение отправляет серверу (используется метод POST)
+ - Сервер для клиентского соединения создает поток событий и регистрирует обработчик, который запустится при наступлении определенного события (прихода нового сообщения)
+ - В обработчике метода POST данные переданные клиентом упаковываются в событие и передаются соответствующему обработчику (см. выше)
+---
+#### SSE. Чат. Клиент
+```html
+<form id="chat">  <input type="text" id="message"> <input type="submit"> </form>
+<ul id="messages"></ul>
+<script>
+    listen();
+    function listen(){
+        let eventSource = new EventSource("/messages")
+        eventSource.addEventListener("message", (e)=>{
+            try {
+                var el = document.createElement("li");
+                el.textContent = e.data; messages.appendChild(el);
+            }catch{console.log("error");}
+        })
+    }
+    chat.onsubmit=function(){
+        var req = new XMLHttpRequest();
+        req.open("POST","/publish",true);
+        req.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+        req.send(JSON.stringify({message: this.elements.message.value}));
+        return false;
+    }
+</script>
+```
+---
+#### SSE. Чат. Сервер (1)
+```js
+const express = require("express");
+const app = express();
+const bodyParser = require('body-parser');
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(express.static('public'));
+
+const EE = require("events").EventEmitter;
+const messageEmitter = new EE();
+
+app.post("/publish", (req, res) =>{
+    console.log("get request for publlish "+ req.body.message);
+    messageEmitter.emit('newmessage',{data: req.body.message});
+    res.end();
+})
+```
+---
+#### SSE. Чат. Сервер (2)
+```js
+app.get("/messages", (req, res) => {
+    res.set("Content-Type","text/event-stream")
+    res.set("Connection","keep-alive");
+    res.set("Cache-Control","no-cache");
+    res.set("Access-Control-Allow-Origin","*");
+    console.log("client conected");
+    let id = 0;
+    const callback = function(message){
+        res.status(200);
+        let data = 'id:'+(id++)+'\n'+'data: '+message.data+'\n\n';
+        res.write(data); // НЕ send!!!
+        console.log("data send: "+data);
+    }
+    //устанавливаем обработчик для вновь пришедшего сообщения
+    messageEmitter.on('newmessage', callback);/
+    req.on('close', () =>{
+        console.log("close connection" );
+        //при закрытии соединения - убираем обработчик
+        messageEmitter.off('newmessage', callback);
+    })
+})
+app.listen(3000);
+```
+---
+#### WebSockets (Википедия)
+ - WebSocket — протокол **полнодуплексной** связи (может передавать и принимать одновременно) поверх TCP-соединения, предназначенный для обмена сообщениями между браузером и веб-сервером в режиме реального времени.
+ - Протокол WebSocket — это независимый протокол, основанный на протоколе TCP. Он делает возможным более тесное взаимодействие между браузером и севрером, способствуя f созданию приложений реального времени.
+     - В настоящее время в W3C осуществляется стандартизация API Web Sockets. Черновой вариант стандарта этого протокола утверждён IETF.
+    - _Широко поддерживается современными браузерами и серверами_
+---
+#### WebSocket. Клиент
+ - Создание
+```js
+ socket=new WebSocket("ws://localhost:8080/ws");
+```
+ - Обработчики событий
+     - Соединение 
+```js
+socket.onopen=function(){…}
+```
+     - Отсоединение 
+```js
+socket.onclose = function(event) {
+    if (event.wasClean) {
+        console.log('Соед. закрыто чисто');
+    } else {
+        console.log('Обрыв соединения'); 
+    }
+    console.log('Код: ' + event.code + ' причина: ' + event.reason);
+};
+```
+---
+#### WebSocket. Клиент
+ - Прием сообщения
+```js
+socket.onmessage = function(event) {
+    console.log("Получены данные " + event.data);
+    … = event.data;
+};
+```
+ - Ошибка 
+```js
+socket.onerror = function(error) {
+    console.log("Ошибка " + error.message);
+}
+```
+---
+#### WebSocket. Сервер (1)
+ - Модуль ws
+
+```js
+const express = require('express');
+const http = require('http');
+const url = require('url');
+const WebSocket = require('ws');
+const bodyParser = require('body-parser');
+
+const app = express();
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(express.static('public'));
+
+const EE = require("events").EventEmitter;
+const messageEmitter = new EE();
+
+var server = http.createServer(app);
+var wss = new WebSocket.Server({ server });
+let count  = 0;
+
+server.listen(8080, function listening() {
+    console.log('Listening on %d', server.address().port);
+});
+
+```
+---
+#### WebSocket. Сервер (1)
+```js
+wss.on('connection', function connection(ws, req) {
+    var location = url.parse(req.url, true);
+    console.log("new client connected");
+    let instance = count++;
+    const callback = (message) => {
+        console.log("in callback: message="+message.data);
+        ws.send(message.data);
+        console.log("sending to client....%s", instance);
+    }
+    messageEmitter.on('newmessage',callback);
+
+    ws.on('message', function incoming(message) {
+        console.log('received: %s', message);
+        messageEmitter.emit('newmessage',{data: JSON.parse(message).message});
+    });
+    ws.on('close', function close() {
+        console.log('socket closed for client %s', instance);
+        messageEmitter.off('newmessage',callback);
+    })
+});
+app.listen(3000);
+
+```
+---
+#### WebSocket. Клиент
+```html
+<form id="chat"> <input type="text" id="message"> <input type="submit"> </form>
+<ul id="messages"></ul>
+<script>
+    var socket = new WebSocket("ws://localhost:8080/ws");
+    socket.onopen = function() {console.log("Соединение установлено."); };
+    socket.onclose = function(event) {
+        if (event.wasClean) {console.log('Соединение закрыто чисто');
+        } else {console.log('Обрыв соединения');}
+        console.log('Код: ' + event.code + ' причина: ' + event.reason);
+    };
+    socket.onmessage = function(event) {
+        console.log("Получены данные " + event.data);
+        var el = document.createElement("li");
+        el.textContent = event.data;
+        messages.appendChild(el);
+    };
+    socket.onerror = function(error) {console.log("Ошибка " + error.message);}
+    chat.onsubmit=function(){
+        socket.send(JSON.stringify({message: this.elements.message.value}));
+        return false;
+    }
+</script>
+```
