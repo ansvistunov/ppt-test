@@ -694,7 +694,20 @@ function reqListener(event) {
 ### AJAX. Использование fetch
   - При необходимости выполнить запрос с другим методом протокола HTTP (например, POST) используются дополнительные параметры:
   
-Дописать!!!
+```js
+let country = {id: 1, name: 'Москва'};
+fetch('/country', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json;charset=utf-8'
+    },
+    body: JSON.stringify(ccountry)
+}
+)
+    .then(responce => responce.json())
+    .then(json => console.log(json));
+```
+
 ---
 ### AJAX
  - Существует множество библиотек, которые предоставляют более удобное API, чем XMLHttpRequest (jQuery, Prototype, …)
