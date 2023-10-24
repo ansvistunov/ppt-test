@@ -898,6 +898,7 @@ https://upload.wikimedia.org/wikipedia/commons/b/bc/HTTP_cookie_exchange.svg<!--
 ```txt
 GET /index.html HTTP/1.1                браузер -> сервер (запрос)
 Host: www.example.org
+________________________
 
 HTTP/1.1 200 OK                         сервер -> браузер (ответ)
 Content-type: text/html
@@ -905,7 +906,7 @@ Set-Cookie: name=value                  установка куки
 
 (содержимое страницы)
 
-
+________________________
 
 GET /spec.html HTTP/1.1                 браузер -> сервер (запрос)
 Host: www.example.org
@@ -1412,7 +1413,7 @@ server.listen(8080, function listening() {
 
 ```
 ---
-#### WebSocket. Сервер (1)
+#### WebSocket. Сервер (2)
 ```js
 wss.on('connection', function connection(ws, req) {
     var location = url.parse(req.url, true);
