@@ -1,0 +1,30 @@
+version: "2.1"
+services:
+  mysql-workbench:
+    image: lscr.io/linuxserver/mysql-workbench:latest
+    container_name: mysql-workbench
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+    volumes:
+      - /path/to/config:/config
+    ports:
+      - 8000:3000
+      - 8001:3001
+    cap_add:
+      - IPC_LOCK
+    restart: unless-stopped
+  mysql:
+    image: mysql:8.0
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: 123qwe
+      MYSQL_USER: alex
+      MYSQL_PASSWORD: Qwerty123
+      MYSQL_DATABASE: world
+    volumes:
+     - ./world.sql.gz:/docker-entrypoint-initdb.d/world.sql.gz
+#     - ./:/mnt
+    ports:
+      - 3306:3306
