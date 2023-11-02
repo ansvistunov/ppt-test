@@ -1,0 +1,181 @@
+function DistanceOnTerrain{
+	parameter p1. //первая точка на поверхности тела
+	parameter p2. //вторая точка на поверхности тела
+	//чтобы не учитывать ланшафт, приводим все точки к уровню моря
+	set vector1 to p1:altitudeposition(0)  - ship:body:position. // vector from body center to spot on surface.
+	set vector2 to p2:altitudeposition(0)  - ship:body:position. // vector from body center to spot on surface.
+	set theta to vang(vector1, vector2). // angle between the vectors.
+	return (theta * constant:degtorad * body:radius). // distance of the circumference arc between the two vectors on a circle of the body's radius.
+
+}
+
+function GetVertAcc {
+  parameter tgtcoord.
+  parameter stoptime, Isp. // обе величины в секундах, stoptime - время гашения горизонтальной скорости
+  local hstart to altitude.
+  local vv to ship:verticalspeed.
+  local hland to tgtcoord:terrainheight.
+// оценка скорости, которую нужно стравить
+// складывается из непосредственно скорости и гравипотерь;
+// потери оценены как g*stoptime/5
+  local dv to sqrt(velocity:surface:sqrmagnitude + 2*body:mu*(1/(body:radius + hland) - 1/(body:radius + hstart)) ) + body:mu/body:position:sqrmagnitude*stoptime/5.
+// оценка массы и максимально достижимого вертикального ускорения перед переходом к вертикальному спуску
+  local endmass to mass*constant:e^(-dv/(Isp*9.80665)).
+  local endav to availablethrust/endmass - body:mu/(body:radius + hland)^2.
+  local a to stoptime^2/(2*endav).
+  local b to stoptime * ( vv/endav - stoptime/2 ).
+  local c to vv^2/(2*endav) - vv*stoptime - hstart + hland.
+  return (-b - sqrt(b^2 - 4*a*c) ) / (2*a).
+}
+
+
+function waitdownrange {
+  parameter tgtcoord.
+  parameter maxah.
+  local lock vh to ship:groundspeed. // groundspeed - скорость относительно поверхности
+  local hland to tgtcoord:terrainheight.
+  local stoptime to vh/maxah.
+  
+  clearscreen.
+  until false {
+    wait 0.
+    set stoptime to vh/maxah.
+    local stopdist to vh^2/(2*maxah).
+
+  local tgtdist to DistanceOnTerrain(Ship:GeoPosition, tgtcoord ).
+  
+  print "stoptime="+stoptime at (0,1).
+  print "stopdist="+stopdist at (0,2).
+  print "tgtdist="+tgtdist at (0,3).
+  
+  if tgtdist < stopdist + vh*0.2 break. // 0.2 секунды - время запуска двигателя в стоке
+  set kuniverse:timewarp:rate to (tgtdist - stopdist)/(vh*5).
+  }
+  return stoptime.
+}
+
+
+function Descent {
+  parameter tgtcoord. //точка посадки
+  parameter stoptime. //продолжительность горизонтального торможения
+  parameter endalt. //высота НАД ПОВЕРХНОСТЬЮ, на которой нужно остановить маневр
+  parameter endv. //вертикальная скорость в момент останова маневра
+  local tstart to time:seconds.
+  local hland to tgtcoord:terrainheight. //высота точки посадки над поверхностью
+  local vh0 to ship:groundspeed. //горизональная скорость относительно земли
+  local ah to vh0/stoptime. //необходимое горизотальное ускорение, чтобы погасить начальную скорость
+  local av to (endv - ship:verticalspeed)/stoptime. //необходимое значение вертикального ускорения
+  //local endvv to ship:verticalspeed + av*stoptime. //конечная вертикальная скорость
+  // высота перехода к вертикальному спуску
+  //local vdstarth to altitude + stoptime * (ship:verticalspeed + av * stoptime / 2).
+  local hpid to pidloop(0.04, 0, 0.4).
+  local vpid to pidloop(0.04, 0, 0.4).
+  set hpid:setpoint to 0.
+  set vpid:setpoint to 0.
+  set hpid:minoutput to -ah/2.
+  set hpid:maxoutput to ah/2.
+  set vpid:minoutput to -body:mu/(body:radius^2*2).
+  
+  local wds is VECDRAW(V(0,0,0),tgtcoord:Position,red).
+  set wds:show to true.
+  
+  clearscreen.
+  until altitude < endalt {
+  
+	
+  
+    local hdir to vxcl(up:vector,tgtcoord:position):normalized. //направление на цель
+    local dcenter to body:radius + altitude.
+    // ускорение свободного падения с поправкой на центробежную силу
+    //local geff to (body:mu/dcenter - vxcl(up:vector,velocity:orbit):sqrmagnitude)/dcenter.
+    local maxa to ship:availablethrust / mass. //максимально возможное ускорение
+    local tleft to tstart + stoptime - time:seconds. //остаток времени
+   
+   //реальные значения скоростей, высоты и расстояния до цели
+    local vh to ship:groundspeed.
+    local vv to ship:verticalspeed.
+    local hasl to altitude.
+    //local dh to (body:radius + (hasl - hland)/3)*vang(up:vector,tgtcoord:position-body:position)*constant:degtorad.
+    local dh to DistanceOnTerrain(Ship:GeoPosition, tgtcoord ).
+   
+    //local ah to 2*(vh*tleft-dh)/(tleft*tleft). //необходимое горизотальное ускорение, чтобы погасить начальную скорость
+    //local av to (endv - ship:verticalspeed)/tleft. //необходимое значение вертикального ускорения
+    //local ah to (vh*vh)/(2*dh). //необходимое горизотальное ускорение, чтобы погасить начальную скорость
+   
+   
+    // ожидаемые значения высоты и расстояния до цели
+    local expdh to vh*tleft - ah*(tleft*tleft)/2.
+    local expalt to endalt + endv*tleft + av/2*(tleft^2).
+    
+	
+	
+	
+	
+    //set ahvec to -hdir*(ah + hpid:update(time:seconds,dh - expdh)).
+	//set ahvec to -VELOCITY:SURFACE:normalized*(ah + hpid:update(time:seconds,dh - expdh)).
+	
+	set ahvec to -VELOCITY:Orbit:normalized*(ah).
+	
+    //set avvec to -up:vector*(av + vpid:update(time:seconds,hasl - expalt)).
+	
+	if (av>0){
+		set av to 0.
+	}
+	
+	set avvec to -up:vector*(av).
+	
+    // боковая скорость и настройка компенсации
+    local latvel to vxcl(hdir,vxcl(up:vector,velocity:surface)).
+    local alatvec to -latvel*5/max(tleft,1).
+    print "Hacc: " + round(ahvec:mag,2) + "  Vacc: " + round(avvec:mag,2) + "  Lacc: " + round(alatvec:mag,2) + "     " at (0,13).
+	
+    set avec to ahvec + avvec.// + alatvec.
+	print "Avec: " + round(avec:mag,2) + " maxa: "+round(maxa,2) at (0,14).
+	
+    lock steering to lookdirup(avec,up:vector).
+	
+	
+	local wavec is VECDRAW(V(0,0,0),avec*5,red,"avec").
+    set wavec:show to true.
+	
+	local whvec is VECDRAW(V(0,0,0),ahvec*5,green,"ahvec").
+    set whvec:show to true.
+	
+	local wavvec is VECDRAW(V(0,0,0),avvec*5,blue,"avvec").
+    set wavvec:show to true.
+	
+	local walatvec is VECDRAW(V(0,0,0),alatvec*5,yellow,"alatvec").
+    set walatvec:show to true.
+	
+    print "tgtdist="+dh at (0,3).
+	print "expdh="+expdh at (25,3).
+	print "timeleft="+ tleft at (0,4).
+	print "ah="+ah at (0,5).
+	print "av="+av at (25,5).
+	print "hspeed="+vh at (0,6).
+	print "vspeed="+vv at (25,6).
+	 
+	
+	
+    lock throttle to avec:mag/maxa.
+	
+    //if avec:mag/maxa > 1.005 { print " WARNING: not enough TWR" at (25,33). }
+    wait 0.
+    if dh < 25 break. // за 25 м до точки посадки переходим к следующему этапу
+	set wds:VEC to tgtcoord:Position.
+  }
+}
+
+
+
+
+wait 10.
+
+set TargetPoint to LATLNG(0,120).
+
+
+clearscreen.
+
+set stoptime to waitdownrange(TargetPoint, ship:maxthrust/mass/5).
+
+Descent(TargetPoint, stoptime, 100,10).

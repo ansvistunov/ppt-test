@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Asunc await test</title>
+    <script>
+        function loadScript(src) {
+            return new Promise(function (resolve, reject) {
+                let script = document.createElement('script');
+                script.src = src;
+                script.onload = () => resolve(script);
+                script.onerror = () => reject(new Error(`Ошибка загрузки скрипта ${src}`));
+                document.head.append(script);
+            });
+        }
+        async function testAsync(){
+            await loadScript("script.js");
+            testFunction()
+        }
+        testAsync();
+    </script>
+
+</head>
+<body>
+
+</body>
+</html>

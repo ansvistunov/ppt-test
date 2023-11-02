@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%=title %></title>
+    <meta charset="utf-8" />
+    <style>
+        table, th, td {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+
+<h1><%=title %> в EJS</h1>
+
+<% if(emailsVisible) {%>
+<h3>Адреса электронной почты</h3>
+<table>
+    <thead>
+    <th>#</th>
+    <th>email</th>
+    </thead>
+    <tbody>
+    <% for(let i=0; i<emails.length;i++) {%>
+    <tr>
+        <td><%=i %></td>
+        <td><%=emails[i] %></td>
+    </tr>
+    <%} %>
+    </tbody>
+</table>
+<% }else {%>
+<h3>Электронный адрес отсутствует</h3>
+<%} %>
+<p>Телефон: <%=phone %></p>
+</body>
+<html>

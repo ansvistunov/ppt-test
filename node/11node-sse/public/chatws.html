@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chat (Пример использования WebSocket)</title>
+</head>
+<body>
+
+<form id="chat">
+    <input type="text" id="message">
+    <input type="submit">
+</form>
+<ul id="messages"></ul>
+<script>
+    //console.log("begin script");
+
+
+    var socket = new WebSocket("ws://localhost:8181/ws");
+        socket.onopen = function() {
+            console.log("Соединение установлено.");
+        };
+
+    socket.onclose = function(event) {
+        if (event.wasClean) {
+            console.log('Соединение закрыто чисто');
+        } else {
+            console.log('Обрыв соединения'); // например, "убит" процесс сервера
+        }
+        console.log('Код: ' + event.code + ' причина: ' + event.reason);
+    };
+
+    socket.onmessage = function(event) {
+        console.log("Получены данные " + event.data);
+        var el = document.createElement("li");
+        el.textContent = event.data;
+        messages.appendChild(el);
+    };
+
+    socket.onerror = function(error) {
+        console.log("Ошибка " + error.message);
+    }
+
+    chat.onsubmit=function(){
+        socket.send(JSON.stringify({message: this.elements.message.value}));
+        //console.log(JSON.stringify({message: this.elements.message.value}));
+        return false;
+    }
+
+
+</script>
+</body>
+</html>

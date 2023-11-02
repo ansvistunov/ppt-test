@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="table.css" rel="stylesheet" type="text/css">
+    <script>
+        //var url = 'http://s-cyberheart:8080/CyberHeart/CureService';
+        //var url='https://s-cyberheart:8181/CyberHeart/CyberHeartWebService';
+
+
+        function editCityHandler(){
+            var edits =  document.getElementsByName("dynamic_form");
+            var city = new Object();
+            var table = document.getElementById("table_data");
+            var colls = table.tHead.rows[0].cells;
+            for (var i = 0; i< edits.length;i++){
+                city[colls[i].innerHTML] = edits[i].value;
+                console.log();
+            }
+            console.log(city);
+
+            var oReq = new XMLHttpRequest();
+            //oReq.addEventListener("load", reqListener);
+            oReq.open("PUT", "http://localhost:3000/city/");
+            oReq.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+            oReq.send(JSON.stringify(city));
+            console.log("sended");
+
+
+        }
+
+        var cityHandler = function(){
+            //this->row
+
+            console.log("cityHandler called");
+
+            var currow = this;
+            var table = currow.parentNode;
+            var curindex = currow.rowIndex;
+            //console.log("index="+currow.rowIndex);
+
+            var i;
+            //сначала убираем старые строки...
+            var oldrows = document.getElementsByName("dynamic_form");
+            var arr = new Array();
+            //копируем список в массив. Напрямую со списком работать нельзя
+            for (i = 0; i < oldrows.length; i++) arr.push(oldrows[i]);
+
+            for (i = 0; i < arr.length; i++){
+                //console.log(oldrows);
+                var cell = arr[i].parentNode;
+                var row = cell.parentNode;
+                var val = arr[i].value;
+                cell.innerHTML = val;
+            }
+            //теперь убираем кнопку
+            var btnSave = document.getElementsByName("dynamic_button");
+            if (row)
+                if (btnSave[0]) {
+                //console.log(btnSave[0]);
+                //console.log(btnSave[0].parentNode);
+                row.removeChild(btnSave[0].parentNode);
+                row.onclick = cityHandler;
+                //и добавляем на предыдущую строку обработчик
+            };
+
+            //создаем новую строку на месте старой
+
+            var formRow = table.insertRow(curindex);
+            var elements = currow.cells;
+            for (var i = 0; i < elements.length; i++) {
+                //заполняем строку элементами ввода
+                var input = document.createElement("input");
+                input.type = "text";
+                input.value = elements[i].innerHTML;
+                input.name = "dynamic_form";
+                input.style.width = elements[i].offsetWidth+"px";
+                //console.log("width="+elements[i].offsetWidth );
+                console.log("width="+elements[i].style.width);
+                formRow.insertCell().appendChild(input);
+            }
+            //удаляем старую
+            table.removeChild(currow);
+
+            //и добавляем кнопку
+            var btnSave = document.createElement("input");
+            btnSave.type = "button";
+            btnSave.value = "Save";
+            btnSave.name = "dynamic_button";
+            btnSave.onclick = editCityHandler;
+            formRow.insertCell().appendChild(btnSave);
+
+            return true;
+        }
+
+        var countryHandler = function(){
+            queryHandbook('http://localhost:3000/city/'+this.cells[0].innerHTML, cityHandler);
+        }
+
+
+
+
+        var url = 'http://localhost:3000/country';
+
+
+
+        function queryHandbook(request, rowHandler) {
+
+            function reqListener(event) {
+                var data = JSON.parse(this.responseText);
+                //console.log(table);
+                var table = document.getElementById("table_data");
+                table.innerHTML='';
+
+
+                if (data.length > 0) {
+                    var header = table.createTHead();
+                    var hrow = header.insertRow();
+                    console.log(header);
+                    for (var k in data[0]) {
+                        var cell = hrow.insertCell();
+                        cell.innerHTML= k;
+                        //console.log(cell);
+                    }
+
+                }
+
+                for (var i =0; i<data.length;i++ ){
+                    var newRow = table.insertRow();
+
+                    newRow.onclick = rowHandler;
+                    for (j in data[i]){
+                        var cell = newRow.insertCell();
+                        cell.innerHTML = data[i][j];
+                    }
+                }
+            }
+
+
+
+
+            var oReq = new XMLHttpRequest();
+            oReq.addEventListener("load", reqListener);
+            oReq.open("GET", request);
+            oReq.send();
+        }
+
+
+
+
+    </script>
+</head>
+<body>
+<div>
+    <!-- <input type="text" id="cure_code" value="I25"> <label for="cure_code" >Код болезни</label> <br>
+    <input type="number" id="id_type" value="1"> <label for="id_type" >Номер справочника</label> <br>
+    -->
+    <input type="button" onclick="queryHandbook(url, countryHandler)" value="Запросить справочник стран"> <p> <p>
+
+</div>
+<div id="table_div">
+    <table id="table_data">
+    </table>
+</div>
+</body>
+</html>

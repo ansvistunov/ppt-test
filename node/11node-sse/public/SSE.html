@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SSE stream test</title>
+</head>
+<body>
+
+
+
+<div id="chat">
+    <h1 id="message">0</h1>
+    <button onclick="send()">Start</button>
+</div>
+<ul id="messages"></ul>
+<script>
+    function send(){
+        console.log("begin script");
+        let eventSource = new EventSource("/sse")
+        eventSource.addEventListener("message", (e)=>{
+            try {
+                console.log(e.data);
+                message.innerHTML = Math.round(e.data);
+            }catch{
+                console.log("error");
+            }
+        })
+    }
+</script>
+</body>
+</html>

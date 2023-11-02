@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<!--
+    To change this license header, choose License Headers in Project Properties.
+    To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+<head>
+<title>Тест сервиса справочников</title>
+<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="table.css" rel="stylesheet" type="text/css">
+    <script>
+//var url = 'http://s-cyberheart:8080/CyberHeart/CureService';
+//var url='https://s-cyberheart:8181/CyberHeart/CyberHeartWebService';
+var url = 'http://localhost:3000/service';
+function reqListener(event) {
+    console.log(this.responseText);
+    //this.responseText;
+    //event.currentTarget.responseXML;
+
+    var xml = this.responseXML;
+    console.log(xml);
+    var tbl = "";
+    var rows = xml.getElementsByTagName("ROW");
+    if (rows)
+        for (var i = 0; i < rows.length; i++)
+        {
+            tbl+='<tr class="rows">';
+            //console.log(rows[i]);
+            /*if (rows[i].attributes) {
+                console.log("attribs exists at row " + i+" length="+rows[i].attributes.length);
+                for (var j = 0; j < rows[i].attributes.length; j++) {
+                    console.log(rows[i].attributes[j]);
+                }
+            } else {
+                console.log("no atribs at row" + i);
+            }*/
+
+            nodes = rows[i].childNodes;
+
+            //console.log("у строки "+i+" "+nodes.length+" детей");
+
+            if (nodes)
+                for (var j=0; j<nodes.length;j++) {
+                    if (nodes[j] instanceof Element){
+                        //nodes[j].nodeName - название столбца
+                        //console.log(nodes[j].nodeValue+" "+j+" "+nodes[j].nodeName);
+                        //console.log(nodes[j].firstChild.nodeValue);
+                        var dat = nodes[j].firstChild.nodeValue;
+                        if (dat==null) dat="";
+                        if (i==0){
+                            tbl+="<th>";
+                        } else tbl+="<td>";
+                        tbl+=dat;
+                        if (i==0) {
+                            tbl+="</th>";
+                        }else tbl+="</td>"
+                    }
+                }
+
+            //console.log(rows[i]);
+            //town = towns[i1];
+            // операции над текущим элементом town
+            tbl+="</tr>\n";
+        }
+
+    //console.log(tbl);
+
+    document.getElementById("table_data").innerHTML=tbl;
+
+}
+
+
+function queryHandbook() {
+    var oReq = new XMLHttpRequest();
+    var request = url; //"http://s-cyberheart:8080/CyberHeart/CureServlet";
+
+    var codeElement = document.getElementById("cure_code");
+    var typeElement = document.getElementById("id_type");
+
+    //request += ("?code=" + codeElement.value + "&idType=" + typeElement.value);
+    console.log(request);
+    oReq.addEventListener("load", reqListener);
+    oReq.open("GET", request);
+    oReq.send();
+
+    //return oReg.
+
+}
+
+
+
+
+</script>
+</head>
+<body>
+<div>
+<input type="text" id="cure_code" value="I25"> <label for="cure_code" >Код болезни</label> <br>
+<input type="number" id="id_type" value="1"> <label for="id_type" >Номер справочника</label> <br>
+<input type="button" onclick="queryHandbook()" value="Запросить справочник"> <p> <p>
+
+    </div>
+    <div id="table_div">
+    <table id="table_data">
+    </table>
+    </div>
+    </body>
+    </html>
