@@ -69,14 +69,14 @@
      - Тесты сравнения производительности vs Java vs PHP показывают разные результаты, в зависимости от задачи, которая используется в качестве теста
  - Основная мысль: Node хорошо работает там, где много задач ввода\вывода и плохо работает на чисто вычислительных задачах
 ---
-### Пример 1. Демонстрация
+### Архитектура Node.js
 ![NodeJs](https://static.wixstatic.com/media/1af9b8_a386867fa0784bf7b3f4ac93a7366e3e~mv2.png/v1/fill/w_925,h_694,al_c,q_90,usm_0.66_1.00_0.01,enc_auto/1af9b8_a386867fa0784bf7b3f4ac93a7366e3e~mv2.png)<!-- .element: width="70%"  -->
 
 https://static.wixstatic.com/media/1af9b8_a386867fa0784bf7b3f4ac93a7366e3e~mv2.png/v1/fill/w_925,h_694,al_c,q_90,usm_0.66_1.00_0.01,enc_auto/1af9b8_a386867fa0784bf7b3f4ac93a7366e3e~mv2.png<!-- .element: class="copyright-reference"  -->
 ---
 ### Очередь сообщений (Event loop)
  - Это цикл (libuv, быстрая, реализована на С)
- - Это один процесс, один поток
+ - Это **один** процесс, **один** поток
  - Выполняет одну задачу на один момент времени
  - Ожидает события параллельно (libeio)
  - В каждой итерации последовательно запускает функции-колбэки из трех разных очередей
@@ -100,13 +100,53 @@ https://static.wixstatic.com/media/1af9b8_a386867fa0784bf7b3f4ac93a7366e3e~mv2.p
 ---
 ### npm
  - Npm – менеджер пакетов
- - База модулей – http://nmpjs.org (.com)
+    - База модулей – https://www.npmjs.com/. 
+    - Документация - https://docs.npmjs.com/about-npm
  - npm s <имя модуля> - поиск модуля по имени
  - npm i <имя модуля> - установить модуль
     - Установка осуществляется в директорию node_modules проекта
  - npm up <имя модуля> - обновить модуль
  - npm  r <имя модуля> - удалить (деинсталлировать) модуль
  - Можно создавать свои собственные модули и публиковать их в репозитории
+---
+### npm
+ - npm init - создание нового модуля
+    - при создании указываем важные параметры:
+         - имя модуля
+         - ключевые слова для поиска и описание
+         - точку входа
+         - и т.д.  
+     - создается файл package.json с описанием модуля. В нем *могут быть описаны зависимости*
+ - npm install - для модуля загружает все внешние зависимости    
+---
+### npm
+ - npm install <имя модуля> - устанавливает внешний модуль (можно указать конкретную версию модуля, минимальную версию модуля или загрузить последнюю. подробнее про указание версий: https://docs.npmjs.com/about-semantic-versioning)
+ - внешние модули устанавливаются в папку node_modules 
+ - эту папку **не нужно передавать** при передаче вашего проекта. Достаточно передать файл package.json
+ - npm install прочитает package.json и загрузит все внешние зависимости
+---
+### Пример package.json
+```json
+{
+  "name": "mytest",
+  "version": "1.0.0",
+  "description": "mytest",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "super module",
+    "test"
+  ],
+  "author": "Alexey Svistunov",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "mysql": "^2.18.1"
+  }
+}
+```
 ---
 ### Модули в node.js
  - Подключение внешнего кода
@@ -225,7 +265,7 @@ http.get('http://www.unn.ru', function(response) {
 ```
 ---
 ### Часто используемые модули. url
- URL позволяет
+ URL позволяет<!-- .element: class="left"  -->
  - Сформировать URL из отдельных элементов (протокол, адрес, порт и т.д.)
  - Извлечь из строки URL отдельные элементы:
      - url.parse(<строка URL>, [сформировать объект])
@@ -266,7 +306,7 @@ server.on('request',function(req,res){
 ```
 ---
 ### Часто используемые модули. fs
-fs позволяет
+FS позволяет<!-- .element: class="left"  -->
  - Выполнять операции с элементами файловой системы
      - Читать данные из файлов
      - Создавать файлы
@@ -328,9 +368,94 @@ server.on('request',function(req,res){
 });
 ```
 ---
+### Часто используемые модули. fs
+ ```js [17-25]
+server.on('request', function (req, res) {
+    let urlParsed = url.parse(req.url, true);
+    let data;
+    if (req.method === "GET") {
+        if (req.url == "/") {
+            data = fs.readFileSync("index.html");
+            res.end(data);
+        } else {
+            try {
+                data = fs.readFileSync("." + urlParsed.path);
+                res.end(data);
+            } catch (error) {
+                res.status = 404;
+                res.end("Page not found");
+            }
+        }
+    } else if (req.method === "POST") {
+        let body = '';
+        req.on('data', chunk => {
+            body += chunk.toString(); // convert Buffer to string
+        });
+        req.on('end', () => {
+            console.log(body);
+        });
+    }
+});
+```
+---
+### Часто используемые модули. fs
+ - вывод предыдущей программы:
+
+ ```
+------WebKitFormBoundaryc4cSmzSsiq2jHW7Q
+Content-Disposition: form-data; name="fileToUpload"; filename="test.json"
+Content-Type: application/json
+
+{
+  "Hello":"привет",
+  "test":"Тест"
+}
+------WebKitFormBoundaryc4cSmzSsiq2jHW7Q--
+```
+ - т.е. нам как-то нужно суметь разобрать multipart/form-data. 
+ - Можно делать это вручную, или можно использовать готовые модули (их много), например **formidable** или **multer**. 
+ - Как правило они не являются стандартными и требуют установки
+---
+### fs + formidable
+ ```js [1-33|4|23-31]
+const http = require("http");
+const url = require("url");
+const fs = require("fs");
+const formidable  =  require('formidable');
+const server = new http.Server();
+server.listen(4848, "localhost");
+server.on('request', async function (req, res) {
+    let urlParsed = url.parse(req.url, true);
+    let data;
+    if (req.method === "GET") {
+        if (req.url == "/") {
+            data = fs.readFileSync("index.html");
+            res.end(data);
+        } else {
+            try {
+                data = fs.readFileSync("." + urlParsed.path);
+                res.end(data);
+            } catch (error) {
+                res.status = 404;
+                res.end("Page not found");
+            }
+        }
+    } else if (req.method === "POST") {
+        const form = new formidable.Formidable({ multiples: true });
+        let fields;
+        let files;
+        [fields, files] = await form.parse(req);
+        fs.rename(files['fileToUpload'][0].filepath, './upload/'+files['fileToUpload'][0].originalFilename, (err)=>{
+            if (err) console.log(`renamed. error is ${err}`);
+        })
+        res.end("Success upload")
+    }
+});
+```
+---
 ### Часто используемые модули. Express
  - Модуль Express не является “стандартным”
-     - Требует установки (npm install express --save)
+     - Требует установки (npm install express)
  - Обладает богатой функциональностью (всю рассматривать не будем), в частности
      - Позволяет определить обработчики для url, body (автоматическое преобразование в объекты JS)
      - Позволяет определить автоматическую обработку для статических элементов (файлы html, css, изображения, …)
