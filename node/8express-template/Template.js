@@ -7,7 +7,7 @@ app.use('/', function (request, response) {
     response.render('index', {
         title: 'Мои контакты',
         emailsVisible: true,
-        emails: ['test@test.com', 'test@corp.com', 'yuiyuiyuiyuiyiyiuyui'],
+        emails: ['test@test.com', 'test@corp.com', 'test@bad.com'],
         phone: '+1234567890',
     })
 })
