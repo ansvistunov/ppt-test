@@ -2,13 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Страны и города</title>
     <link href="table.css" rel="stylesheet" type="text/css">
     <script>
-        //var url = 'http://s-cyberheart:8080/CyberHeart/CureService';
-        //var url='https://s-cyberheart:8181/CyberHeart/CyberHeartWebService';
-
-
+        
         function editCityHandler(){
             var edits =  document.getElementsByName("dynamic_form");
             var city = new Object();
@@ -21,7 +18,6 @@
             console.log(city);
 
             var oReq = new XMLHttpRequest();
-            //oReq.addEventListener("load", reqListener);
             oReq.open("PUT", "http://localhost:3000/city/");
             oReq.setRequestHeader('Content-type', 'application/json; charset=utf-8');
             oReq.send(JSON.stringify(city));
@@ -31,15 +27,10 @@
         }
 
         var cityHandler = function(){
-            //this->row
-
             console.log("cityHandler called");
-
             var currow = this;
             var table = currow.parentNode;
             var curindex = currow.rowIndex;
-            //console.log("index="+currow.rowIndex);
-
             var i;
             //сначала убираем старые строки...
             var oldrows = document.getElementsByName("dynamic_form");
@@ -48,7 +39,6 @@
             for (i = 0; i < oldrows.length; i++) arr.push(oldrows[i]);
 
             for (i = 0; i < arr.length; i++){
-                //console.log(oldrows);
                 var cell = arr[i].parentNode;
                 var row = cell.parentNode;
                 var val = arr[i].value;
@@ -58,8 +48,6 @@
             var btnSave = document.getElementsByName("dynamic_button");
             if (row)
                 if (btnSave[0]) {
-                //console.log(btnSave[0]);
-                //console.log(btnSave[0].parentNode);
                 row.removeChild(btnSave[0].parentNode);
                 row.onclick = cityHandler;
                 //и добавляем на предыдущую строку обработчик
@@ -76,7 +64,6 @@
                 input.value = elements[i].innerHTML;
                 input.name = "dynamic_form";
                 input.style.width = elements[i].offsetWidth+"px";
-                //console.log("width="+elements[i].offsetWidth );
                 console.log("width="+elements[i].style.width);
                 formRow.insertCell().appendChild(input);
             }
@@ -109,7 +96,6 @@
 
             function reqListener(event) {
                 var data = JSON.parse(this.responseText);
-                //console.log(table);
                 var table = document.getElementById("table_data");
                 table.innerHTML='';
 
@@ -121,7 +107,6 @@
                     for (var k in data[0]) {
                         var cell = hrow.insertCell();
                         cell.innerHTML= k;
-                        //console.log(cell);
                     }
 
                 }
@@ -153,11 +138,7 @@
 </head>
 <body>
 <div>
-    <!-- <input type="text" id="cure_code" value="I25"> <label for="cure_code" >Код болезни</label> <br>
-    <input type="number" id="id_type" value="1"> <label for="id_type" >Номер справочника</label> <br>
-    -->
     <input type="button" onclick="queryHandbook(url, countryHandler)" value="Запросить справочник стран"> <p> <p>
-
 </div>
 <div id="table_div">
     <table id="table_data">
