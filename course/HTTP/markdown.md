@@ -115,7 +115,7 @@ Connection: close
 
 ---
 ### Коды состояний HTTP
-![Коды состояний HTTP](https://dcpweb.co.uk/wp-content/uploads/2025/02/http-status-codes-v1-1024x1024.jpg)
+![Коды состояний HTTP](../img/http-status-codes.jpg)
 
 ---
 ### Пример: Ответ HTTP/1.1 200 OK

@@ -70,7 +70,7 @@
  - Основная мысль: Node хорошо работает там, где много задач ввода\вывода и плохо работает на чисто вычислительных задачах
 ---
 ### Архитектура Node.js
-![NodeJs](https://static.wixstatic.com/media/1af9b8_a386867fa0784bf7b3f4ac93a7366e3e~mv2.png/v1/fill/w_925,h_694,al_c,q_90,usm_0.66_1.00_0.01,enc_auto/1af9b8_a386867fa0784bf7b3f4ac93a7366e3e~mv2.png)<!-- .element: width="70%"  -->
+![NodeJs](../img/node-architecture.png)<!-- .element: width="70%"  -->
 
 https://static.wixstatic.com/media/1af9b8_a386867fa0784bf7b3f4ac93a7366e3e~mv2.png/v1/fill/w_925,h_694,al_c,q_90,usm_0.66_1.00_0.01,enc_auto/1af9b8_a386867fa0784bf7b3f4ac93a7366e3e~mv2.png<!-- .element: class="copyright-reference"  -->
 ---
@@ -78,7 +78,7 @@ https://static.wixstatic.com/media/1af9b8_a386867fa0784bf7b3f4ac93a7366e3e~mv2.p
  - Это цикл (libuv, быстрая, реализована на С)
  - Это **один** процесс, **один** поток
  - Выполняет одну задачу на один момент времени
- - Ожидает события параллельно (libeio)
+ - Ожидание событий выполняется параллельно (пул потоков libuv)
  - В каждой итерации последовательно запускает функции-колбэки из трех разных очередей
      - nextTick функции
      - Таймеры (setTimeout, setInterval)
@@ -124,6 +124,7 @@ https://static.wixstatic.com/media/1af9b8_a386867fa0784bf7b3f4ac93a7366e3e~mv2.p
  - внешние модули устанавливаются в папку node_modules 
  - эту папку **не нужно передавать** при передаче вашего проекта. Достаточно передать файл package.json
  - npm install прочитает package.json и загрузит все внешние зависимости
+ - рядом создаётся package-lock.json с точными версиями всего дерева зависимостей — в реальных проектах его коммитят вместе с кодом
 ---
 ### Пример package.json
 ```json
@@ -192,6 +193,16 @@ v.hello(p);
 const test = require("./test");
 console.log(test.Hello);
 ```
+---
+### CommonJS и ES-модули
+ - В курсе используются CommonJS-модули — исторический стандарт Node.js: `require` / `exports`
+ - В современном коде и документации часто встречаются ES-модули:
+```js
+import express from "express";
+export default function handler(req, res) { /* ... */ }
+```
+ - ES-модули в Node включаются `"type": "module"` в package.json
+ - Оба механизма можно использовать в одном проекте, но не смешивать синтаксис в одном файле
 ---
 ### Часто используемые модули. util
  - Util.inspect – вывод объекта в консоль (аналог toString в Java)
@@ -272,7 +283,7 @@ http.get('http://www.unn.ru', function(response) {
  URL позволяет<!-- .element: class="left"  -->
  - Сформировать URL из отдельных элементов (протокол, адрес, порт и т.д.)
  - Извлечь из строки URL отдельные элементы:
-     - url.parse(<строка URL>, [сформировать объект])
+     - url.parse(<строка URL>, [сформировать объект]) — API устаревший, в новом коде используйте встроенный класс URL
      - http://localhost:4848/echo?message=Hello
 ```js
 Url {protocol: null,
@@ -456,6 +467,7 @@ server.on('request', async function (req, res) {
     }
 });
 ```
+> ⚠️ `originalFilename` пришёл от клиента: перед сохранением его нужно очистить (`path.basename`), иначе возможен выход за пределы каталога загрузки.
 ---
 ### Часто используемые модули. Express
  - Модуль Express не является “стандартным”
@@ -534,14 +546,11 @@ app.use(express.static('public'));
 ---
 ### Часто используемые модули. Express
  - Автоматический разбор тела (body) и запроса для основных методов HTTP
-```js 
-const bodyParser =require('body-parser');
-app.use(bodyParser.urlencoded(
-                                { extended: true }
-                            )
-        );
-app.use(bodyParser.json());
-``` 
+```js
+// средства разбора тела встроены в Express, отдельный модуль не нужен
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+```
  - Обращение к параметрам, переданным в запросе: req.params.<param_name>
  - Обращение к параметрам, переданным в теле: req.body. <param_name>
 ---
@@ -549,10 +558,9 @@ app.use(bodyParser.json());
 ```js 
 const express = require("express");
 const app = express();
-const bodyParser = require('body-parser');
 
-app.use(bodyParser.urlencoded({extended:true}));
-app.use(bodyParser.json());
+app.use(express.urlencoded({extended:true}));
+app.use(express.json());
 app.use(express.static('public'));
 
 app.get("/city/:countrycode",function(req,res){
@@ -667,27 +675,6 @@ app.listen(3000)
  ```  
      - При таком доступе работа с данными осуществляется посредством встроенного языка обработки данных СУБД (SQL для реляционных систем)
 ---
-#### Часто используемые модули. Работа с СУБД (ORM-1)
- - Доступ через ORM-драйвер
-```js  
- let Person = db.define('person', {
-    name: String,   surname: String,
-    age: Number,    male: Boolean,
-    data: Object 
- }
- app.use(orm.express("mysql://username:password@host/database", {
-    define: function(db, models){
-        models.person = Person;
-    }
- }))
- );
- Person.find({surname: 'Doe'}, function (err, people){
-    //SQL: select * from person where surname = 'Doe'
-    console.log(`People found: ${people.length}`);
-    console.log(`First person: ${people[0].name}, age ${people[0].age}`);
- });
-```  
----
 #### Часто используемые модули. Работа с СУБД (ORM-2)
  - Доступ через «ORM» «драйвер»
      - При этом подходе тем или иным образом определяется «модель» (класс сущности) и далее работа в приложении осуществляется с экземплярами классов сущностей, при этом работа по сохранению данных (а также чтению, изменению, удалению) ложится на ORM-систему
@@ -769,27 +756,6 @@ https://ru.wikipedia.org/wiki/AJAX <!-- .element: class="copyright-reference"  -
 ![AJAX](https://www.cs.put.poznan.pl/jkobusinski/ajax/model.png)<!-- .element: width="40%"  -->
      
 https://www.cs.put.poznan.pl/jkobusinski/ajax/model.png<!-- .element: class="copyright-reference"  -->
----
-### AJAX. XMLHttpRequest
-Методы
-|Метод|	Описание|
-|-----|---------|
-|abort()|	Отменяет текущий запрос, удаляет все заголовки, ставит текст ответа сервера в null.|
-|getAllResponseHeaders()|	Возвращает полный список HTTP-заголовков в виде строки. Заголовки разделяются знаками переноса (CR+LF). Если флаг ошибки равен true, возвращает пустую строку. Если статус 0 или 1, вызывает ошибку INVALID_STATE_ERR.|
-|getResponseHeader(headerName)|	Возвращает значение указанного заголовка.Если флаг ошибки равен true, возвращает null.Если заголовок не найден, возвращает null. Если статус 0 или 1, вызывает ошибку INVALID_STATE_ERR.|
-|open(method, URL, async, userName, password)|	Определяет метод, URL и другие опциональные параметры запроса; параметр async определяет, происходит ли работа в асинхронном режиме. Последние два параметра необязательны.|
-|send(content)|	Отправляет запрос на сервер.|
-|setRequestHeader(label, value)|	Добавляет HTTP-заголовок к запросу.|
-
-Свойства
-|Свойство|	Тип	|Описание|
-|--------|------|--------|
-|onreadystatechange|	EventListener|	Обработчик события, которое происходит при каждой смене состояния объекта. Имя должно быть записано в нижнем регистре.|
-|readyState	|unsigned short|	Текущее состояние объекта (0 — не инициализирован, 1 — открыт, 2 — отправка данных, 3 — получение данных и 4 — данные загружены)|
-|responseText|	DOMString|	Текст ответа на запрос. Если состояние не 3 или 4, возвращает пустую строку.|
-|responseXML|	Document|	Текст ответа на запрос в виде XML, который затем может быть обработан посредством DOM. Если состояние не 4, возвращает null.|
-|status|	unsigned short|	HTTP-статус в виде числа (404 — «Not Found», 200 — «OK» и т. д.)|
-|statusText|	DOMString|	Статус в виде строки («Not Found», «OK» и т. д.). Если статус не распознан, браузер пользователя должен вызвать ошибку INVALID_STATE_ERR.
 ---
 ### AJAX. Пример
 ```js  
@@ -885,7 +851,7 @@ app.listen(3000);
 ---
 ### REST API. Пример (клиент)
 ```js [1-25]
-function queryHandbook(request, rowHandler) {
+function queryHandbook(request) {
     function reqListener(event) {
         var data = JSON.parse(this.responseText);
         var table = document.getElementById("table_data");
@@ -898,7 +864,7 @@ function queryHandbook(request, rowHandler) {
         }
         for (var i =0; i<data.length;i++ ){
             var newRow = table.insertRow();
-            for (j in data[i]){
+            for (let j in data[i]){
                 var cell = newRow.insertCell();  cell.innerHTML = data[i][j];
             }
         }
@@ -912,9 +878,8 @@ function queryHandbook(request, rowHandler) {
 ### REST API. Пример (сервер)
  - Развиваем сервер, добавляем дополнительные операцию получения списка городов по коду страны
 
-```js 
-const bodyParser = require('body-parser');
-app.use(bodyParser.urlencoded({ extended: true }));
+```js
+app.use(express.urlencoded({ extended: true }));
 …
 app.get("/city/:countrycode",function(req,res){
     console.log(req.params.countrycode);
@@ -931,8 +896,8 @@ app.get("/city/:countrycode",function(req,res){
 
 ```js 
 let countryHandler = function(){
-  queryHandbook('http://localhost:3000/city/'+ 
-                    this.cells[0].innerHTML, cityHandler);
+  queryHandbook('http://localhost:3000/city/'+
+                    this.cells[0].innerHTML);
 };
 
 //…
@@ -943,10 +908,8 @@ newRow.onclick = countryHandler;
 ### REST API. Пример (сервер)
  - Развиваем сервер, добавляем операцию редактирования сведений о городе
 
-```js 
-var bodyParser = require('body-parser');
-
-app.use(bodyParser.json());
+```js
+app.use(express.json());
 
 app.put("/city", function(req,res){
     console.log("PUT /city called");
@@ -991,13 +954,6 @@ function editCityHandler(){
 ```
 ---
 ### Сессии
- - Протокол HTTP не поддерживает состояние (Stateless protocol)
- - Это означает, что 
-     - Не сохраняет состояния между вызовами
-     - Все взаимодействие имеет короткий жизненный цикл (запрос - ответ)
-     - КАЖДЫЙ ресурс, доступ к которому осуществляется через HTTP, получается отдельным запросом, без какой-либо связи с предыдущими запросами (в HTTP 1.1 добавлен механизм постоянного соединения)
----
-### Сессии
  - Часто приложениям необходим механизм поддержки состояния приложения (соединения пользователя)
      - Пользователь уже заходил на этот сайт
      - Пользователь аутентифицировался
@@ -1005,7 +961,7 @@ function editCityHandler(){
      - Пользователь сохранил данные (корзину при покупке в магазине)
      - …
  - => Такой механизм должен реализовываться поверх протокола HTTP
----
+
 ### Сессии
  - Как реализовать состояние?
  - Как клиенту однозначно идентифицировать себя на сервере?
@@ -1019,43 +975,6 @@ function editCityHandler(){
      - Локальное хранилище
  - Серверные механизмы:
      - сеансы
----
-### Куки
- - Небольшой объем информации, отправляемой сервером клиенту (браузеру), который сохраняется на клиенте и затем отправляется обратно клиентом при запросах
- - Используется для:
-     - проверки подлинности
-     - отслеживания пользователей
-     - сохранение пользовательских настроек, корзин и т.д.
----
-### Куки
- - Формируется сервером
- - Отправляется клиенту с заголовком HTTP-ответа
- - Возвращается браузером серверу в HTTP-запросе
-
-![Cookies](https://upload.wikimedia.org/wikipedia/commons/b/bc/HTTP_cookie_exchange.svg)
-https://upload.wikimedia.org/wikipedia/commons/b/bc/HTTP_cookie_exchange.svg<!-- .element: class="copyright-reference"  -->
-
----
-### Куки. HTTP запросы
-```txt
-GET /index.html HTTP/1.1                браузер -> сервер (запрос)
-Host: www.example.org
-________________________
-
-HTTP/1.1 200 OK                         сервер -> браузер (ответ)
-Content-type: text/html
-Set-Cookie: name=value                  установка куки
-
-(содержимое страницы)
-
-________________________
-
-GET /spec.html HTTP/1.1                 браузер -> сервер (запрос)
-Host: www.example.org
-Cookie: name=value                      все последующие запросы содержат 
-Accept: */*                                 установленную куки
-
-```
 ---
 ### Поддержка куки (node.js)
 ```js
@@ -1120,15 +1039,14 @@ document.cookie="username=Ivan Drago; expires=Thu, 17 Jul 2017 15:00:00 GMT";
 ### Сессии. пример
 ```js
 const express = require("express");
-const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const SessionStore = require('express-mysql-session');
 
 const app = express();
 
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 app.use(express.static('public'));
 app.use(cookieParser());
 ```
@@ -1149,21 +1067,22 @@ const options = {
 
 
 app.use(session({
-    key: 'session_cookie_name',
+    name: 'session_cookie_name',
     secret: 'session_cookie_secret',
     store: new SessionStore(options),
-    resave: true,
-    saveUninitialized: true
+    resave: false,
+    saveUninitialized: false
 }))
 ```
 ---
 ### Сессии в Node.js
  - Инициализируем хранилище сессий, используя в качестве СУБД MySQL
  - Параметры подключения указываем в options
-     - Secret – ключ, используемый для подписи файла куки
-     - Store – используемое хранилище
-     - Resave – принудительная запись сеанса в хранилище, даже если он не изменялся
-     - saveUninitialized – в хранилище записываются в том числе неинициализированные сессии
+     - name – имя куки, в которой хранится идентификатор сессии
+     - secret – ключ, используемый для подписи идентификатора сессии
+     - store – используемое хранилище
+     - resave: false – не переписывать сессию в хранилище без изменений
+     - saveUninitialized: false – не создавать сессию «на всякий случай» для каждого гостя
 ---
 ### Сессии. пример
 ```js
@@ -1178,6 +1097,25 @@ app.listen(3000);
 ```
 Сессия - обычный объект, в который можно добавлять свойства
 ---
+### Хранение паролей
+ - Пароли в открытом виде не хранят нигде: ни в БД, ни в сессии, ни в куки
+ - Хранят только результат одностороннего преобразования с «солью» — хеш пароля
+ - Проверка при входе: вычислить хеш введённого пароля и сравнить с сохранённым
+ - Алгоритмы: bcrypt, scrypt, Argon2. Обычные SHA/MD5 — плохо: слишком быстрые, есть готовые таблицы
+ - В сессии — только идентификатор пользователя, пароль не покидает обработчика входа
+---
+### Хэширование с bcrypt
+ - Установка: `npm install bcrypt`
+ - При регистрации сохраняем хеш, а не пароль:
+```js
+const bcrypt = require('bcrypt');
+const hash = bcrypt.hashSync(req.body.password, 10);
+connection.query("insert into users (user_name, passwd_hash) values (?,?)",
+    [req.body.login, hash], ...);
+```
+ - 10 — «стоимость» хеширования: вычисление занимает ~0.1 с — быстро для человека, медленно для перебора
+ - Проверка входа — `bcrypt.compareSync` (пример в следующем примере)
+---
 ### Практическое использование сессий
  - Разработаем систему, позволяющую закрыть доступ к «секретной» информации всем «неавторизованным» пользователям
  - Система при запросе секретных данных должна позволить пользователю авторизоваться (ввести логин/пароль), а в случае, если он уже авторизовался – предоставить данные
@@ -1186,15 +1124,14 @@ app.listen(3000);
 ### Пример. Подключение модулей
 ```js
 const express = require("express");
-const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const SessionStore = require('express-mysql-session');
 const connection = require("./db");
 const app = express();
 
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 app.use(express.static('public'));
 app.use(cookieParser());
 ```
@@ -1208,11 +1145,11 @@ const options = {
     database: 'world'
 };
 app.use(session({
-    key: 'session_cookie_name',
+    name: 'session_cookie_name',
     secret: 'session_cookie_secret',
     store: new SessionStore(options),
-    resave: true,
-    saveUninitialized: true
+    resave: false,
+    saveUninitialized: false
 }))
 ```
 ---
@@ -1229,19 +1166,7 @@ app.listen(3000);
 ```js
 function checkUser(req, res, next) {
     if (req.session.user_id) {
-        connection.query("select count(*) cnt from users where user_name=?"
-                                                            +" and passwd=?", 
-            [req.session.user_id,req.session.password], function(err, rows){
-            if (err){
-                console.log(err);
-                return;
-            }
-            if (rows[0].cnt == 1) next();
-            else {
-                req.session.url = req.url;
-                res.redirect('/login.html');
-            }
-        });
+        next();
     } else {
         req.session.url = req.url;
         res.redirect('/login.html');
@@ -1251,14 +1176,19 @@ function checkUser(req, res, next) {
 ---
 ### Пример. Операции с сессиями
 ```js
-app.post('/session/create', function(req, res) {
-    req.session.user_id = req.body.login;
-    req.session.password = req.body.password;
+const bcrypt = require('bcrypt');
 
-    if (req.session.url)
-        res.redirect(req.session.url);
-    else
-        res.redirect('/');
+app.post('/session/create', function(req, res) {
+    connection.query("select passwd_hash from users where user_name=?",
+        req.body.login, function(err, rows){
+            if (err){ console.log(err); return res.redirect('/login.html'); }
+            const ok = rows.length == 1 &&
+                bcrypt.compareSync(req.body.password, rows[0].passwd_hash);
+            if (!ok) return res.redirect('/login.html');
+
+            req.session.user_id = req.body.login;   // пароль в сессию не кладём
+            res.redirect(req.session.url || '/');
+        });
 });
 
 app.get('/session/del', function(req, res) {
@@ -1268,8 +1198,6 @@ app.get('/session/del', function(req, res) {
     res.end("Session deleted");
 });
 ```
-
-> ⚠️ **Так не делают:** пример показывает только механизм `express-session`. В реальных приложениях пароли хранятся только в виде хэшей, а в сессии — только идентификатор пользователя.
 
 ---
 ### Пример. Login.html
@@ -1455,10 +1383,9 @@ app.get("/sse", (req, res) => {
 ```js
 const express = require("express");
 const app = express();
-const bodyParser = require('body-parser');
 
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 app.use(express.static('public'));
 
 const EE = require("events").EventEmitter;
@@ -1500,7 +1427,7 @@ app.listen(3000);
 ### WebSockets (Википедия)
  - WebSocket — протокол **полнодуплексной** связи (может передавать и принимать одновременно) поверх TCP-соединения, предназначенный для обмена сообщениями между браузером и веб-сервером в режиме реального времени.
  - Протокол WebSocket — это независимый протокол, основанный на протоколе TCP. Он делает возможным более тесное взаимодействие между браузером и сервером, способствуя созданию приложений реального времени.
-     - В настоящее время в W3C осуществляется стандартизация API Web Sockets. Черновой вариант стандарта этого протокола утверждён IETF.
+     - Протокол стандартизован IETF в RFC 6455 (2011); API описан в спецификации HTML (WHATWG).
     - _Широко поддерживается современными браузерами и серверами_
 ---
 ### WebSocket. Клиент
@@ -1548,11 +1475,10 @@ const express = require('express');
 const http = require('http');
 const url = require('url');
 const WebSocket = require('ws');
-const bodyParser = require('body-parser');
 
 const app = express();
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 app.use(express.static('public'));
 
 const EE = require("events").EventEmitter;
@@ -1619,3 +1545,24 @@ app.listen(3000);
     }
 </script>
 ```
+---
+### Сборка курса: как устроено пройденное приложение
+ - Браузер: HTML-разметка + формы + fetch-запросы к API (колоды HTML и JavaScript)
+ - Сервер: Node.js + Express — маршруты (`app.get`/`app.post`), middleware (body-parser, сессии)
+ - Данные: MySQL — параметризованные запросы (`?`) — защита от SQL-инъекций
+ - Аутентификация: куки + express-session, в сессии только `user_id`, пароль — только хеш в БД
+ - Обновления без перезагрузки: long polling → SSE → WebSocket (по возрастанию сложности)
+---
+### Путь запроса
+ 1. Браузер resolving имени: DNS → IP-адрес сервера
+ 2. Установлено TCP-соединение (и TLS для https), сформирован HTTP-запрос: метод, путь, заголовки (`Host`, `Cookie`)
+ 3. Express сопоставил путь с маршрутом, middleware обработал тело и сессию
+ 4. Обработчик выполнил SQL-запрос, сформировал ответ: статус, `Content-Type`, тело (JSON/HTML)
+ 5. Браузер отрисовал ответ; отдельные ресурсы — с проверкой кэша (ETag / Last-Modified)
+---
+### Что проверить себя
+ - Собрать GET-запрос вручную в telnet/nc и получить ответ сервера
+ - Объяснить разницу PUT и POST идемпотентностью и примером из курса
+ - Сказать, что напечатает `let` в блоке и почему `this` зависит от места вызова
+ - Объяснить, зачем `bcrypt.compareSync`, а не `==` хешу
+ - Назвать случай, когда WebSocket избыточен и хватает long polling
