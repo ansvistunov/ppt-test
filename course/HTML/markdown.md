@@ -46,7 +46,7 @@
 5. Встречая ссылки на CSS, JavaScript, изображения и другие ресурсы, браузер при необходимости запрашивает их отдельно.
 6. Браузер формирует итоговое отображение страницы.
 
-![Клиент-серверная модель](https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Client-server-model.svg/800px-Client-server-model.svg.png)
+![Клиент-серверная модель](https://commons.wikimedia.org/wiki/Special:FilePath/Client-server-model.svg)
 
 ---
 ### Стандартизация HTML
@@ -290,14 +290,7 @@ HTML предоставляет шесть уровней заголовков:
 </ol>
 ```
 
-Можно также задавать тип нумерации:
-
-```html
-<ol type="A">
-  <li>Первый пункт</li>
-  <li>Второй пункт</li>
-</ol>
-```
+Тип нумерации задаётся не атрибутом, а CSS-свойством `list-style-type` (`list-style-type: upper-alpha`) — атрибут `type` у `<ol>` в современном HTML считается устаревшим.
 
 ---
 ### Форматирование текста

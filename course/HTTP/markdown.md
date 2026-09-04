@@ -227,10 +227,11 @@ Content-Type: image/jpeg
 Запрос клиента:
 ```http
 GET /private/index.html HTTP/1.1
-Host: localhos
+Host: localhost
 ```
 Ответ сервера:
 ```http
+HTTP/1.1 401 Unauthorized
 WWW-Authenticate: Basic realm="Secure Area"
 ```
 Клиент передаёт:
@@ -269,6 +270,7 @@ Access-Control-Allow-Origin: *
 ### Практика: HTTP-взаимодействие через Telnet
 - HTTP/1.1 в текстовом виде можно отправить веб-серверу вручную, без браузера.
 - **Алгоритм для Windows:**
+  - Установить клиент Telnet: «Панель управления → Программы и компоненты → Компоненты Windows → Клиент Telnet» (по умолчанию отключён).
   - Запустить консоль (`Win+R` → `cmd`).
   - Подключиться:
    `telnet example.com 80`

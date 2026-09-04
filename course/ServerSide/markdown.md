@@ -11,8 +11,8 @@
 ---
 ### Схема типичного приложения
 
-![Web App](https://developer.mozilla.org/en-US/docs/Learn/Server-side/First_steps/Introduction/web_application_with_html_and_steps.png)
-https://developer.mozilla.org/en-US/docs/Learn/Server-side/First_steps/Introduction/web_application_with_html_and_steps.png <!-- .element: class="copyright-reference"  -->
+![Web App](https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Server-side/First_steps/Introduction/web_application_with_html_and_steps.png)
+https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Server-side/First_steps/Introduction/web_application_with_html_and_steps.png <!-- .element: class="copyright-reference"  -->
 ---
 ### 
  - Чем отличается программирование на сервере от программирования на клиенте:
@@ -36,9 +36,9 @@ https://developer.mozilla.org/en-US/docs/Learn/Server-side/First_steps/Introduct
      - Стандартный выходной поток 
      - Командная строка
 
-![CGI](https://dit.isuct.ru/IVT/BOOKS/DBMS/DBMS1/_pic_/cgi.gif)
+![CGI](https://commons.wikimedia.org/wiki/Special:FilePath/CPT-internet-CGI.svg)
 
-https://dit.isuct.ru/IVT/BOOKS/DBMS/DBMS1/_pic_/cgi.gif <!-- .element: class="copyright-reference"  -->
+https://commons.wikimedia.org/wiki/Special:FilePath/CPT-internet-CGI.svg <!-- .element: class="copyright-reference"  -->
 
 ---
 ### Переменные окружения
@@ -50,7 +50,7 @@ https://dit.isuct.ru/IVT/BOOKS/DBMS/DBMS1/_pic_/cgi.gif <!-- .element: class="co
 ---
 ### Стандартный вывод
  - СGI - модуль выводит информацию в стандартный выходной поток. Этот вывод может представлять собой или документ, сгенерированный cgi-модулем, или инструкцию серверу, где получить необходимый документ. Обычно cgi-модуль производит свой вывод. Преимущество такого подхода в том, что cgi-модуль не должен формировать полный HTTP заголовок на каждый запрос.
- - Вывод cgi-модуля должен начинаться с заголовка содержащего определенные строки и завершаться двумя символами CR(0x10).
+ - Вывод cgi-модуля должен начинаться с заголовка содержащего определенные строки и завершаться пустой строкой (две последовательности CRLF).
  - Любые строки не являющиеся директивами сервера, посылаются непосредственно клиенту.
 ---
 ### Стандартный ввод
@@ -192,8 +192,9 @@ int main(int arcg, char* argv[]){
 http://localhost:8080/tests/ex1.jsp
 ---
 ### Принцип работы
-![JSP](https://findout.su/findoutsu/baza3/1203618253253.files/image004.png)
-https://findout.su/findoutsu/baza3/1203618253253.files/image004.png<!-- .element: class="copyright-reference"  -->
+ - HTTP-запрос обрабатывается веб-сервером и передаётся контейнеру сервлетов (например, Tomcat)
+ - При первом обращении JSP-страница транслируется в сервлет и компилируется, далее используется готовый класс
+ - Сервлет формирует HTML-ответ, который возвращается клиенту
 ---
 ### Трансляция JSP-файла
  - JSP-файл транслируется в файл java
@@ -397,6 +398,6 @@ http://localhost:8080/tests/form_post_jsp.html
         <%
         }
         %>
-    <table>  
+    </table>
 </body>
 ```

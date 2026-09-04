@@ -411,8 +411,10 @@ if (null) { }
 ```javascript
 let now = new Date();
 let january1st1970 = new Date(0);
-let firstSputnik = new Date(1957, 10, 4);
+let firstSputnik = new Date(1957, 9, 4); // 4 октября 1957
 ```
+
+> ⚠️ Нумерация месяцев в `Date` начинается с 0: январь — это 0.
 
 Методы:
 
@@ -1752,8 +1754,6 @@ let promise = new Promise(function(resolve, reject) {
 
 `reject()` сообщает об ошибке.
 
-![Состояния Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)
-
 ---
 
 # 47. `then()`
@@ -2722,5 +2722,5 @@ DOM ← JavaScript → BOM
 
 - [learn.javascript.ru](https://learn.javascript.ru)
 - [Coursera — HTML, CSS, JavaScript](https://www.coursera.org/learn/html-css-javascript/home/welcome)
-- [MDN — JavaScript](https://developer.mozilla.org/ru/docs/Learn/JavaScript)
+- [MDN — JavaScript](https://developer.mozilla.org/ru/docs/Web/JavaScript)
 - [JavaScript.com](https://www.javascript.com)

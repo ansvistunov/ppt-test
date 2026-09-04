@@ -303,7 +303,7 @@ server.on('request',function(req,res){
     if (urlParsed.pathname == "/echo" &&  urlParsed.query.message){
         res.end(urlParsed.query.message);
     }else{
-        res.status = 404;
+        res.statusCode = 404;
         res.end("Page not found");
     };
 });
@@ -340,7 +340,7 @@ server.on('request',function(req,res){
             data = fs.readFileSync("." + urlParsed.path);
             res.end(data);
         }catch(error){
-            res.status = 404;
+            res.statusCode = 404;
             res.end("Page not found");
         }
     }
@@ -357,7 +357,7 @@ server.listen(4848, "localhost");
 server.on('request',function(req,res){
     const readFile = function (err, info) {
         if (err) {
-            res.status = 404;
+            res.statusCode = 404;
             res.end("Page not found");
         } else
             res.end(info);
@@ -386,7 +386,7 @@ server.on('request', function (req, res) {
                 data = fs.readFileSync("." + urlParsed.path);
                 res.end(data);
             } catch (error) {
-                res.status = 404;
+                res.statusCode = 404;
                 res.end("Page not found");
             }
         }
@@ -440,7 +440,7 @@ server.on('request', async function (req, res) {
                 data = fs.readFileSync("." + urlParsed.path);
                 res.end(data);
             } catch (error) {
-                res.status = 404;
+                res.statusCode = 404;
                 res.end("Page not found");
             }
         }
@@ -579,7 +579,7 @@ npm install --save <имя_движка_в репозитории_npm>
  - Регистрация в Express
     - регистрация директории, в которой будут лежать шаблоны:
 ```js 
-app.set('views','./vievs');
+app.set('views','./views');
 ``` 
      - регистрация движка
 ```js 
@@ -643,7 +643,7 @@ app.listen(3000)
 <% } %>
 <p>Телефон: <%=phone %></p>
 </body>
-<html>
+</html>
 ```  
 ---
 ### Часто используемые модули. Работа с СУБД
@@ -696,7 +696,7 @@ app.listen(3000)
 ### Работа с СУБД (MySQL, без ORM)
  - Установка модуля Node.js для работы с СУБД MySQL:
 ```bash  
-npm install mysql –save
+npm install mysql --save
 ``` 
  - Подключение в проекте:
 ```js  
@@ -794,7 +794,7 @@ https://www.cs.put.poznan.pl/jkobusinski/ajax/model.png<!-- .element: class="cop
 ### AJAX. Пример
 ```js  
 var oReq = new XMLHttpRequest();
-var request= “http://localhost:3000/country”; 
+var request= "http://localhost:3000/country"; 
 console.log(request);
 oReq.addEventListener("load", reqListener);
 oReq.open("GET", request);
@@ -809,10 +809,10 @@ function reqListener(event) {
 ### AJAX. fetch
  - Использование fetch (есть поддержка во всех современных браузерах):
      - fetch(url, [options]) - Выполняет запрос на ресурс url (по умолчанию GET), с использованием (необязательно) опций. Возвращает Promise c объектом response, содержащий ответ сервера.
-Объект Responce:
+Объект Response:
 |Метод/Свойство|Описание|
 |--------------|--------|
-|responce.status|Код возврата РЕЕЗ-запроса (200 при удачном завершении)|
+|response.status|Код возврата HTTP-запроса (200 при удачном завершении)|
 |response.text()| читает ответ и возвращает как обычный текст|
 |response.json()| декодирует ответ в формате JSON|
 |response.formData()| возвращает ответ как объект FormData|
@@ -830,7 +830,7 @@ fetch('/country', {
     headers: {
         'Content-Type': 'application/json;charset=utf-8'
     },
-    body: JSON.stringify(ccountry)
+    body: JSON.stringify(country)
 }
 )
     .then(responce => responce.json())
@@ -889,7 +889,7 @@ function queryHandbook(request, rowHandler) {
     function reqListener(event) {
         var data = JSON.parse(this.responseText);
         var table = document.getElementById("table_data");
-        table.innerHTML=‘’;
+        table.innerHTML='';
         if (data.length > 0) {
             var header = table.createTHead();   var hrow = header.insertRow();
             for (var k in data[0]) {
@@ -1063,7 +1063,7 @@ const http = require("http");
 http.createServer(function(req,res){
     res.writeHead(200, {
         "Set-Cookie":"testcookie=test",
-        "Context-type":"text/plain"
+        "Content-type":"text/plain"
     })
     res.end("Hello world");
 }).listen(3000);
@@ -1076,11 +1076,12 @@ http.createServer(function(req,res){
  - Из JavaScript (браузер) доступно поле document.cookie
  - Поле можно устанавливать/читать вручную
 ```js
-document.cookie = "username=ivan;password=12345";
+document.cookie = "username=ivan";
+document.cookie = "password=12345";
 ```
  - Или с использованием функции
 ```js
-Cookies.set("username", “ivan");
+Cookies.set("username", "ivan");
 ...
 alert(Cookies.get("username")); // ivan
 ```
@@ -1185,10 +1186,10 @@ app.listen(3000);
 ### Пример. Подключение модулей
 ```js
 const express = require("express");
-const bodyParser = require('body-parser’);
-const cookieParser = require('cookie-parser’);
-const session = require('express-session’);
-const SessionStore = require('express-mysql-session’);
+const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
+const SessionStore = require('express-mysql-session');
 const connection = require("./db");
 const app = express();
 
@@ -1256,6 +1257,8 @@ app.post('/session/create', function(req, res) {
 
     if (req.session.url)
         res.redirect(req.session.url);
+    else
+        res.redirect('/');
 });
 
 app.get('/session/del', function(req, res) {
@@ -1265,6 +1268,9 @@ app.get('/session/del', function(req, res) {
     res.end("Session deleted");
 });
 ```
+
+> ⚠️ **Так не делают:** пример показывает только механизм `express-session`. В реальных приложениях пароли хранятся только в виде хэшей, а в сессии — только идентификатор пользователя.
+
 ---
 ### Пример. Login.html
 ```html
@@ -1280,7 +1286,7 @@ app.get('/session/del', function(req, res) {
         <label for="login">Имя пользователя</label>
         <input type="text" name="login">
         <label for="password">Пароль</label>
-        <input type="text" name="password">
+        <input type="password" name="password">
         <input type="submit">
     </fieldset>
 </form>
