@@ -1,21 +1,33 @@
 # JavaScript
----
-### Что такое JavaScript?
- - Прежде всего – язык программирования​
- - Которым не владеет какая-либо компания или организация (торговый знак принадлежит Oracle)​
- - Стандартизован (стандарт ECMA-262), также утвержден ISO как ISO-16262​
- - Обычно используется как встраиваемый язык​
- - Модель выполнения как правило- интерпретация ​
- - Появился в 1995, автор Брендан Эйх (Netscape)​
- - В настоящий момент – самый популярный язык, используемый для ВЕБ-разработки ​
----
-### Стек технологий
-![Web stack](../img/webstack.png)
----
-<!-- .slide: data-background-iframe="https://octoverse.github.com/2022/top-programming-languages#Line%20737" data-background-interactive -->
+
+## 1. Что такое JavaScript?
+
+JavaScript — язык программирования, который особенно широко используется при разработке Web-приложений.
+
+Основные особенности:
+
+- стандартизован в стандарте **ECMA-262**;
+- появился в 1995 году, автор — **Брендан Эйх**;
+- обычно используется как встраиваемый язык;
+- поддерживает несколько парадигм программирования:
+  - императивную;
+  - объектно-ориентированную;
+  - функциональную;
+- в браузере работает совместно с HTML и CSS.
+
+JavaScript применяется не только в браузере:
+
+- в клиентской части Web-приложений;
+- в серверных приложениях;
+- для прикладного ПО;
+- в офисных приложениях;
+- в других средах выполнения.
+
+![JavaScript](https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d3/JavaScript_logo.svg/960px-JavaScript_logo.svg.png)
+
 ---
 
-### 2. JavaScript в браузере
+## 2. JavaScript в браузере
 
 В браузере JavaScript взаимодействует с HTML-документом и возможностями самого браузера.
 
@@ -36,8 +48,9 @@
 
 ---
 
-### 3. Подключение JavaScript к HTML
-3.1. Элемент `<script>`
+# 3. Подключение JavaScript к HTML
+
+## 3.1. Элемент `<script>`
 
 Самый простой вариант — разместить JavaScript непосредственно внутри HTML:
 
@@ -416,797 +429,2298 @@ setFullYear()
 
 ---
 
+# 9. Массивы
 
+Массив хранит набор элементов.
 
-### Объекты в JavaScript. Массивы
-* Объект это ассоциативный массив: структура, пригодная для хранения любых данных в виде структуры «ключ-значение» (хеш-таблица). ​
-* Объекты предоставляют языковые возможности для объектно-ориентированного программирования. ​
----
-### Объекты в JavaScript. Массивы
-* Создание (пустой объект): 
-```js 
-let o = new Object();​
-let o1 = {}; // пустые фигурные скобки​​
+```javascript
+let holidays = [
+    "1 января",
+    "8 марта",
+    "23 февраля"
+];
 ```
-* Создание (объект с содержимым)​: 
-```js 
-let user = { name: “Маша", age: 25};​
+
+Доступ к элементу:
+
+```javascript
+holidays[0];
+holidays[1];
 ```
-* Операции 
 
-```js 
-//Создание свойства и присвоение ему значения ​
-o.key1 = value; o.name=‘Ivan’;​
+Размер:
 
-//Доступ к значению свойства​
-alert(o.name); //или 
-alert(o[‘name’]);​
-
-//Удаление свойства​
-delete o.name​
-
-//Проверка наличия свойства в объекте​
-If (“name” in o) {…} или if (o.name===undefined)​​
+```javascript
+holidays.length;
 ```
----
-### Объекты в JavaScript. Массивы
-* Перебор всех свойств объекта. Цикл for ..in​​
-```js 
-for (let key in obj) {​
-    console.log(obj[key]);​
-}​
+
+Создание массива через конструктор:
+
+```javascript
+let arr = new Array();
 ```
-* Ссылки на объекты​: при присваивании в JavaScript всегда осуществляется создание ссылки на объект​
-```js 
-let user = { name: 'Вася' };​
-let admin = user;​
-admin.name = 'Петя'; // поменяли данные через admin​
-alert(user.name); // 'Петя', изменения видны в user​
+
+---
+
+## 9.1. Методы массивов
+
+Добавление и удаление элементов:
+
+```javascript
+push()
+pop()
+shift()
+unshift()
 ```
----
-### Глобальный объект
-* Глобальными называют переменные и функции, которые не находятся внутри какой-то функции.​
-* В JavaScript все глобальные переменные и функции являются свойствами специального объекта, который называется «глобальный объект» (global object).​
-* В браузере этот объект доступен под именем window. Объект window одновременно является глобальным объектом и содержит ряд свойств и методов для работы с окном браузера​
-* Присваивая или читая глобальную переменную, мы, фактически, работаем со свойствами window​
-```js 
-var a = 5;  alert( window.a ); // 5​​
-//или так
-window.a = 5; alert( a ); // 5​
+
+Объединение:
+
+```javascript
+concat()
 ```
----
-### Объекты «в стиле ООП»​
-* При объявлении объекта можно указать свойство-функцию, например:
 
-```js 
-var user = {​
-    name: 'Вася',​
-    // метод​
-    sayHi: function() {​
-        alert( 'Привет,'+ name );​
-    }​
-};​
+Преобразование в строку:
 
-// Вызов​
-user.sayHi();​
+```javascript
+join()
+toString()
 ```
----
-### Объекты «в стиле ООП»​
-* Свойства-функции называют «методами» объектов. Их можно добавлять и удалять в любой момент, в том числе и явным присваиванием:​
 
-```js 
-var user = {​
-    name: 'Вася'​
-};​
+Получение части массива:
 
-user.sayHi = function() { ​
-    alert('Привет, ' + name);​
-};​
-
-// Вызов метода:​
-user.sayHi();​
+```javascript
+slice()
 ```
----
-### Доступ к объекту через this
-* Для доступа к текущему объекту из метода используется ключевое слово this.​
 
-```js 
-var user = {​
-    name: 'Вася'​
-};​
+Другие методы:
 
-user.sayHi = function() { ​
-    alert('Привет, '+ this.name);​
-};​
-
-// Вызов метода:​
-user.sayHi();​
+```javascript
+reverse()
+sort()
+splice()
 ```
----
-### Подробнее про this​
-* Любая функция может иметь в себе this. Совершенно неважно, объявлена ли она в объекте или отдельно от него.​
-* Значение this называется контекстом вызова и будет определено в момент вызова функции.​
 
-```js 
-let user = { firstName: "Вася" };​
-let admin = { firstName: "Админ" };​
-function func() {alert( this.firstName );}​
-user.f = func;  
-admin.g = func;​
+Важно помнить, что обычный `sort()` сортирует элементы как строки:
 
-user.f(); // Вася​
-admin.g(); // Админ​
-admin['g'](); // Админ​
+```javascript
+[5, 3, 40, 1, 10, 100].sort();
+// [1, 10, 100, 3, 40, 5]
 ```
----
-### Подробнее про this​
-* Если функция использует this – это подразумевает работу с объектом. Прямой вызов func() так же возможен.​
-* При этом this получает значение глобального объекта (window) в старом стандарте или undefined в новом:​
 
-```js 
-function func() {​
-    alert( this ); ​
-    // выведет [object global] в старом стандарте или undefined в новом​
-}​
+Для числовой сортировки обычно передают функцию сравнения:
 
-func();​​
+```javascript
+[5, 3, 40, 1, 10, 100].sort((a, b) => a - b);
 ```
----
-### Преобразование объектов​
-* Бывают операции, при которых объект должен быть преобразован в примитив, например:​
-    * Строковое преобразование – если объект выводится через alert(obj).​
-    * Численное преобразование – при арифметических операциях, сравнении с примитивом.​
-    * Логическое преобразование – при if(obj) и других логических операциях.​
----
-### Логическое преобразование​
-* Любой объект в логическом контексте – true, даже если это пустой массив [] или объект {}.​
 
-```js 
-if ({} && []) {​
-    alert( "Все объекты - true!" ); // alert сработает​
-}​
+---
+
+# 10. Операторы
+
+К привычным операторам относятся:
+
+```text
++  -  *  /  %
+++ --
+=  +=  -=  *=  /=  %=
+== !=
+> < >= <=
+&& || !
 ```
----
-### Преобразование в строку
-* Преобразование по умолчанию возвращает строку [object Object]​
-* Поведение по умолчанию можно переопределить​
 
-```js 
-var user = {​
-    firstName: 'Василий',​
-    toString: function() {​
-        return 'Пользователь ' + this.firstName;​
-    }​
-};​
+Есть и специальные операторы:
 
-alert( user );  // Пользователь Василий​
+```javascript
+typeof
+delete
+void
+in
+instanceof
+===
 ```
----
-### Преобразование в число​
-* Для численного преобразования объекта используется метод valueOf, а если его нет – то toString:​
 
-```js 
-let room = {​
-    number: 777,​
-    valueOf: function() { return this.number; },​
-    toString: function() { return this.number; }​
-};​
+Современный JavaScript также поддерживает деструктуризацию:
 
-alert( +room );  // 777, вызвался valueOf​
-delete room.valueOf; // valueOf удалён​
-alert( +room );  // 777, вызвался toString​
+```javascript
+let [a, b] = [10, 20];
+
+let {name, age} = {
+    name: "Маша",
+    age: 25
+};
 ```
+
 ---
-### Стадии преобразования​
-* Если объект преобразован в примитив при помощи toString или valueOf, то  на этом преобразования не обязательно заканчиваются. Вполне возможно, что в процессе вычислений этот примитив будет преобразован во что-то другое.​
 
-```js 
-let a = {​
-    valueOf: function() {return "1";}​
-};​
+# 11. Простое взаимодействие с пользователем
 
-let b = { 
-    valueOf: function() {return "2";}​
-};​
+## `alert()`
 
-alert( a + b ); // "12"​
-alert( a - b ); // "1" - "2" = -1​
+Показывает сообщение:
+
+```javascript
+alert("Привет!");
 ```
----
-### Объекты и оператор new
-* Использование функции-конструктора:
 
-```js 
-function Animal(name) {​
-    this.name = name;​
-    this.canWalk = true;​
-}​
+## `confirm()`
 
-var animal = new Animal("кот");​
+Показывает вопрос с кнопками OK/Cancel и возвращает `true` или `false`:
+
+```javascript
+let result = confirm("Вы согласны?");
+
+if (result) {
+    alert("Вы согласились");
+}
 ```
-* Технически, функцией-конструктором может быть любая функция!​
-* **Принято** функции-конструкторы называть с большой буквы.​
----
-### Возврат из функции-конструктора​
-* Как правило, конструкторы ничего не возвращают. Их задача – записать всё, что нужно, в this, который автоматически станет результатом.​
-* Но если явный вызов return всё же есть, то применяется простое правило:​
-    * При вызове return с объектом, будет возвращён он, а не this.​
-    * При вызове return с примитивным значением, оно будет отброшено.​
----
-### Создание методов в конструкторе
-```js 
-function User(name) {​
-    this.name = name;​
-    this.sayHi = function() {​
-        alert( "Моё имя: " + this.name );​
-    };​
-}​
 
-let ivan = new User("Иван");​
-ivan.sayHi(); // Моё имя: Иван​
+## `prompt()`
+
+Запрашивает ввод пользователя:
+
+```javascript
+let name = prompt("Как вас зовут?");
+
+alert("Привет, " + name);
 ```
+
 ---
-### Локальные методы и переменные
 
-```js 
-function User(firstName, lastName) {​
-  // вспомогательная переменная​
-    let phrase = "Привет";​
-  //  вспомогательная вложенная функция​
-    function getFullName() {​
-        return firstName + " " + lastName;​
-    }​
+# 12. Функции
 
-    this.sayHi = function() {​
-        alert( phrase + ", " + getFullName() ); // использование​
-    };​
-}​
+Функция объявляется так:
 
-let vasya = new User("Вася", "Петров");​
-
-vasya.sayHi(); // Привет, Вася Петров​
+```javascript
+function showMessage() {
+    alert("Привет Мир!");
+}
 ```
----
-### Дескрипторы, геттеры и сеттеры свойств​​
-* Основной метод для управления свойствами Object.defineProperty. Он позволяет объявить свойство объекта и, тонко настроить его особые аспекты​
-* Синтаксис: Object.defineProperty(obj, prop, descriptor)​
-* Аргументы:​
-    * obj  - объект, в котором объявляется свойство.​
-    * Prop- имя свойства, которое нужно объявить или модифицировать.​
-    * descriptor -дескриптор – объект, который описывает поведение свойства.​
----
-### Свойства дескриптора​
-* В дескрипторе могут быть следующие поля​
-    * value – значение свойства, по умолчанию undefined​
-    * writable – значение свойства можно менять, если true. По умолчанию false.​
-    * configurable – если true, то свойство можно удалять, а также менять его в дальнейшем при помощи новых вызовов defineProperty. По умолчанию false.​
-    * enumerable – если true, то свойство просматривается в цикле for..in и методе Object.keys(). По умолчанию false.​
-    * get – функция, которая возвращает значение свойства. По умолчанию undefined.​
-    * set – функция, которая записывает значение свойства. По умолчанию undefined.​​
----
-### Примеры
-* Обычное свойство:​
 
-```js 
-let user = {};​
+Вызов:
 
-// 1. простое присваивание​
-user.name = "Вася";​
-
-// 2. указание значения через дескриптор​
-Object.defineProperty(user, "name", { value: "Вася", 
-                                      configurable: true, 
-                                      writable: true, 
-                                      enumerable: true 
-                                      }
-                    );​
+```javascript
+showMessage();
 ```
----
-### Примеры
-* Свойство-константа:​
 
-```js 
-"use strict";​
+Функция может принимать параметры:
 
-let user = {};​
-Object.defineProperty(user, "name", {value: "Вася",​
-                                    writable: false, // запретить присвоение                   
-                                    configurable: false // запретить удаление​
-                                    }
-                    );​
+```javascript
+function showMessage(from, text) {
+    alert(from + ": " + text);
+}
 
-// Теперь попытаемся изменить это свойство.​
-// в strict mode присвоение "user.name=" вызовет ошибку​
-user.name = "Петя";​ //Ошибка
+showMessage("Маша", "Привет!");
 ```
+
 ---
-### Примеры
-* Свойство, скрытое для for…in:​​
 
-```js 
-let user = {​
-    name: "Вася",​
-    toString: function() { return this.name; }​
-};​
+## 12.1. Аргументы функции
 
-// помечаем toString как не подлежащий перебору в for..in​
-Object.defineProperty(user, "toString", ​{enumerable: false});​
+Если параметр не передан, его значение будет `undefined`:
 
-for(let key in user) alert(key);  // name​
-```
----
-### Примеры
-* Свойство-функция:​
-
-```js 
-let user = {​
-    firstName: "Вася",  
-    surname: "Петров"​
-}​
-
-Object.defineProperty(user, "fullName", 
-    {​
-        get: function() {return this.firstName + ' ' + this.surname;​ } ​
+```javascript
+function showMessage(from, text) {
+    if (text === undefined) {
+        text = "текст не передан";
     }
-);​
 
-alert(user.fullName); // Вася Петров​
+    alert(from + ": " + text);
+}
+
+showMessage("Маша");
+// Маша: текст не передан
 ```
----
-### Примеры
-* get и set можно создать при объявлении объекта:​
 
-```js 
-let user = { firstName: "Вася",surname: "Петров",​
-    get fullName() {​
-        return this.firstName + ' ' + this.surname;​
-    },​
-    set fullName(value) { 
-        var split = value.split(' ');​
-        this.firstName = split[0]; 
-        this.surname = split[1]; }​
-};​
+Функцию можно вызвать с большим количеством аргументов:
 
-alert( user.fullName ); // Вася Петров (из геттера)​
-user.fullName = "Петя Иванов";​
-alert( user.firstName ); // Петя  (поставил сеттер)​
-alert( user.surname ); // Иванов (поставил сеттер)​
+```javascript
+function go(a, b) {
+    alert("a=" + a + ", b=" + b);
+}
+
+go(1);       // a=1, b=undefined
+go(1, 2);    // a=1, b=2
+go(1, 2, 3); // третий аргумент не используется
 ```
----
-### Другие методы работы со свойствами​
-* Object.defineProperties(obj, descriptors) - позволяет объявить несколько свойств сразу​
-* Object.keys(obj) - возвращает массив – список свойств объекта (только enumerable-свойства) ​
-* Object.getOwnPropertyNames(obj) -  возвращает массив – список свойств объекта (все свойства) ​
-* Object.getOwnPropertyDescriptor(obj, prop) - возвращает дескриптор для свойства obj[prop].​
-* И др..​
 
----
-### Статические свойства и методы​
-* Свойства и методы, «записанные» в саму функцию-конструктор называются статическими​
+В JavaScript нет традиционной перегрузки функций:
 
-```js 
-function Article() {​
-    Article.count++;​
-}​
+```javascript
+function f(a) {
+    // ...
+}
 
-Article.count = 0; // статическое свойство-переменная​
-Article.DEFAULT_FORMAT = "html"; // статическое свойство-константа​
+function f(a, b, c) {
+    // ...
+}
 ```
----
-### Статические свойства и методы​
-* Свойства и методы, «записанные» в саму функцию-конструктор называются статическими​:
 
-```js   
-function Article() { 
+Вторая функция переопределит первую.
+
+---
+
+## 12.2. `arguments`
+
+В обычной функции можно получить все переданные аргументы через `arguments`:
+
+```javascript
+function hello() {
+    for (let i = 0; i < arguments.length; i++) {
+        alert("Привет, " + arguments[i]);
+    }
+}
+
+hello("Маша", "Света");
+```
+
+`arguments` — не настоящий массив, поэтому методы массива непосредственно к нему не применяются.
+
+---
+
+## 12.3. Возвращаемое значение
+
+Функция может возвращать результат:
+
+```javascript
+function x2(a) {
+    return a * a;
+}
+
+let test = x2(10);
+
+alert(test); // 100
+```
+
+Если функция ничего не возвращает, результатом будет `undefined`.
+
+---
+
+# 13. Стрелочные функции
+
+Стрелочная функция — короткая форма записи функции:
+
+```javascript
+let showMessage = (message) => alert(message);
+
+showMessage("Привет Мир!");
+```
+
+Если параметр один, скобки можно опустить:
+
+```javascript
+let square = x => x * x;
+```
+
+У стрелочных функций нет собственного `this` и `arguments`, а также они не используются как конструкторы через `new`.
+
+---
+
+# 14. Область видимости
+
+Функция может иметь локальные переменные:
+
+```javascript
+function showMessage() {
+    let msg = "Привет, мир!";
+    alert(msg);
+}
+
+showMessage();
+
+alert(msg); // ошибка
+```
+
+`let` имеет блочную область видимости:
+
+```javascript
+for (let i = 0; i < 3; i++) {
+    let j = i * 2;
+}
+
+// i и j здесь недоступны
+```
+
+`var` имеет функциональную область видимости:
+
+```javascript
+function cnt() {
+    for (var i = 0; i < 3; i++) {
+        var j = i * 2;
+    }
+
+    alert(i); // 3
+    alert(j); // 4
+}
+```
+
+---
+
+# 15. Внешние переменные
+
+Функция может обращаться к переменным из внешней области видимости:
+
+```javascript
+let name = "Вася";
+
+function showMessage() {
+    name = "Петя";
+    let message = "Привет, я " + name;
+
+    alert(message);
+}
+
+showMessage();
+
+alert(name); // Петя
+```
+
+Функция может как читать, так и изменять внешнюю переменную.
+
+Неявное создание глобальных переменных в современном коде использовать нельзя. В частности, строгий режим помогает обнаруживать такие ошибки:
+
+```javascript
+"use strict";
+
+function test() {
+    message = "Привет"; // ошибка
+}
+```
+
+---
+
+# 16. Функция как объект
+
+С функцией можно работать как со значением:
+
+```javascript
+function hello() {
+    alert("Привет");
+}
+
+let f = hello;
+
+f();
+```
+
+Функции можно передавать в другие функции и хранить в переменных.
+
+---
+
+# 17. Function Declaration и Function Expression
+
+**Function Declaration**:
+
+```javascript
+function sum(a, b) {
+    return a + b;
+}
+```
+
+**Function Expression**:
+
+```javascript
+let sum = function(a, b) {
+    return a + b;
+};
+```
+
+Function Declaration создаётся до выполнения основного кода:
+
+```javascript
+hello("Вася");
+
+function hello(name) {
+    alert("Hi, " + name);
+}
+```
+
+Function Expression создаётся во время выполнения присваивания:
+
+```javascript
+hello("Вася"); // ошибка
+
+let hello = function(name) {
+    alert("Hi, " + name);
+};
+```
+
+---
+
+# 18. Именованные и анонимные функции
+
+Анонимная функция:
+
+```javascript
+function() {
+    alert("Привет!");
+}
+```
+
+Например, функцию можно передать как аргумент:
+
+```javascript
+function ask(question, yes, no) {
+    if (confirm(question)) {
+        yes();
+    } else {
+        no();
+    }
+}
+
+ask(
+    "Вы согласны?",
+    function() {
+        alert("Вы согласились.");
+    },
+    function() {
+        alert("Вы НЕ согласились.");
+    }
+);
+```
+
+Именованное функциональное выражение может быть полезно, например, для рекурсии:
+
+```javascript
+let f = function hello() {
+    // внутри функции доступно имя hello
+};
+```
+
+---
+
+# 19. Создание функции через `Function`
+
+Функцию можно создать динамически:
+
+```javascript
+let sum = new Function(
+    "a,b",
+    "return a+b;"
+);
+
+let result = sum(1, 2);
+```
+
+Такой способ встречается значительно реже обычных объявлений функций.
+
+---
+
+# 20. Условия
+
+Основная конструкция:
+
+```javascript
+if (year < 1961) {
+    alert("Это слишком рано");
+} else if (year > 1961) {
+    alert("Это слишком поздно");
+} else {
+    alert("Да, точно!");
+}
+```
+
+---
+
+# 21. Циклы
+
+## `while`
+
+```javascript
+let i = 0;
+
+while (i < 3) {
+    alert(i);
+    i++;
+}
+```
+
+## `do...while`
+
+Тело выполняется хотя бы один раз:
+
+```javascript
+let i = 0;
+
+do {
+    alert(i);
+    i++;
+} while (i < 3);
+```
+
+## `for`
+
+```javascript
+for (let i = 0; i < 3; i++) {
+    alert(i);
+}
+```
+
+Части цикла `for` можно опускать:
+
+```javascript
+let i = 0;
+
+for (; i < 3; i++) {
+    alert(i);
+}
+```
+
+---
+
+## 21.1. `break` и `continue`
+
+`break` завершает цикл:
+
+```javascript
+while (true) {
+    let value = prompt("Введи число");
+
+    if (!value) {
+        break;
+    }
+}
+```
+
+`continue` пропускает текущую итерацию:
+
+```javascript
+for (let i = 0; i < 100; i++) {
+    if (i % 2 === 0) {
+        continue;
+    }
+
+    alert(i);
+}
+```
+
+### Метки
+
+Метка позволяет выйти из внешнего цикла:
+
+```javascript
+outer:
+for (let i = 0; i < 3; i++) {
+    for (let j = 0; j < 3; j++) {
+        let input = prompt("Введите значение");
+
+        if (!input) {
+            break outer;
+        }
+    }
+}
+```
+
+---
+
+# 22. `switch`
+
+`switch` используется для выбора одного из вариантов:
+
+```javascript
+let a = parseInt(prompt("2 + 2 = ?"));
+
+switch (a) {
+    case 3:
+        alert("Маловато");
+        break;
+
+    case 4:
+        alert("В точку!");
+        break;
+
+    case 5:
+        alert("Перебор");
+        break;
+
+    default:
+        alert("Совсем далеко...");
+}
+```
+
+Сравнение в `switch` производится по строгому равенству.
+
+---
+
+# 23. `typeof`
+
+Оператор `typeof` позволяет определить тип значения:
+
+```javascript
+typeof 100;       // "number"
+typeof "hello";   // "string"
+typeof false;     // "boolean"
+typeof undefined; // "undefined"
+```
+
+Особенность:
+
+```javascript
+typeof null; // "object"
+```
+
+Это историческая особенность JavaScript.
+
+---
+
+# 24. Обработка ошибок: `try...catch`
+
+Конструкция:
+
+```javascript
+try {
+    // код, в котором может возникнуть ошибка
+} catch (err) {
+    // обработка ошибки
+}
+```
+
+Если в `try` возникает исключение, выполнение блока прерывается и управление передаётся в `catch`.
+
+```javascript
+try {
+    someFunction();
+} catch (err) {
+    alert(err.message);
+}
+```
+
+Объект ошибки содержит информацию о произошедшем.
+
+---
+
+# 25. События
+
+Событие — сигнал о том, что в браузере что-то произошло.
+
+Примеры:
+
+- нажатие кнопки мыши;
+- движение мыши;
+- нажатие клавиши;
+- получение фокуса;
+- изменение значения поля;
+- загрузка документа;
+- отправка формы.
+
+JavaScript в браузере использует событийную модель.
+
+---
+
+# 26. Обработчики событий
+
+## 26.1. HTML-атрибут
+
+```html
+<input
+    type="button"
+    value="Нажми меня"
+    onclick="alert('Привет!')">
+```
+
+Можно вызвать отдельную функцию:
+
+```html
+<script>
+function hello() {
+    alert("Привет!");
+}
+</script>
+
+<input
+    type="button"
+    onclick="hello()"
+    value="Привет!">
+```
+
+Для сложных приложений этот способ неудобен.
+
+## 26.2. Свойство элемента
+
+```javascript
+button.onclick = function() {
+    alert("Привет!");
+};
+```
+
+Недостаток: через одно свойство `onclick` можно хранить только один обработчик.
+
+## 26.3. `addEventListener()`
+
+Предпочтительный универсальный способ:
+
+```javascript
+element.addEventListener("click", handler);
+```
+
+Например:
+
+```javascript
+function handler() {
+    alert("Привет!");
+}
+
+button.addEventListener("click", handler);
+```
+
+Удалить обработчик можно:
+
+```javascript
+button.removeEventListener("click", handler);
+```
+
+Важно: для удаления должна использоваться **та же функция**, которая была передана при добавлении.
+
+Нельзя:
+
+```javascript
+element.addEventListener("click", function() {
+    alert("Привет!");
+});
+
+element.removeEventListener("click", function() {
+    alert("Привет!");
+});
+```
+
+Это две разные функции.
+
+Можно:
+
+```javascript
+function handler() {
+    alert("Привет!");
+}
+
+element.addEventListener("click", handler);
+element.removeEventListener("click", handler);
+```
+
+`addEventListener()` позволяет назначить несколько обработчиков одного события.
+
+---
+
+# 27. `this` в обработчике
+
+В обработчике события `this` обычно ссылается на элемент, для которого обработчик вызван:
+
+```html
+<button onclick="alert(this.innerHTML)">
+    Нажми меня
+</button>
+```
+
+---
+
+# 28. Объект события
+
+Обработчик получает объект `event`:
+
+```javascript
+element.onclick = function(event) {
+    // ...
+};
+```
+
+Полезные свойства:
+
+```javascript
+event.type
+event.target
+event.currentTarget
+event.clientX
+event.clientY
+```
+
+`event.target` — элемент, на котором произошло исходное событие.
+
+`event.currentTarget` — элемент, чей обработчик сейчас выполняется.
+
+---
+
+# 29. Всплытие и захват событий
+
+Событие в DOM проходит несколько фаз:
+
+1. **capture** — распространение сверху вниз;
+2. **target** — достижение целевого элемента;
+3. **bubble** — распространение обратно вверх.
+
+![Фазы распространения DOM-события](https://www.w3.org/TR/2003/NOTE-DOM-Level-3-Events-20031107/images/eventflow.png)
+
+По умолчанию `addEventListener()` регистрирует обработчики в фазе bubbling.
+
+Для capture можно использовать:
+
+```javascript
+element.addEventListener(
+    "click",
+    handler,
+    true
+);
+```
+
+или современную запись:
+
+```javascript
+element.addEventListener(
+    "click",
+    handler,
+    { capture: true }
+);
+```
+
+---
+
+# 30. Остановка распространения
+
+Распространение события можно остановить:
+
+```javascript
+event.stopPropagation();
+```
+
+Если у элемента несколько обработчиков, `stopPropagation()` не отменяет выполнение остальных обработчиков этого же элемента.
+
+Для немедленной остановки обработки используется:
+
+```javascript
+event.stopImmediatePropagation();
+```
+
+---
+
+# 31. Порядок обработки событий
+
+JavaScript в браузере выполняет обычный код последовательно.
+
+Если обработка события занимает много времени, интерфейс может перестать реагировать.
+
+Упрощённо можно представить работу браузера так:
+
+- выполняется текущий JavaScript;
+- события и другие асинхронные операции ожидают своей очереди;
+- когда основной поток освобождается, браузер выполняет ожидающий обработчик.
+
+![JavaScript Event Loop](https://upload.wikimedia.org/wikipedia/commons/8/83/JavaScript_Event_Loop.png)
+
+Это связано с понятием **event loop** — цикла обработки событий.
+
+---
+
+# 32. Синхронные и отложенные действия
+
+Если JavaScript непосредственно вызывает действие, оно может выполниться сразу.
+
+Например:
+
+```javascript
+button.onclick = function() {
+    text.value += "в onclick ";
+
+    text.focus();
+
+    text.value += "из onclick ";
+};
+```
+
+Если `focus()` вызывает другое событие, оно может быть обработано непосредственно во время текущего вызова.
+
+`setTimeout()` позволяет запланировать функцию:
+
+```javascript
+setTimeout(function() {
+    text.focus();
+}, 0);
+```
+
+Даже `setTimeout(..., 0)` не означает «выполнить прямо сейчас». Функция будет поставлена в очередь и выполнится после завершения текущего кода.
+
+---
+
+# 33. События мыши
+
+Основные события:
+
+```text
+mousedown
+mouseup
+mouseover
+mouseout
+mousemove
+click
+contextmenu
+dblclick
+```
+
+Например, обычный клик связан с последовательностью нажатия и отпускания кнопки мыши.
+
+Дополнительные признаки события:
+
+```javascript
+event.shiftKey
+event.altKey
+event.ctrlKey
+event.metaKey
+```
+
+Координаты мыши:
+
+```javascript
+event.clientX
+event.clientY
+
+event.pageX
+event.pageY
+```
+
+Также существуют:
+
+```text
+mouseenter
+mouseleave
+```
+
+---
+
+# 34. События клавиатуры
+
+Основные события:
+
+```text
+keydown
+keyup
+```
+
+Современный код обычно работает со свойствами `event.key` и `event.code`.
+
+Например:
+
+```javascript
+document.addEventListener("keydown", event => {
+    console.log(event.key);
+});
+```
+
+Пользовательский ввод можно отменить:
+
+```javascript
+input.addEventListener("keydown", event => {
+    event.preventDefault();
+});
+```
+
+---
+
+# 35. События документа
+
+`DOMContentLoaded` возникает, когда HTML разобран и DOM построен:
+
+```javascript
+document.addEventListener(
+    "DOMContentLoaded",
+    ready
+);
+```
+
+`load` означает, что документ и связанные ресурсы загружены:
+
+```javascript
+window.addEventListener("load", ready);
+```
+
+Также существуют события, связанные с уходом со страницы:
+
+```text
+beforeunload
+unload
+```
+
+---
+
+# 36. События формы
+
+Часто используются:
+
+```text
+focus
+blur
+change
+input
+cut
+copy
+paste
+submit
+```
+
+`input` обычно возникает при изменении значения поля.
+
+`change` возникает после фиксации изменения значения элемента формы.
+
+`submit` связан с отправкой формы.
+
+---
+
+# 37. DOM — Document Object Model
+
+DOM — объектное представление HTML-документа.
+
+Например, HTML:
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>A Simple Web Page</title>
+</head>
+<body>
+    <h1>My Web Page</h1>
+    <p>Это текст</p>
+</body>
+</html>
+```
+
+представляется браузером как дерево узлов.
+
+![Пример дерева DOM](https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/DOM_tree.svg/960px-DOM_tree.svg.png)
+
+DOM позволяет JavaScript:
+
+- находить элементы;
+- читать и изменять их содержимое;
+- изменять атрибуты;
+- добавлять и удалять узлы;
+- изменять CSS;
+- назначать обработчики событий.
+
+---
+
+# 38. Узлы DOM
+
+Основные виды узлов:
+
+- `Document`;
+- `Element`;
+- `Text`;
+- `Comment`;
+- `DocumentType`.
+
+Например, HTML-элемент является узлом типа `Element`, а текст внутри него — текстовым узлом.
+
+---
+
+# 39. Основные свойства DOM-узлов
+
+### `nodeType`
+
+Тип узла.
+
+Наиболее часто:
+
+```text
+1 — Element
+3 — Text
+```
+
+### `nodeName` и `tagName`
+
+Имя узла или HTML-тега.
+
+### `innerHTML`
+
+Внутреннее HTML-содержимое:
+
+```javascript
+element.innerHTML;
+```
+
+Можно изменять:
+
+```javascript
+element.innerHTML = "<b>Привет!</b>";
+```
+
+### `outerHTML`
+
+HTML всего элемента вместе с самим элементом.
+
+### `textContent`
+
+Только текстовое содержимое без HTML-тегов:
+
+```javascript
+element.textContent;
+```
+
+### `hidden`
+
+Позволяет скрыть элемент:
+
+```javascript
+element.hidden = true;
+```
+
+---
+
+# 40. Навигация по DOM
+
+Для перемещения по дереву используются свойства:
+
+### Дети
+
+```javascript
+childNodes
+firstChild
+lastChild
+```
+
+### Соседи
+
+```javascript
+previousSibling
+nextSibling
+```
+
+### Родители
+
+```javascript
+parentNode
+parentElement
+```
+
+![Навигация по дереву DOM](https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5a/DOM-model.svg/960px-DOM-model.svg.png)
+
+---
+
+# 41. Поиск элементов
+
+По `id`:
+
+```javascript
+document.getElementById("main");
+```
+
+По тегу:
+
+```javascript
+element.getElementsByTagName("p");
+```
+
+По имени:
+
+```javascript
+document.getElementsByName("username");
+```
+
+По классу:
+
+```javascript
+element.getElementsByClassName("important");
+```
+
+Современный и очень удобный способ — CSS-селекторы:
+
+```javascript
+document.querySelector("#main");
+document.querySelector(".important");
+document.querySelectorAll("p");
+```
+
+`querySelector()` возвращает первый найденный элемент, а `querySelectorAll()` — все подходящие элементы.
+
+---
+
+# 42. BOM — Browser Object Model
+
+BOM предоставляет JavaScript доступ к возможностям браузера.
+
+Главный объект:
+
+```javascript
+window
+```
+
+В него входят, в частности:
+
+```text
+document
+navigator
+screen
+location
+history
+```
+
+Также с браузером связаны:
+
+```text
+localStorage
+sessionStorage
+XMLHttpRequest
+alert()
+confirm()
+prompt()
+```
+
+---
+
+# 43. Глобальный объект `window`
+
+В браузере глобальным объектом является `window`.
+
+Некоторые глобальные значения доступны как его свойства:
+
+```javascript
+var a = 5;
+
+alert(window.a); // 5
+```
+
+При этом для `let` и `const` поведение отличается:
+
+```javascript
+let b = 10;
+
+window.b; // не является тем же глобальным свойством, что var
+```
+
+---
+
+# 44. Асинхронные операции
+
+Некоторые операции нельзя или не следует выполнять как длительную синхронную работу.
+
+Например:
+
+- загрузка сетевых данных;
+- загрузка скрипта;
+- таймер;
+- ожидание результата внешней операции.
+
+Задача JavaScript — дождаться результата, не блокируя основной поток.
+
+---
+
+# 45. Callback
+
+Один из способов работы с асинхронностью — передать функцию обратного вызова.
+
+Например, загрузка скрипта:
+
+```javascript
+function loadScript(src, callback) {
+    let script = document.createElement("script");
+
+    script.src = src;
+
+    script.onload = () => callback(script);
+
+    document.head.append(script);
+}
+
+loadScript("script.js", function() {
+    testFunction();
+});
+```
+
+Функция `callback` будет вызвана после завершения загрузки.
+
+---
+
+# 46. Promise
+
+`Promise` — объект, представляющий результат асинхронной операции.
+
+Состояния Promise:
+
+```text
+pending   — ожидание
+fulfilled — успешно выполнено
+rejected  — завершилось ошибкой
+```
+
+Создание:
+
+```javascript
+let promise = new Promise(function(resolve, reject) {
+    // асинхронная операция
+
+    // resolve(result);
+    // reject(error);
+});
+```
+
+`resolve()` сообщает об успешном завершении.
+
+`reject()` сообщает об ошибке.
+
+![Состояния Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)
+
+---
+
+# 47. `then()`
+
+Успешный результат обрабатывается через `then()`:
+
+```javascript
+promise.then(
+    function(result) {
+        // успешное выполнение
+    },
+    function(error) {
+        // ошибка
+    }
+);
+```
+
+Первый обработчик получает результат.
+
+Второй — ошибку.
+
+---
+
+# 48. `catch()` и `finally()`
+
+`catch()` используется для обработки ошибки:
+
+```javascript
+promise.catch(function(error) {
+    console.log(error);
+});
+```
+
+`finally()` выполняется независимо от результата:
+
+```javascript
+promise.finally(function() {
+    console.log("Операция завершена");
+});
+```
+
+Это удобно для действий, которые должны выполняться и после успеха, и после ошибки: например, скрыть индикатор загрузки.
+
+---
+
+# 49. `async/await`
+
+`async/await` делает код работы с Promise похожим на последовательный код.
+
+`async` перед функцией означает, что функция возвращает Promise:
+
+```javascript
+async function test() {
+    // ...
+}
+```
+
+`await` ожидает завершения Promise:
+
+```javascript
+async function testAsync() {
+    await loadScript("script.js");
+
+    testFunction();
+}
+```
+
+`await` можно использовать внутри `async`-функции.
+
+---
+
+# 50. Объекты JavaScript
+
+Объект можно рассматривать как структуру данных «ключ — значение»:
+
+```javascript
+let user = {
+    name: "Маша",
+    age: 25
+};
+```
+
+Доступ через точку:
+
+```javascript
+user.name;
+```
+
+или через квадратные скобки:
+
+```javascript
+user["name"];
+```
+
+Добавление свойства:
+
+```javascript
+user.city = "Нижний Новгород";
+```
+
+Удаление:
+
+```javascript
+delete user.city;
+```
+
+Проверка наличия:
+
+```javascript
+"name" in user;
+```
+
+---
+
+# 51. Перебор свойств
+
+Для перебора используется `for...in`:
+
+```javascript
+for (let key in user) {
+    console.log(key, user[key]);
+}
+```
+
+---
+
+# 52. Ссылки на объекты
+
+При присваивании объекта другой переменной копируется ссылка на тот же объект:
+
+```javascript
+let user = {
+    name: "Вася"
+};
+
+let admin = user;
+
+admin.name = "Петя";
+
+alert(user.name); // Петя
+```
+
+Поэтому изменение через `admin` видно через `user`.
+
+---
+
+# 53. Методы объектов
+
+Свойство объекта может содержать функцию:
+
+```javascript
+let user = {
+    name: "Вася",
+
+    sayHi: function() {
+        alert("Привет!");
+    }
+};
+
+user.sayHi();
+```
+
+Такую функцию называют **методом объекта**.
+
+Метод можно добавить позднее:
+
+```javascript
+user.sayHi = function() {
+    alert("Привет!");
+};
+```
+
+---
+
+# 54. `this`
+
+Для доступа к текущему объекту внутри метода используется `this`:
+
+```javascript
+let user = {
+    name: "Вася",
+
+    sayHi: function() {
+        alert("Привет, " + this.name);
+    }
+};
+
+user.sayHi();
+```
+
+Важно: значение `this` определяется способом вызова функции.
+
+```javascript
+let user = {
+    firstName: "Вася"
+};
+
+let admin = {
+    firstName: "Админ"
+};
+
+function func() {
+    alert(this.firstName);
+}
+
+user.f = func;
+admin.g = func;
+
+user.f();   // Вася
+admin.g();  // Админ
+```
+
+---
+
+# 55. Преобразование объектов
+
+В некоторых операциях объект преобразуется в примитив.
+
+Это может происходить при:
+
+- строковом преобразовании;
+- числовых операциях;
+- логических операциях.
+
+В логическом контексте объекты являются истинными:
+
+```javascript
+if ({}) {
+    alert("Объект — true");
+}
+```
+
+Даже пустые массивы и объекты считаются `true`.
+
+---
+
+# 56. `toString()` и `valueOf()`
+
+По умолчанию объект при строковом преобразовании может давать:
+
+```text
+[object Object]
+```
+
+Можно определить собственный `toString()`:
+
+```javascript
+let user = {
+    firstName: "Василий",
+
+    toString: function() {
+        return "Пользователь " + this.firstName;
+    }
+};
+
+alert(user);
+```
+
+Для числового преобразования используется `valueOf()`, а при его отсутствии применяются дальнейшие правила преобразования, включая `toString()`.
+
+---
+
+# 57. Конструкторы и `new`
+
+Функция может использоваться как конструктор:
+
+```javascript
+function Animal(name) {
+    this.name = name;
+    this.canWalk = true;
+}
+
+let animal = new Animal("кот");
+```
+
+При вызове с `new` создаётся новый объект, а `this` внутри конструктора указывает на него.
+
+По соглашению имена функций-конструкторов начинают с заглавной буквы.
+
+---
+
+# 58. Методы в конструкторах
+
+Можно создать метод непосредственно в конструкторе:
+
+```javascript
+function User(name) {
+    this.name = name;
+
+    this.sayHi = function() {
+        alert("Моё имя: " + this.name);
+    };
+}
+
+let ivan = new User("Иван");
+
+ivan.sayHi();
+```
+
+Для большого количества объектов такой подход может создавать отдельную функцию для каждого объекта. Поэтому методы часто размещают в прототипе.
+
+---
+
+# 59. Локальные переменные конструктора
+
+В конструкторе могут существовать вспомогательные локальные переменные и функции:
+
+```javascript
+function User(firstName, lastName) {
+    let phrase = "Привет";
+
+    function getFullName() {
+        return firstName + " " + lastName;
+    }
+
+    this.sayHi = function() {
+        alert(phrase + ", " + getFullName());
+    };
+}
+```
+
+Здесь `sayHi()` сохраняет доступ к локальным значениям конструктора.
+
+---
+
+# 60. Дескрипторы свойств
+
+Для тонкой настройки свойств используется:
+
+```javascript
+Object.defineProperty(
+    object,
+    property,
+    descriptor
+);
+```
+
+Например:
+
+```javascript
+let user = {};
+
+Object.defineProperty(user, "name", {
+    value: "Вася",
+    writable: true,
+    configurable: true,
+    enumerable: true
+});
+```
+
+Основные поля дескриптора:
+
+- `value` — значение;
+- `writable` — можно ли изменять значение;
+- `configurable` — можно ли изменять конфигурацию и удалять свойство;
+- `enumerable` — участвует ли свойство в перечислении;
+- `get` — функция-геттер;
+- `set` — функция-сеттер.
+
+---
+
+# 61. Геттеры и сеттеры
+
+Геттер вычисляет значение свойства:
+
+```javascript
+let user = {
+    firstName: "Вася",
+    surname: "Петров",
+
+    get fullName() {
+        return this.firstName + " " + this.surname;
+    }
+};
+
+alert(user.fullName);
+```
+
+Сеттер позволяет обработать присваивание:
+
+```javascript
+let user = {
+    firstName: "Вася",
+    surname: "Петров",
+
+    get fullName() {
+        return this.firstName + " " + this.surname;
+    },
+
+    set fullName(value) {
+        let parts = value.split(" ");
+
+        this.firstName = parts[0];
+        this.surname = parts[1];
+    }
+};
+
+user.fullName = "Петя Иванов";
+```
+
+---
+
+# 62. Работа со свойствами объекта
+
+Полезные методы:
+
+```javascript
+Object.defineProperties()
+Object.keys()
+Object.getOwnPropertyNames()
+Object.getOwnPropertyDescriptor()
+```
+
+Например:
+
+```javascript
+Object.keys(user);
+```
+
+возвращает массив перечисляемых собственных свойств.
+
+---
+
+# 63. Статические свойства и методы
+
+Свойства и методы, записанные непосредственно в функцию-конструктор, являются статическими:
+
+```javascript
+function Article() {
     Article.count++;
 }
-Article.count = 0;​
-Article.showCount = function() {​
-    alert( this.count );​
-}​
 
-// использование​
-new Article();​
-new Article();​
-Article.showCount(); // (2)​​
-```
----
-### Метод call​
-* Синтаксис метода call:​
-```js 
-func.call(context, arg1, arg2, ...)​
-```
-* При этом вызывается функция func, первый аргумент call становится её this, а остальные передаются в func согласно списку аргументов (arg1, arg2,).​
-* Вызов func.call(context, a, b...) – то же, что обычный вызов func(a, b...), но с явно указанным this(=context)
-
----
-### Метод call​
-
-```js 
-let user = {​
-  firstName: "Василий",​
-  surname: "Петров",​
-  patronym: "Иванович"​
-};​
-
-function showFullName(firstPart, lastPart) {​
-  alert( this[firstPart] + " " + this[lastPart] );​
-}​
-
-showFullName.call(user, 'firstName', 'surname’) ​
-// "Василий Петров"​
-showFullName.call(user, 'firstName', 'patronym’) ​
-// "Василий Иванович"​
-```
----
-### Метод apply
-* Вызов функции при помощи func.apply работает аналогично func.call, но принимает массив аргументов вместо списка.​
-* Используется, когда спиcок параметров нужно формировать динамически​
-```js 
-func.call(context, arg1, arg2);​
-// идентичен вызову​
-func.apply(context, [arg1, arg2]);​
-```
----
-### Объекты и их прототипы
-* Объекты в JavaScript можно организовать в цепочки так, чтобы свойство, не найденное в одном объекте, автоматически искалось бы в другом.​
-* Если один объект имеет специальную ссылку \__proto__ на другой объект, то при чтении свойства из него, если свойство отсутствует в самом объекте, оно ищется в объекте \__proto__
-```js 
-let animal = {eats: true};​
-let rabbit = {jumps: true};​
-rabbit.__proto__ = animal;​
-alert( rabbit.jumps ); // true​
-alert( rabbit.eats ); // true​
-```
----
-### Объекты и их прототипы
-* Объект, на который указывает ссылка \__proto__, называется «прототипом». ​
-* Также говорят, что объект rabbit «прототипно наследует» от animal.​
-* Прототип используется исключительно при чтении. Запись значения – работает напрямую с объектом.
-```js 
-let animal = {eats: true};​
-let rabbit = {jumps: true};​
-rabbit.__proto__ = animal;​
-rabbit.eats = false;​
-alert( rabbit.eats ); //false​
-```
----
-### Объекты и их прототипы
-* Обычный цикл for..in не делает различия между свойствами объекта и его прототипа.​
-```js 
-let animal = {eats: true};​
-let rabbit = {jumps: true,__proto__: animal};​
-for (let key in rabbit) {​
-  alert( key + " = " + rabbit[key] ); ​
-// выводит и "eats" и "jumps"​
-}​
-```
-* Вызов obj.hasOwnProperty(prop) возвращает true, если свойство prop принадлежит самому объекту obj, иначе false.​
----
-### Объекты и их прототипы
-* Установка прототипа при использовании функции-конструктора
-```js 
-let animal = {eats: true};​
-function Rabbit(name) {this.name = name;}​
-Rabbit.prototype = animal;​
-let rabbit = new Rabbit("Кролик"); ​
-//  rabbit.__proto__ == animal​
-alert( rabbit.eats ); // true​​
-```
----
-### Объекты и их прототипы
-* По умолчанию (если оно не изменялось), свойство prototype содержит объект вида 
-
-{constructor: <функция-конструктор данного объекта>}​
-
-Т.е. допустим код вида:​
-```js 
-function Rabbit(name) {​
-  this.name = name;​
-  alert( name );​
-}​
-let rabbit = new Rabbit("Братец Кролик");​
-let rabbit2 = new rabbit.constructor("Крольчиха");​
-```
----
-### Объекты и их прототипы
-* Все объекты в JavaScript «наследуют» от Object.prototype​
-```js 
-let obj = {};​
-// метод берётся из прототипа?​
-alert( obj.toString == Object.prototype.toString ); // true, да​
-// проверим, правда ли что __proto__ это Object.prototype?​
-alert( obj.__proto__ == Object.prototype ); // true​
-// А есть ли __proto__ у Object.prototype?​
-alert( obj.__proto__.__proto__ ); // null, нет​
-```
----
-### Объекты и их прототипы
-* Встроенные прототипы можно изменять
-```js 
-String.prototype.repeat = function(times) {​
-    return new Array(times + 1).join(this);​
-};​
-alert( "ля".repeat(3) ); // ляляля​
+Article.count = 0;
+Article.DEFAULT_FORMAT = "html";
 ```
 
-* Метод repeat теперь доступен для ВСЕХ строк
+Статический метод:
+
+```javascript
+Article.showCount = function() {
+    alert(this.count);
+};
+```
+
+Использование:
+
+```javascript
+new Article();
+new Article();
+
+Article.showCount(); // 2
+```
+
 ---
-### Наследование методов​
-```js 
+
+# 64. `call()`
+
+Метод `call()` позволяет явно указать значение `this`:
+
+```javascript
+func.call(context, arg1, arg2);
+```
+
+Пример:
+
+```javascript
+function showFullName(firstPart, lastPart) {
+    alert(this[firstPart] + " " + this[lastPart]);
+}
+
+let user = {
+    firstName: "Василий",
+    surname: "Петров"
+};
+
+showFullName.call(
+    user,
+    "firstName",
+    "surname"
+);
+```
+
+---
+
+# 65. `apply()`
+
+`apply()` работает аналогично `call()`, но принимает аргументы массивом:
+
+```javascript
+func.call(context, arg1, arg2);
+
+func.apply(context, [arg1, arg2]);
+```
+
+`apply()` удобен, когда набор аргументов формируется динамически.
+
+---
+
+# 66. Прототипы
+
+Объекты JavaScript могут образовывать цепочки прототипов.
+
+Если свойство не найдено непосредственно в объекте, JavaScript ищет его в прототипе.
+
+```javascript
+let animal = {
+    eats: true
+};
+
+let rabbit = {
+    jumps: true
+};
+
+rabbit.__proto__ = animal;
+
+alert(rabbit.jumps); // true
+alert(rabbit.eats);  // true
+```
+
+![Цепочка прототипов JavaScript](https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/JS_Prototype_Chain.svg/960px-JS_Prototype_Chain.svg.png)
+
+`rabbit` имеет собственное свойство `jumps`, а `eats` получает через прототип.
+
+Запись свойства происходит непосредственно в объект:
+
+```javascript
+rabbit.eats = false;
+```
+
+Теперь:
+
+```javascript
+rabbit.eats; // false
+```
+
+---
+
+# 67. `for...in` и собственные свойства
+
+При использовании `for...in` могут учитываться свойства, полученные через цепочку прототипов.
+
+Проверить, принадлежит ли свойство самому объекту, можно через:
+
+```javascript
+obj.hasOwnProperty("name");
+```
+
+---
+
+# 68. Прототип конструктора
+
+Для функции-конструктора используется свойство `prototype`:
+
+```javascript
+function Rabbit(name) {
+    this.name = name;
+}
+
+let animal = {
+    eats: true
+};
+
+Rabbit.prototype = animal;
+
+let rabbit = new Rabbit("Кролик");
+
+rabbit.eats; // true
+```
+
+Все экземпляры конструктора могут использовать методы, размещённые в его прототипе.
+
+---
+
+# 69. Наследование методов
+
+Методы удобно размещать в прототипе:
+
+```javascript
 function Animal(name) {
     this.name = name;
     this.speed = 0;
-}​
-// 1.1. Методы -- в прототип​
+}
+
 Animal.prototype.stop = function() {
-    this.speed = 0;​
-    alert( this.name + ' стоит' );
-}​
-Animal.prototype.run = function(speed) { 
-    this.speed += speed;​
-    alert( this.name + ' бежит, скорость ' + this.speed );
-};​
+    this.speed = 0;
+};
+
+Animal.prototype.run = function(speed) {
+    this.speed += speed;
+};
+```
+
+Другой конструктор может наследовать прототип:
+
+```javascript
 function Rabbit(name) {
     this.name = name;
     this.speed = 0;
-}​
-// 2.1. Наследование​
-Rabbit.prototype = Object.create(Animal.prototype);​
-Rabbit.prototype.constructor = Rabbit;​
-// 2.2. Методы Rabbit​
-Rabbit.prototype.jump = function() {  
-    this.speed++;​
-    alert( this.name + ' прыгает, скорость ' + this.speed );
-}​
-```
----
-### Методы родителя
-* Переопределение метода родителя​
-```js 
-Rabbit.prototype.run = function(speed) {​
-    this.speed++;   
-    this.jump();​
-};​​
-```
-* Вызов метода родителя​
-```js 
-Rabbit.prototype.run = function() {​
-   // вызвать метод родителя, передав ему аргументы​
-   Animal.prototype.run.apply(this, arguments);​
-   this.jump(); 
-}
-```
----
-### Ключевое слово "class"​
-```js 
-class Animal { // конструктор 
-    constructor(name) { 
-        this.name = name; 
-        this.speed = 0; 
-    } 
-//методы класса 
-    stop() { 
-        this.speed = 0; 
-        console.log(this.name + " state with speed " + this.speed); 
-    } 
-    run(speed) { 
-        this.speed += speed; 
-        console.log(this.name + ' run with speed:' + this.speed); 
-    }
-} 
-```
----
-### Ключевое слово "class"​
-```js 
-class Rabbit extends Animal {
-    jump() {
-        this.speed++;
-        console.log(this.name + ' jump with speed ' + this.speed);
-    }
 }
 
-let animal = new Animal("Животное");
-let rabbit = new Rabbit("Кролик");
-rabbit.stop(); //Кролик stop with speed 0
-rabbit.run(10); //Кролик run with speed:10
-rabbit.jump(); //Кроликjump with speed 11
+Rabbit.prototype = Object.create(
+    Animal.prototype
+);
+
+Rabbit.prototype.constructor = Rabbit;
 ```
----
-### Как происходит выполнение программы?​
----
-### Порядок инициализации
-* На первой фазе происходит инициализация, подготовка к запуску.  Во время инициализации скрипт сканируется на предмет объявления функций вида Function Declaration, а затем – на предмет объявления переменных var. Каждое такое объявление добавляется в window.  Функции, объявленные как Function Declaration, создаются сразу работающими, а переменные – равными undefined.​
-* На второй фазе происходит выполнение. Присваивание (=) значений переменных происходит, когда поток выполнения доходит до соответствующей строчки кода, до этого они undefined.​
----
-### Порядок инициализации
-```js 
-alert("a" in window); // true,  т.к. есть свойство window.a​
-alert(a); // равно undefined,  присваивание будет выполнено далее​
-alert(f); // function ...,  готовая к выполнению функция​
-alert(g); // undefined, т.к. это переменная, а не Function Declaration​
 
-var a = 5;​
-function f() { /*...*/ }​
-var g = function() { /*...*/ };​
+После этого Rabbit получает доступ к методам `Animal`.
+
+---
+
+# 70. Переопределение методов
+
+Метод родителя можно переопределить:
+
+```javascript
+Rabbit.prototype.run = function(speed) {
+    this.speed++;
+    this.jump();
+};
 ```
----
-### Замыкания. Лексическое окружение​
-* Все переменные внутри функции – это свойства специального внутреннего объекта LexicalEnvironment, который создаётся при её запуске. При запуске функция создает объект LexicalEnvironment, записывает туда аргументы, функции и переменные. Процесс инициализации выполняется в том же порядке, что и для глобального объекта, который, вообще говоря, является частным случаем лексического окружения.​
-* В отличие от window, объект LexicalEnvironment является внутренним, он скрыт от прямого доступа.​
----
-### Замыкания. Лексическое окружение​
-* Из функции мы можем обратиться не только к локальной переменной, но и к внешней. Интерпретатор, при доступе к переменной, сначала пытается найти переменную в текущем LexicalEnvironment, а затем, если её нет – ищет во внешнем объекте переменных. В случае браузера им является window.​
----
-### Замыкания. Лексическое окружение​
-* Каждая функция при создании получает ссылку \[[Scope]] на объект с переменными, в контексте которого была создана.​
-* При **запуске** функции **создаётся новый объект** с переменными LexicalEnvironment. Он получает ссылку на внешний объект переменных из \[[Scope]].​
-* При поиске переменных он осуществляется сначала в текущем объекте переменных, а потом – по этой ссылке.​
----
-### Замыкания. Лексическое окружение​
-```js 
-function makeCounter() {​
-    let currentCount = 1;​
-    return function() {return currentCount++;};​
-}​
 
-let counter = makeCounter();​
-// каждый вызов увеличивает счётчик​
-alert( counter() ); // 1​
-alert( counter() ); // 2​
-alert( counter() ); // 3​
+При необходимости можно вызвать реализацию родителя:
 
-// создать другой счётчик​
-let counter2 = makeCounter();​
-alert( counter2() ); // 1​
+```javascript
+Rabbit.prototype.run = function() {
+    Animal.prototype.run.apply(this, arguments);
+    this.jump();
+};
 ```
+
 ---
-### Свойства функции
-```js 
-function makeCounter() {​
-    function counter() {​
-        return counter.currentCount++;​
-    };​
-    counter.currentCount = 1;​
-    return counter;​
-}​
 
-let counter = makeCounter();​
-alert( counter() ); // 1​
-alert( counter() ); // 2​
+# 71. Порядок инициализации программы
 
-counter.currentCount = 5;​
-alert( counter() ); // 5​
+Упрощённо выполнение JavaScript можно разделить на подготовку окружения и непосредственное выполнение кода.
+
+При подготовке учитываются объявления функций и переменных.
+
+Например:
+
+```javascript
+alert("a" in window); // true
+alert(a);             // undefined
+alert(f);             // функция
+
+var a = 5;
+
+function f() {
+    // ...
+}
+
+var g = function() {
+    // ...
+};
 ```
-Свойства функции доступны извне и могут быть изменены​
+
+Для `var` само объявление существует раньше присваивания значения.
+
+Function Declaration также доступна до строки, на которой она написана.
+
 ---
-### Особенности при использовании Function​
-* При создании функции с использованием new Function, её свойство \[[Scope]] ссылается не на текущий LexicalEnvironment, а на window.​
 
-```js 
-let a = 1;​
-function getFunc() {​
-    let a = 2;​
-    let func = new Function('', 'alert(a)');​
-    return func;​
-}​
+# 72. Замыкания
 
-getFunc()(); // 1, из window !!!​
+Замыкание возникает, когда функция сохраняет доступ к переменным внешней области видимости даже после завершения внешней функции.
+
+Пример:
+
+```javascript
+function makeCounter() {
+    let currentCount = 1;
+
+    return function() {
+        return currentCount++;
+    };
+}
+
+let counter = makeCounter();
+
+alert(counter()); // 1
+alert(counter()); // 2
+alert(counter()); // 3
 ```
----
-### Функция как объект​
-```js 
-function makeCounter() {​
-    let currentCount = 1;​
-    function counter() {return currentCount++;}​
-    counter.set = function(value){currentCount =value;};​
-    counter.reset = function() { currentCount = 1; };​
-    return counter;​
-}​
 
-let counter = makeCounter();​
-alert( counter() ); // 1​
-alert( counter() ); // 2​
+Переменная `currentCount` продолжает существовать, потому что внутренняя функция сохраняет ссылку на неё.
 
-counter.set(5);​
-alert( counter() ); // 5​
+Можно создать независимый счётчик:
+
+```javascript
+let counter2 = makeCounter();
+
+alert(counter2()); // 1
 ```
+
+`counter` и `counter2` имеют разные замыкания.
+
 ---
-### Использование «Модулей»
-* Скобки здесь важны. Из за них выражение превращается в Function Expression.​ В результате в глобальный объект переменные функции не попадут​
 
-```js 
-(function() {​
-  // глобальная переменная нашего скрипта​
-    let message = "Привет";​
-  // функция для вывода этой переменной​
-    function showMessage() {​
-        alert( message );​
-    } ​
-  // выводим сообщение​
-    showMessage();​
+# 73. Лексическое окружение
 
-})();​
+Для каждой выполняющейся функции существует внутреннее лексическое окружение.
+
+При поиске переменной JavaScript:
+
+1. сначала ищет её в текущем окружении;
+2. если не находит — переходит во внешнее окружение;
+3. продолжает поиск по цепочке внешних окружений.
+
+Именно этот механизм лежит в основе замыканий.
+
+---
+
+# 74. Функция как объект
+
+Функция является объектом и может иметь собственные свойства:
+
+```javascript
+function makeCounter() {
+    function counter() {
+        return counter.currentCount++;
+    }
+
+    counter.currentCount = 1;
+
+    return counter;
+}
+
+let counter = makeCounter();
+
+counter(); // 1
+counter(); // 2
+
+counter.currentCount = 5;
+
+counter(); // 5
 ```
----
-### Экспорт объектов из модулей​
-```js 
-(function() {​
 
-  // main - основная функция для библиотеки​
-    function main(value) {​
-    // ...​
-    }​
+То есть функция может одновременно:
 
-  // "экспортировать" main из модуля​
-    window.m = main; ​
+- выполняться как функция;
+- хранить собственные свойства.
 
-}());​
+---
+
+# 75. Модули и изоляция
+
+Один из старых способов скрыть переменные от глобальной области — немедленно вызываемая функция:
+
+```javascript
+(function() {
+    let message = "Привет";
+
+    function showMessage() {
+        alert(message);
+    }
+
+    showMessage();
+})();
 ```
+
+Скобки превращают объявление в функциональное выражение, а локальные переменные не попадают в глобальную область.
+
+Исторически таким способом создавали простейшие модули.
+
+Современный JavaScript использует встроенные **ES-модули** (`import` / `export`).
+
 ---
-### Приложения
----
-### CANVAS – элемент HTML 5​
-```html 
-<!doctype html> ​
-<html> 
-    <head> ​
-        <title>canvasExample</title> 
-        <meta charset='utf-8' /> ​
-    </head> 
-    <body> ​
-        <canvas height='320' width='480' id="example"> 
-            Обновите браузер
-        </canvas>​
-        <script> ​
-            let example = document.getElementById("example")​
-            let ctx = example.getContext('2d'); ​
-            ctx.fillRect(0, 0, example.width, example.height); ​
-        </script> ​
-    </body> 
-</html>​
+
+# 76. Canvas
+
+`<canvas>` — HTML-элемент, позволяющий рисовать средствами JavaScript.
+
+Пример:
+
+```html
+<canvas
+    width="480"
+    height="320"
+    id="example">
+    Обновите браузер
+</canvas>
 ```
----
-### CANVAS – элемент HTML 5​
-* Прямоугольники​
-    * strokeRect(x, y, ширина, высота) // Рисует прямоугольник​
-    * fillRect(x, y, ширина, высота)   // Рисует закрашенный прямоугольник​
-    * clearRect(x, y, ширина, высота)  // Очищает область на холсте размером с прямоугольник заданного размера​
-* Линии и дуги​
-    * fill() заливает фигуру сплошным цветом​
-    * moveTo(x, y) // перемещает "курсор" в позицию x, y​
-    * lineTo(x, y) // ведёт линию из текущей позиции в указанную, и делает в последствии указанную текущей ​
----
-### CANVAS – элемент HTML 5​
-* Линии и дуги​
-    * arc(x, y, radius, startAngle, endAngle, anticlockwise) // рисование дуги, где x и y центр окружности, далее начальный и конечный угол, последний параметр указывает направление​
-* Кривые Бернштейна-Безье​
-    * quadraticCurveTo(Px, Py, x, y) для построения кубической кривой​
-    * bezierCurveTo(P1x, P1y, P2x, P2y, x, y) для построения квадратичной кривой Бизье​
----
-### JSON
-* JSON (англ. JavaScript Object Notation) — текстовый формат обмена данными, основанный на JavaScript. ​
-* Данные в формате JSON (RFC 4627) представляют собой:​
-    * JavaScript-объекты { ... } или​
-    * Массивы [ ... ] или​
-    * Значения одного из типов:​
-        * строки в двойных кавычках,​
-        * число,​
-        * логическое значение true/false,​
-        * null.​
-* Основные методы для работы с JSON в JavaScript – это:​
-    * JSON.parse – создает объекты из строки​
-    * JSON.stringify – превращает объект в строку в формате JSON​
----
-### JSON (пример)​
-```json 
-{​
-    "name": "Вася",​
-    "age": 25,​
-    "roles": {​
-        "isAdmin": false,​
-        "isEditor": true​
-    }​,
-    "connections":["Oracle", "MSSQL","MySQL"]
-}​
+
+Получение контекста:
+
+```javascript
+let example =
+    document.getElementById("example");
+
+let ctx = example.getContext("2d");
+
+ctx.fillRect(
+    0,
+    0,
+    example.width,
+    example.height
+);
 ```
+
+---
+
+# 77. Рисование в Canvas
+
+Прямоугольники:
+
+```javascript
+strokeRect(x, y, width, height)
+fillRect(x, y, width, height)
+clearRect(x, y, width, height)
+```
+
+Линии:
+
+```javascript
+moveTo(x, y)
+lineTo(x, y)
+```
+
+Дуги:
+
+```javascript
+arc(
+    x,
+    y,
+    radius,
+    startAngle,
+    endAngle,
+    anticlockwise
+)
+```
+
+Для сложных кривых используются:
+
+```javascript
+quadraticCurveTo(...)
+bezierCurveTo(...)
+```
+
+---
+
+# 78. JSON
+
+**JSON (JavaScript Object Notation)** — текстовый формат обмена данными.
+
+Пример:
+
+```json
+{
+    "name": "Вася",
+    "age": 25,
+    "roles": {
+        "isAdmin": false,
+        "isEditor": true
+    }
+}
+```
+
+JSON может содержать:
+
+- объекты `{ ... }`;
+- массивы `[ ... ]`;
+- строки;
+- числа;
+- `true` / `false`;
+- `null`.
+
+---
+
+## 78.1. `JSON.parse()`
+
+Преобразует JSON-строку в JavaScript-значение:
+
+```javascript
+let text = '{"name":"Вася","age":25}';
+
+let user = JSON.parse(text);
+
+console.log(user.name);
+```
+
+## 78.2. `JSON.stringify()`
+
+Преобразует JavaScript-объект в JSON-строку:
+
+```javascript
+let user = {
+    name: "Вася",
+    age: 25
+};
+
+let text = JSON.stringify(user);
+```
+
+---
+
+# 79. Что важно запомнить
+
+JavaScript в браузере связывает три основных мира:
+
+```text
+HTML
+  ↓
+DOM ← JavaScript → BOM
+```
+
+Ключевые темы:
+
+1. **Переменные и типы**
+   - `let`, `const`, `var`;
+   - `Number`, `String`, `Boolean`;
+   - массивы и объекты.
+
+2. **Управление выполнением**
+   - `if`;
+   - `switch`;
+   - `for`;
+   - `while`;
+   - `break` / `continue`.
+
+3. **Функции**
+   - обычные функции;
+   - стрелочные функции;
+   - параметры и `return`;
+   - Function Declaration / Expression;
+   - область видимости;
+   - замыкания.
+
+4. **Браузер**
+   - DOM;
+   - BOM;
+   - `window`.
+
+5. **События**
+   - обработчики;
+   - `addEventListener`;
+   - объект `event`;
+   - `this`;
+   - capture / target / bubbling.
+
+6. **Асинхронность**
+   - `setTimeout`;
+   - callbacks;
+   - Promise;
+   - `async/await`;
+   - event loop.
+
+7. **Объекты**
+   - свойства и методы;
+   - `this`;
+   - конструкторы;
+   - дескрипторы;
+   - `call()` / `apply()`;
+   - прототипы и наследование.
+
+8. **Web API**
+   - DOM;
+   - события;
+   - Canvas;
+   - JSON;
+   - Web Storage и другие API браузера.
+
+---
+
+# 80. Материалы
+
+- [learn.javascript.ru](https://learn.javascript.ru)
+- [Coursera — HTML, CSS, JavaScript](https://www.coursera.org/learn/html-css-javascript/home/welcome)
+- [MDN — JavaScript](https://developer.mozilla.org/ru/docs/Learn/JavaScript)
+- [JavaScript.com](https://www.javascript.com)
