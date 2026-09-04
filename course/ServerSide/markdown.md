@@ -25,7 +25,7 @@ https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Server
  - CGI-программа - это обычная программа, которая выполняется на Web-сервере в ответ на запрос, сделанный браузером. Для написания такой программы можно использовать почти любой язык программирования - CGI определяет стандарт интерфейса между Web-сервером и CGI-программой. 
 ---
 ### Подходы. CGI
- - CGI-программа может возвращать данные любого типа, например HTML-текст, рисунки в формате GIF, проcтой текст, документы Microsoft Word, аудоифайлы и т.д. 
+ - CGI-программа может возвращать данные любого типа, например HTML-текст, рисунки в формате GIF, простой текст, документы Microsoft Word, аудиофайлы и т.д. 
  - Заголовок типа возвращаемых данных сообщает браузеру о типе данных, для того чтобы обеспечивать их правильную обработку.
  - Если Web-сервер может запустить программу на выполнение и если программа возвращает правильные данные, она может быть использована в качестве CGI-программы
 ---
@@ -88,7 +88,7 @@ http://localhost:8080/cgi-bin/HelloCGI.exe
 ```c 
 #include <stdio.h>
 
-int main(int arcg, char* argv[]){
+int main(int argc, char* argv[]){
     printf("Content-type: text/html%c%c",10,10); 
     printf("<h1>HelloWorld</h1>\n\n");
     //printf("REQUEST_METHOD=%s",getenv("REQUEST_METHOD"));
@@ -104,7 +104,7 @@ http://localhost:8080/form_get.html
 ---
 ### Пример 3
 ```c 
-int main(int arcg, char* argv[]){
+int main(int argc, char* argv[]){
     entry entries[MAX_ENTRIES]; 
     printf("Content-type: text/html%c%c",10,10); 
     printf("<h1>HelloWorld</h1>\n\n");
@@ -135,7 +135,7 @@ http://localhost:8080/tests/form_post.html
 ---
 ### Пример 4
 ```c 
-int main(int arcg, char* argv[]){
+int main(int argc, char* argv[]){
     entry entries[MAX_ENTRIES]; 
     printf("Content-type: text/html%c%c",10,10); 
     printf("<h1>HelloWorld</h1>\n\n");

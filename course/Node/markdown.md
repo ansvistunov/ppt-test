@@ -6,7 +6,7 @@
 ### Технологии для разработки серверной части
  - CGI
  - PHP, JSP, ASP (ASP.NET)
- - Java (Сервера приложений (JacartaEE), Spring, …) 
+ - Java (Сервера приложений (Jakarta EE), Spring, …) 
  - Python
  - …. (Ruby, Perl, Go, C#,…)
  - JavaScript (Node.js)
@@ -198,7 +198,7 @@ console.log(test.Hello);
  - Util.format – аналог printf (форматный вывод)
  - Util.inherits – устанавливает отношение «наследования» между объектами JavaScript
 ---
-### Часто используемые модули. concole
+### Часто используемые модули. console
  - Глобальная (!!!) переменная
  - Console.log выводит в stdout
  - Console.error выводи в stderr
@@ -668,7 +668,7 @@ app.listen(3000)
      - При таком доступе работа с данными осуществляется посредством встроенного языка обработки данных СУБД (SQL для реляционных систем)
 ---
 #### Часто используемые модули. Работа с СУБД (ORM-1)
- - Доступ черер ORM-драйвер
+ - Доступ через ORM-драйвер
 ```js  
  let Person = db.define('person', {
     name: String,   surname: String,
@@ -1304,32 +1304,32 @@ app.get('/session/del', function(req, res) {
 ---
 ### Варианты реализации
  - Периодические запросы к серверу (не появились ли у сервера новые данные)
- - LongPooling
+ - Long polling
  - WebSocket
  - HTML5 Server Sent Events(SSE)
  - …
  - Многочисленные библиотеки, в реальности использующие один из описанных выше механизмов
 ---
-### Long pooling
+### Long polling
  - Клиент запрашивает страницу у сервера, используя обычный http
  - На странице (обычно) выполняется JavaScript, который запрашивает ресурс у сервера.
  - Сервер НЕ реагирует на запрос (не формирует ответ и не закрывает соединение) и ждет, пока не появится необходимость в пересылке сообщения клиенту
  - Когда появляется новая информация, сервер отсылает ее клиенту
  - Клиент получает новую информацию и НЕМЕДЛЕННО отсылает другой запрос серверу, запуская процесс ожидания на нем снова.
 ---
-### Long pooling
-![LongPooling](https://javascript.info/article/long-polling/long-polling.svg)<!-- .element: class="big_image"  -->
+### Long polling
+![Long polling](https://javascript.info/article/long-polling/long-polling.svg)<!-- .element: class="big_image"  -->
 
 https://javascript.info/article/long-polling/long-polling.svg<!-- .element: class="copyright-reference"  -->
 ---
-### «Чат» с использованием Long pooling
+### «Чат» с использованием Long polling
  - Клиент запрашивает у сервера ресурс /messages
  - Сервер не отвечает на это запрос, но сохраняет его для возможности ответить клиенту в будущем
  - Для отправки сообщения, клиент посылает запрос на ресурс /publish
  - Получив новое сообщение, сервер рассылает его на все клиенты, используя сохраненные ранее запросы
  - Получив ответ на запрос /messages, клиент выполняет новый запрос на этот ресурс, и цикл повторяется заново  
 ---
-### Long pooling. Шаблон клиента
+### Long polling. Шаблон клиента
 ```js
 <script>
 //    …
@@ -1346,12 +1346,12 @@ https://javascript.info/article/long-polling/long-polling.svg<!-- .element: clas
 </script>
 ```
 ---
-### Long pooling. Сервер
+### Long polling. Сервер
 ```js
 let clients = [];
 
 app.post('/publish', function(req, res) {
-    console.log("get request for publlish "+ req.body.message);
+    console.log("get request for publish "+ req.body.message);
     //console.log(req);
     for (let i=0; i<clients.length;i++){
         clients[i].end(req.body.message);
@@ -1465,7 +1465,7 @@ const EE = require("events").EventEmitter;
 const messageEmitter = new EE();
 
 app.post("/publish", (req, res) =>{
-    console.log("get request for publlish "+ req.body.message);
+    console.log("get request for publish "+ req.body.message);
     messageEmitter.emit('newmessage',{data: req.body.message});
     res.end();
 })
@@ -1478,7 +1478,7 @@ app.get("/messages", (req, res) => {
     res.set("Connection","keep-alive");
     res.set("Cache-Control","no-cache");
     res.set("Access-Control-Allow-Origin","*");
-    console.log("client conected");
+    console.log("client connected");
     let id = 0;
     const callback = function(message){
         res.status(200);
@@ -1499,7 +1499,7 @@ app.listen(3000);
 ---
 ### WebSockets (Википедия)
  - WebSocket — протокол **полнодуплексной** связи (может передавать и принимать одновременно) поверх TCP-соединения, предназначенный для обмена сообщениями между браузером и веб-сервером в режиме реального времени.
- - Протокол WebSocket — это независимый протокол, основанный на протоколе TCP. Он делает возможным более тесное взаимодействие между браузером и севрером, способствуя созданию приложений реального времени.
+ - Протокол WebSocket — это независимый протокол, основанный на протоколе TCP. Он делает возможным более тесное взаимодействие между браузером и сервером, способствуя созданию приложений реального времени.
      - В настоящее время в W3C осуществляется стандартизация API Web Sockets. Черновой вариант стандарта этого протокола утверждён IETF.
     - _Широко поддерживается современными браузерами и серверами_
 ---
