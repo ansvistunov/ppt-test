@@ -79,6 +79,12 @@
   --r-heading-margin: 0 0 10px 0;
 }
 
+/* Абзацы по левому краю: reveal по умолчанию центрирует всё */
+.reveal p,
+.reveal blockquote {
+  text-align: left;
+}
+
 /* === Картинки с фиксированной высотой (классы на конкретных img в markdown) === */
 .reveal img.img-fit-s,
 .reveal img.img-fit-m,
