@@ -72,4 +72,49 @@
 .small_font{
   font-size: 60%;
 }
+
+/* === Плотная вёрстка: межблочные отступы и поля заголовков === */
+.reveal {
+  --r-block-margin: 10px;
+  --r-heading-margin: 0 0 10px 0;
+}
+
+/* === Картинки с фиксированной высотой (классы на конкретных img в markdown) === */
+.reveal img.img-fit-s,
+.reveal img.img-fit-m,
+.reveal img.img-fit-l {
+  max-width: 90%;
+  object-fit: contain;
+  margin: 10px auto;
+}
+.reveal img.img-fit-s { max-height: 180px; }
+.reveal img.img-fit-m { max-height: 300px; }
+.reveal img.img-fit-l { max-height: 420px; }
+
+/* === Двухколоночные списки на плотных слайдах (class="cols" у слайда) === */
+.reveal section.cols ul,
+.reveal section.cols ol {
+  columns: 2;
+  column-gap: 1.5em;
+}
+.reveal section.cols li {
+  break-inside: avoid;
+}
+
+/* === Двухколоночный слайд целиком (class="cols2") === */
+.reveal section.cols2 {
+  columns: 2;
+  column-gap: 1.5em;
+}
+.reveal section.cols2 h1,
+.reveal section.cols2 h2,
+.reveal section.cols2 img,
+.reveal section.cols2 pre {
+  break-inside: avoid;
+}
+
+/* === Мельче код на отдельных слайдах (class="code-sm") === */
+.reveal section.code-sm pre {
+  font-size: .45em;
+}
   

@@ -1,3 +1,5 @@
+<!-- .slide: class="cols2" -->
+
 # JavaScript
 
 ## 1. Что такое JavaScript?
@@ -23,7 +25,7 @@ JavaScript применяется не только в браузере:
 - в офисных приложениях;
 - в других средах выполнения.
 
-![JavaScript](https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d3/JavaScript_logo.svg/960px-JavaScript_logo.svg.png)
+![JavaScript](https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d3/JavaScript_logo.svg/960px-JavaScript_logo.svg.png)<!-- .element: class="img-fit-s" -->
 
 ---
 
@@ -856,6 +858,8 @@ let hello = function(name) {
 
 ---
 
+<!-- .slide: class="code-sm" -->
+
 # 18. Именованные и анонимные функции
 
 Анонимная функция:
@@ -896,6 +900,7 @@ let f = function hello() {
 };
 ```
 
+---
 
 # 19. Создание функции через `Function`
 
@@ -1155,6 +1160,8 @@ button.onclick = function() {
 Недостаток: через одно свойство `onclick` можно хранить только один обработчик.
 
 ---
+<!-- .slide: class="code-sm" -->
+
 ## 26.3. `addEventListener()`
 
 Предпочтительный универсальный способ:
@@ -1256,28 +1263,20 @@ event.clientY
 2. **target** — достижение целевого элемента;
 3. **bubble** — распространение обратно вверх.
 
-![Фазы распространения DOM-события](https://www.w3.org/TR/2003/NOTE-DOM-Level-3-Events-20031107/images/eventflow.png)
+![Фазы распространения DOM-события](https://www.w3.org/TR/2003/NOTE-DOM-Level-3-Events-20031107/images/eventflow.png)<!-- .element: class="img-fit-m" -->
 
 По умолчанию `addEventListener()` регистрирует обработчики в фазе bubbling.
 
 Для capture можно использовать:
 
 ```javascript
-element.addEventListener(
-    "click",
-    handler,
-    true
-);
+element.addEventListener("click", handler, true);
 ```
 
 или современную запись:
 
 ```javascript
-element.addEventListener(
-    "click",
-    handler,
-    { capture: true }
-);
+element.addEventListener("click", handler, { capture: true });
 ```
 
 ---
@@ -1312,7 +1311,7 @@ JavaScript в браузере выполняет обычный код посл
 - события и другие асинхронные операции ожидают своей очереди;
 - когда основной поток освобождается, браузер выполняет ожидающий обработчик.
 
-![JavaScript Event Loop](https://upload.wikimedia.org/wikipedia/commons/8/83/JavaScript_Event_Loop.png)
+![JavaScript Event Loop](https://upload.wikimedia.org/wikipedia/commons/8/83/JavaScript_Event_Loop.png)<!-- .element: class="img-fit-m" -->
 
 Это связано с понятием **event loop** — цикла обработки событий.
 
@@ -1471,6 +1470,8 @@ submit
 
 ---
 
+<!-- .slide: class="code-sm cols" -->
+
 # 37. DOM — Document Object Model
 
 DOM — объектное представление HTML-документа.
@@ -1492,7 +1493,7 @@ DOM — объектное представление HTML-документа.
 
 представляется браузером как дерево узлов.
 
-![Пример дерева DOM](https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/DOM_tree.svg/960px-DOM_tree.svg.png)
+![Пример дерева DOM](https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/DOM_tree.svg/960px-DOM_tree.svg.png)<!-- .element: class="img-fit-m" -->
 
 DOM позволяет JavaScript:
 
@@ -1574,6 +1575,8 @@ element.hidden = true;
 
 ---
 
+<!-- .slide: class="code-sm" -->
+
 # 40. Навигация по DOM
 
 Для перемещения по дереву используются свойства:
@@ -1600,7 +1603,7 @@ parentNode
 parentElement
 ```
 
-![Навигация по дереву DOM](https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5a/DOM-model.svg/960px-DOM-model.svg.png)
+![Навигация по дереву DOM](https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5a/DOM-model.svg/960px-DOM-model.svg.png)<!-- .element: class="img-fit-s" -->
 
 ---
 
@@ -1979,6 +1982,8 @@ admin.g();  // Админ
 
 ---
 
+<!-- .slide: class="code-sm" -->
+
 # 55. Преобразование объектов
 
 В некоторых операциях объект преобразуется в примитив.
@@ -2261,6 +2266,8 @@ func.apply(context, [arg1, arg2]);
 
 ---
 
+<!-- .slide: class="code-sm" -->
+
 # 66. Прототипы
 
 Объекты JavaScript могут образовывать цепочки прототипов.
@@ -2284,7 +2291,7 @@ alert(rabbit.eats);  // true
 
 > ⚠️ `__proto__` — легаси-нетандарт; в новом коде используйте `Object.setPrototypeOf(rabbit, animal)`.
 
-![Цепочка прототипов JavaScript](https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/JS_Prototype_Chain.svg/960px-JS_Prototype_Chain.svg.png)
+![Цепочка прототипов JavaScript](https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/JS_Prototype_Chain.svg/960px-JS_Prototype_Chain.svg.png)<!-- .element: class="img-fit-m" -->
 
 `rabbit` имеет собственное свойство `jumps`, а `eats` получает через прототип.
 
@@ -2476,6 +2483,7 @@ alert(counter2()); // 1
 
 Именно этот механизм лежит в основе замыканий.
 
+---
 
 # 74. Собственные свойства функции
 
@@ -2540,10 +2548,7 @@ counter(); // 5
 Пример:
 
 ```html
-<canvas
-    width="480"
-    height="320"
-    id="example">
+<canvas width="480" height="320" id="example">
     Обновите браузер
 </canvas>
 ```
@@ -2551,19 +2556,14 @@ counter(); // 5
 Получение контекста:
 
 ```javascript
-let example =
-    document.getElementById("example");
-
+let example = document.getElementById("example");
 let ctx = example.getContext("2d");
-
-ctx.fillRect(
-    0,
-    0,
-    example.width,
-    example.height
-);
+ctx.fillRect(0, 0, example.width, example.height);
 ```
 
+---
+
+<!-- .slide: class="code-sm" -->
 
 # 77. Рисование в Canvas
 
@@ -2685,6 +2685,8 @@ fetch("/api/city", {
 
 ---
 
+<!-- .slide: class="cols" -->
+
 # 79. Что важно запомнить
 
 JavaScript в браузере связывает три основных мира:
@@ -2723,6 +2725,8 @@ DOM ← JavaScript → BOM
    - `window`.
 
 ---
+<!-- .slide: class="cols" -->
+
 ### Что важно запомнить (продолжение)
 
 5. **События**
