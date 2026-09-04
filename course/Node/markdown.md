@@ -11,7 +11,7 @@
  - …. (Ruby, Perl, Go, C#,…)
  - JavaScript (Node.js)
 ---
-### 
+### Почему JavaScript и Node.js
  - Почему JavaScript?
      - Один язык разработки для клиентской и серверной части
  - Почему Node.js?
@@ -212,7 +212,7 @@ export default function handler(req, res) { /* ... */ }
 ### Часто используемые модули. console
  - Глобальная (!!!) переменная
  - Console.log выводит в stdout
- - Console.error выводи в stderr
+ - Console.error выводит в stderr
  - Console.trace выводит stacktrace в поток ошибок
 ---
 ### Часто используемые модули. events
@@ -374,16 +374,15 @@ server.on('request',function(req,res){
             res.end(info);
     };
     let urlParsed = url.parse(req.url, true);
-    let data;
     if (req.url == "/") {
-        data = fs.readFile("index.html", readFile);
+        fs.readFile("index.html", readFile);
     }else{
-        data = fs.readFile("." + urlParsed.path, readFile);
+        fs.readFile("." + urlParsed.path, readFile);
     }
 });
 ```
 ---
-### Часто используемые модули. fs
+### Часто используемые модули. fs (обработка методов)
  ```js [17-25]
 server.on('request', function (req, res) {
     let urlParsed = url.parse(req.url, true);
@@ -693,6 +692,7 @@ const db = require("mysql");
      - createConnection – определение нового подключения к СУБД
      - connection.connect – собственно, подключение
      - connection.query  - выполнение запроса
+ - 💡 В новых проектах вместо `mysql` используют `mysql2` (API совместим, `mysql` — в режиме поддержки)
 ---
 ### Работа с СУБД (MySQL, без ORM)
 ```js  
@@ -741,7 +741,7 @@ connection.query("update city set name=?, CountryCode=? where id=?",
  - Мы будем использовать AJAX для загрузки нужных данных на клиента
 ---
 ### SPA vs MPA
-![SPAvsMPA](https://learn.microsoft.com/en-us/archive/msdn-magazine/2013/november/images/dn463786.wasson_figure2_hires(en-us,msdn.10).png)<!-- .element: width="45%"  -->
+![SPAvsMPA](../img/spa-vs-mpa.png)<!-- .element: width="45%"  -->
 
 https://learn.microsoft.com/en-us/archive/msdn-magazine/2013/november/images/dn463786.wasson_figure2_hires(en-us,msdn.10).png<!-- .element: class="copyright-reference"  -->
 ---
@@ -753,7 +753,7 @@ https://ru.wikipedia.org/wiki/AJAX <!-- .element: class="copyright-reference"  -
 ### AJAX
   - SPA, как  подход к построению приложения перекликается с моделью AJAX. При использовании AJAX необходимо иметь специальные имена ресурсов на сервере, при доступе к которым возвращаются необходимые данные <!-- .element: class="left small_font"  -->
 
-![AJAX](https://www.cs.put.poznan.pl/jkobusinski/ajax/model.png)<!-- .element: width="40%"  -->
+![AJAX](../img/ajax-model.png)<!-- .element: width="40%"  -->
      
 https://www.cs.put.poznan.pl/jkobusinski/ajax/model.png<!-- .element: class="copyright-reference"  -->
 ---
@@ -998,7 +998,7 @@ http.createServer(function(req,res){
 document.cookie = "username=ivan";
 document.cookie = "password=12345";
 ```
- - Или с использованием функции
+ - Или с использованием библиотеки (например, js-cookie)
 ```js
 Cookies.set("username", "ivan");
 ...
@@ -1019,7 +1019,7 @@ alert(Cookies.get("username")); // ivan
      - Для куки может быть определено время устаревания:
 
 ```js
-document.cookie="username=Ivan Drago; expires=Thu, 17 Jul 2017 15:00:00 GMT";
+document.cookie="username=Ivan Drago; expires=Thu, 17 Jul 2031 15:00:00 GMT";
 ```
 ---
 ### Сессии на сервере
@@ -1246,7 +1246,7 @@ app.get('/session/del', function(req, res) {
  - Клиент получает новую информацию и НЕМЕДЛЕННО отсылает другой запрос серверу, запуская процесс ожидания на нем снова.
 ---
 ### Long polling
-![Long polling](https://javascript.info/article/long-polling/long-polling.svg)<!-- .element: class="big_image"  -->
+![Long polling](../img/long-polling.svg)<!-- .element: class="big_image"  -->
 
 https://javascript.info/article/long-polling/long-polling.svg<!-- .element: class="copyright-reference"  -->
 ---
@@ -1414,7 +1414,7 @@ app.get("/messages", (req, res) => {
         console.log("data send: "+data);
     }
     //устанавливаем обработчик для вновь пришедшего сообщения
-    messageEmitter.on('newmessage', callback);/
+    messageEmitter.on('newmessage', callback);
     req.on('close', () =>{
         console.log("close connection" );
         //при закрытии соединения - убираем обработчик
@@ -1548,13 +1548,13 @@ app.listen(3000);
 ---
 ### Сборка курса: как устроено пройденное приложение
  - Браузер: HTML-разметка + формы + fetch-запросы к API (колоды HTML и JavaScript)
- - Сервер: Node.js + Express — маршруты (`app.get`/`app.post`), middleware (body-parser, сессии)
+ - Сервер: Node.js + Express — маршруты (`app.get`/`app.post`), middleware (разбор тела запроса, сессии)
  - Данные: MySQL — параметризованные запросы (`?`) — защита от SQL-инъекций
  - Аутентификация: куки + express-session, в сессии только `user_id`, пароль — только хеш в БД
  - Обновления без перезагрузки: long polling → SSE → WebSocket (по возрастанию сложности)
 ---
 ### Путь запроса
- 1. Браузер resolving имени: DNS → IP-адрес сервера
+ 1. Разрешение имени: DNS-запрос → IP-адрес сервера
  2. Установлено TCP-соединение (и TLS для https), сформирован HTTP-запрос: метод, путь, заголовки (`Host`, `Cookie`)
  3. Express сопоставил путь с маршрутом, middleware обработал тело и сессию
  4. Обработчик выполнил SQL-запрос, сформировал ответ: статус, `Content-Type`, тело (JSON/HTML)

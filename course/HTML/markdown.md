@@ -28,7 +28,9 @@
 
 `html → head → title` и `html → body → p`.
 
-![Структура HTML-документа](https://cs50.harvard.edu/web/notes/0/images/dom.png)
+![Структура HTML-документа](../img/html-dom.png)
+
+https://cs50.harvard.edu/web/ <!-- .element: class="copyright-reference"  -->
 
 > 💡 **Важно:** HTML задаёт структуру документа, CSS — его оформление, а JavaScript — поведение и интерактивность.
 
@@ -1011,6 +1013,20 @@ a:active {
 - `flex: 1` — элемент занимает всё свободное место;
 - для сеток «строки×столбцы» удобнее CSS Grid (`display: grid`).
 
+### Позиционирование
+
+`position: relative` — смещение от обычного места; `position: absolute` — от ближайшего позиционированного предка:
+
+```css
+.badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+}
+```
+
+Для макетов чаще используют flex/grid, absolute оставляют для оверлеев и бейджей.
+
 ---
 ### Библиотеки CSS
 
@@ -1051,33 +1067,16 @@ a:active {
 ```
 
 ---
-### Позиционирование элементов
+### Мини-практикум: карточка
 
-CSS позволяет управлять положением элементов.
+1. `<div class="card">`: картинка, заголовок, описание, кнопка «В корзину».
+2. Карточка — flex-колонка: `display: flex; flex-direction: column; gap: 8px;`
+   плюс `padding`, `border`, `border-radius` и `box-sizing: border-box`.
+3. Картинка — `width: 100%`, не забыть `alt`.
+4. Кнопку прижать вниз карточки: `margin-top: auto`.
+5. Ряд карточек: контейнер — `display: flex; gap: 16px;`.
 
-Например:
-
-```css
-.box {
-  position: absolute;
-  top: 60px;
-  left: 60px;
-}
-```
-
-`position: absolute` позиционирует элемент относительно ближайшего подходящего позиционированного предка или содержащего блока.
-
-`position: relative` позволяет смещать элемент относительно его обычного положения:
-
-```css
-.box {
-  position: relative;
-  top: -20px;
-  left: -20px;
-}
-```
-
-> 💡 В современных проектах для построения макетов чаще используются **Flexbox** и **CSS Grid**, а не абсолютное позиционирование всех элементов.
+> 💡 Ориентиры — слайды «Блочная модель» и «Flexbox».
 
 ---
 ### HTML5: семантические элементы

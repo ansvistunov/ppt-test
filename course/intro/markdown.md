@@ -44,7 +44,9 @@
 ---
 ### World Wide Web (WWW)
 
-![Клиент-серверная архитектура WWW](https://iit-web-lectures.readthedocs.io/ru/latest/_images/www.gif)
+![Клиент-серверная архитектура WWW](../img/www-client-server.gif)
+
+https://iit-web-lectures.readthedocs.io/ru/latest/ <!-- .element: class="copyright-reference"  -->
 
 ---
 ### Архитектура веб-сервиса
@@ -61,7 +63,7 @@
 - **Серверные технологии** — CGI, серверные языки программирования, серверы приложений и т.д.
 - Эти технологии стандартизируются разными организациями. Например, URI — в стандартах IETF, а современный HTML развивается как **WHATWG HTML Living Standard**.
 
-![Стек веб-технологий](https://commons.wikimedia.org/wiki/Special:FilePath/CPT-internet-CGI.svg)
+![Механизм CGI](https://commons.wikimedia.org/wiki/Special:FilePath/CPT-internet-CGI.svg)
 
 ---
 ### URL (Единообразный локатор ресурса)

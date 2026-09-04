@@ -1692,7 +1692,7 @@ alert(window.a); // 5
 ```javascript
 let b = 10;
 
-window.b; // не является тем же глобальным свойством, что var
+window.b; // undefined — let/const не создают свойств window
 ```
 
 ---
@@ -1999,9 +1999,7 @@ if ({}) {
 
 Даже пустые массивы и объекты считаются `true`.
 
----
-
-# 56. `toString()` и `valueOf()`
+## `toString()` и `valueOf()`
 
 По умолчанию объект при строковом преобразовании может давать:
 
@@ -2284,6 +2282,8 @@ alert(rabbit.jumps); // true
 alert(rabbit.eats);  // true
 ```
 
+> ⚠️ `__proto__` — легаси-нетандарт; в новом коде используйте `Object.setPrototypeOf(rabbit, animal)`.
+
 ![Цепочка прототипов JavaScript](https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/JS_Prototype_Chain.svg/960px-JS_Prototype_Chain.svg.png)
 
 `rabbit` имеет собственное свойство `jumps`, а `eats` получает через прототип.
@@ -2477,7 +2477,7 @@ alert(counter2()); // 1
 Именно этот механизм лежит в основе замыканий.
 
 
-# 74. Функция как объект
+# 74. Собственные свойства функции
 
 Функция является объектом и может иметь собственные свойства:
 
@@ -2655,6 +2655,32 @@ let user = {
 };
 
 let text = JSON.stringify(user);
+```
+
+---
+
+## 78.3. Сеть: `fetch()`
+
+`fetch()` — встроенный в браузер способ выполнить HTTP-запрос (именно он используется в колоде Node):
+
+```javascript
+fetch("/api/city")
+    .then(response => response.json())
+    .then(cities => console.log(cities));
+```
+
+- Возвращает Promise, который разрешается в объект `Response`;
+- `.json()` читает тело ответа как JSON (тоже возвращает Promise);
+- на HTTP-ошибке (404, 500) Promise **не** отклоняется — проверяйте `response.ok`.
+
+Запрос с телом:
+
+```javascript
+fetch("/api/city", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({name: "Кстово"})
+});
 ```
 
 ---

@@ -11,7 +11,7 @@
 ---
 ### Схема типичного приложения
 
-![Web App](https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Server-side/First_steps/Introduction/web_application_with_html_and_steps.png)
+![Web App](../img/web-app-steps.png)
 https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Server-side/First_steps/Introduction/web_application_with_html_and_steps.png <!-- .element: class="copyright-reference"  -->
 ---
 ### Отличия серверного и клиентского программирования
