@@ -3,7 +3,7 @@
 ### Стек технологий
 ![Web stack](../img/webstack.png)
 ---
-### 
+### Зачем нужно серверное программирование
  - Почему нам не хватает возможностей HTML?
     - Нам нужен **динамически** меняющийся контент на странице с **динамически** изменяющейся структурой страницы
  - Но почему нам не хватает JavaScript?
@@ -14,7 +14,7 @@
 ![Web App](https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Server-side/First_steps/Introduction/web_application_with_html_and_steps.png)
 https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Server-side/First_steps/Introduction/web_application_with_html_and_steps.png <!-- .element: class="copyright-reference"  -->
 ---
-### 
+### Отличия серверного и клиентского программирования
  - Чем отличается программирование на сервере от программирования на клиенте:
      - Различные задачи  (и проблемы).
      - Обычно разные языки программирования (исключение - JavaScript, который может использоваться и на сервере и на стороне клиента).
@@ -23,7 +23,7 @@ https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Server
 ### Как запустить программу на сервере. CGI
  - CGI (Common Gateway Interface ) является стандартом интерфейса внешней прикладной программы с WWW сервером.
  - CGI-программа - это обычная программа, которая выполняется на Web-сервере в ответ на запрос, сделанный браузером. Для написания такой программы можно использовать почти любой язык программирования - CGI определяет стандарт интерфейса между Web-сервером и CGI-программой. 
----
+
 ### Подходы. CGI
  - CGI-программа может возвращать данные любого типа, например HTML-текст, рисунки в формате GIF, простой текст, документы Microsoft Word, аудиофайлы и т.д. 
  - Заголовок типа возвращаемых данных сообщает браузеру о типе данных, для того чтобы обеспечивать их правильную обработку.
@@ -67,7 +67,7 @@ https://commons.wikimedia.org/wiki/Special:FilePath/CPT-internet-CGI.svg <!-- .e
 ---
 ### Пример 1. Демонстрация
 http://localhost:8080/cgi-bin/list.bat
----
+
 ### Пример 1
  - Запуск
  - Stdin, stdout – НЕТ
@@ -83,7 +83,7 @@ echo ^</pre^>^</body^>^</html^>
 ---
 ### Пример 2. Демонстрация
 http://localhost:8080/cgi-bin/HelloCGI.exe
----
+
 ### Пример 2
 ```c 
 #include <stdio.h>
@@ -92,68 +92,6 @@ int main(int argc, char* argv[]){
     printf("Content-type: text/html%c%c",10,10); 
     printf("<h1>HelloWorld</h1>\n\n");
     //printf("REQUEST_METHOD=%s",getenv("REQUEST_METHOD"));
-    return 0;
-}
-```
----
-### Пример 3. Демонстрация
- - Передача параметров (метод GET)
- - Работа через переменные окружения
-
-http://localhost:8080/form_get.html
----
-### Пример 3
-```c 
-int main(int argc, char* argv[]){
-    entry entries[MAX_ENTRIES]; 
-    printf("Content-type: text/html%c%c",10,10); 
-    printf("<h1>HelloWorld</h1>\n\n");
-    printf("<h2>QUERY_STRING=%s</h2>",getenv("QUERY_STRING"));
-    int cl = strlen(getenv("QUERY_STRING")); 
-    int x,m;
-        for(x=0;cl;x++){ 
-            m=x;
-            entries[x].val = fmakeword(getenv("QUERY_STRING"),'&',&cl); 
-            plustospace(entries[x].val); 
-            unescape_url(entries[x].val); 
-            entries[x].name = makeword(entries[x].val,'='); 
-        } 
-    printf("<H1>Query Results</H1>"); 
-    printf("You submitted the following name/value tags:<p>%c",10); 
-    printf("<ul>%c",10); 
-    for(x=0; x <= m; x++) printf("<li> <code>%s = %s</code>%c",entries[x].name, 
-                                                        entries[x].val,10); 
-    printf("</ul>%c",10); return 0;
-}
-```
----
-### Пример 4. Демонстрация
- - Передача параметров (метод POST)
- - Работа через стандартный поток ввода
-
-http://localhost:8080/tests/form_post.html
----
-### Пример 4
-```c 
-int main(int argc, char* argv[]){
-    entry entries[MAX_ENTRIES]; 
-    printf("Content-type: text/html%c%c",10,10); 
-    printf("<h1>HelloWorld</h1>\n\n");
-    int cl = atoi(getenv("CONTENT_LENGTH")); 
-    int x,m;
-    for(x=0;cl && (!feof(stdin));x++){
-        m=x;
-        entries[x].val = fmakeword(stdin,'&',&cl); 
-        plustospace(entries[x].val); 
-        unescape_url(entries[x].val); 
-        entries[x].name = makeword(entries[x].val,'='); 
-    } 
-    printf("<H1>Query Results</H1>"); 
-    printf("You submitted the following name/value pairs:<p>%c",10); 
-    printf("<ul>%c",10); 
-    for(x=0; x <= m; x++) printf("<li> <code>%s = %s</code>%c",entries[x].name, 
-                                                            entries[x].val,10); 
-    printf("</ul>%c",10); 
     return 0;
 }
 ```
@@ -176,7 +114,7 @@ int main(int argc, char* argv[]){
     </body>
   </html>
 ```
----
+
 ### Шаблоны
  - Использование шаблонов решает часть проблем - отделяет разметку от логики формирования данных
  - При  практическом использовании шаблонов возникает желание строить «сложные» шаблоны. Как результат появляются специальные языки управления шаблонами
@@ -187,7 +125,7 @@ int main(int argc, char* argv[]){
  - JSP файл – это текстовый документ, содержимое которого можно разбить на две части
      - статический текст (каркас) – создается при помощи специальных редакторов
      - динамический (генерируемый во время выполнения страницы) – обычно пишется в среде разработки программирования
----
+
 ### Пример 5. JSP
 http://localhost:8080/tests/ex1.jsp
 ---
@@ -202,7 +140,7 @@ http://localhost:8080/tests/ex1.jsp
 **(<%@ page […] %>)**
  - Полученный файл компилируется в класс **сервлета** (класса Java, специального вида, работающего под управлением сервера)
 
----
+
 ### Создание страницы
  - Создание статического содержимого. Для этого удобно использовать редакторы HTML, XML и пр.
  - Вставка динамических объектов и элементов сценариев JSP. В созданный файл вставляются элементы 
@@ -240,7 +178,7 @@ out.write("\n  <!-- This is a HTML comment -->"
  - При трансляции преобразуются в элементы класса сервлета (поля, методы и вложенные типы)
  - Нельзя использовать поля для хранения значений, использующихся в рамках одного запроса
  - При работе с внутренними классами есть особенности
----
+
 ### JSP-страница с объявлениями
  - JSP-страница 
 ```js 
@@ -267,7 +205,7 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
  - Преобразуются во фрагменты методов сервлета, формирующих отклик
  - Синтаксически являются фрагментами обычных Java-методов
  - Каждая завершенная инструкция заканчивается знаком точки с запятой
----
+
 ### JSP-страница со скриптлетами
  - JSP-страница 
 ```html 
@@ -292,7 +230,7 @@ out.write("</body></html>\n");
  - Содержит выражения, значения которых будут выведены в отклик
  - Синтаксически являются вычислимыми выражениями Java, для которых может быть получено текстовое представление
  - В конце выражений точки с запятой нет!
----
+
 ### JSP-страница с выражениями
  - JSP-страница 
 ```html 
@@ -323,7 +261,7 @@ out.write("</body></html>\n");
      - Страница для обработки ошибок
          - Является ли данная страница обработчиком
          - Какая страница используется как обработчик
----
+
 ### Тип отклика, кодировка и импорт типов
  - JSP-страница 
 ```html 
@@ -341,32 +279,12 @@ import java.lang.reflect.*;
 ...
 ``` 
 ---
-### Обработка ошибок (JSP-страницы)
- - Основная страница 
-```html 
-<%@page contentType="text/html; charset=UTF-8"%>
-<%@page errorPage="errorMessage.jsp"%>
-<html><body>
-<% if(true) throw new Exception("Something happened!");%>
-</body></html>
-```
- - Страница-обработчик 
-```html 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page isErrorPage="true" %>
-<html><body>
-An error has occurred! Please, contact administrator.
-<%someLogMethod(exception);%>
-</body></html>
-``` 
----
 ### Стандартные объекты
  - **page** ссылка на текущий объект (по сути – объект сервлета)
  - **config** имеет тип javax.servlet.ServletConfig, позволяет получить контекст сервлета и параметры сервлета
  - **application** имеет тип javax.servlet.ServletContext, определяет контекст сервлета
  - **pageContext** имеет тип javax.servlet.jsp.PageContext, определяет контекст jsp-страницы
----
-### Стандартные объекты
+
  - **session** имеет тип javax.servlet.http.HttpSession, представляет текущую сессию
  - **request** имеет тип javax.servlet.http.HttpServletRequest, представляет текущий запрос
  - **response** имеет тип javax.servlet.http.HttpServletResponse, представляет текущий отклик
@@ -375,7 +293,7 @@ An error has occurred! Please, contact administrator.
 ### Пример 6. Демонстрация​
 http://localhost:8080/tests/form_get_jsp.html
 http://localhost:8080/tests/form_post_jsp.html
----
+
 ### Пример 6
 ```js 
 <body> 
