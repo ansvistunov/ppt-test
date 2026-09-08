@@ -1510,8 +1510,8 @@ font-family:Arial; width:50%">
 ---
 ### DIV. Позиционирование
 - DIV – может быть помещен на любую позицию на странице
-- Атрибут position:absolute вместе с атрибутами top:xxx and left:yyy задают абсолютную позицию левого верхнего угла DIV
-- top:0 and left:0 означают, что DIV будет помещен в левый верхний угол контейнера
+- Атрибут position:absolute вместе с атрибутами top:xxx и left:yyy задают абсолютную позицию левого верхнего угла DIV
+- top:0 и left:0 означают, что DIV будет помещен в левый верхний угол контейнера
 
 ```html
 <div style="background:yellow; font-size:16pt; font-family:courier; 
@@ -1932,8 +1932,6 @@ ondragover="return allowDropStatus(event)">
 
 Для полноценной обработки событий используются JavaScript-обработчики, например `dragstart`, `dragover` и `drop`.
 
-[HTML\51drag-and-drop.html](../../HTML/51drag-and-drop.html)
-
 
 ---
 ### Пример. drag and drop
@@ -1958,7 +1956,6 @@ JavaScript может получить выбранный файл и прочи
 - обработки данных перед загрузкой;
 - построения drag-and-drop загрузчиков.
 
-[HTML\52fileAPI.html](../../HTML/52fileAPI.html)
 
 
 ---
@@ -2003,12 +2000,14 @@ sessionStorage.clear();
 ---
 ### Источники
 
-- Полезные книги:
+- Полезные книги для базового понимания (*Внимание: книги выпущены более 10 лет назад, используйте их только для изучения фундамента*):
   - Изучаем HTML, XHTML и CSS (Head First). Элизабет Робсон, Эрик Фримен
   - HTML и CSS. Разработка и дизайн веб-сайтов. Джон Дакетт
+  
 - Источники и полезные ссылки:
-  - http://www.w3.org/TR/html52/
+  - https://webref.ru
+  - https://metanit.com/web/html5/ и https://metanit.com/web/css/
   - https://html.spec.whatwg.org/multipage/
   - https://developer.mozilla.org/ru/docs/Learn/Getting_started_with_the_web/HTML_basics
-  - https://www.w3schools.com/html/
-  - http://htmlbook.ru/html
+  - https://developer.mozilla.org/ru/docs/Learn_web_development/Core/Structuring_content
+ 
