@@ -1047,14 +1047,15 @@ File:///30form.html?feedback=&items=cat&items=dog&items=fish
 
 ```html
 <form>
-<p> Пожалуйста, заполните следующую информацию о себе </p>
-<label for="firstname">Имя</label>
-<input type="text" name="firstname" value="Иван" autofocus> <br>
-<label for="lastname">Фамилия</label>
-<input type="text" name="lastname" placeholder="Напишите здесь Вашу фамилию"> <br>
-<label for="age">Возраст:</label>
-<input type="text" name="age" required> <br>
-<input type="submit" value="Submit">
+  <p>Пожалуйста, заполните следующую информацию о себе</p>
+  <label for="firstname">Имя</label>
+  <input type="text" name="firstname" id="firstname" value="Иван" autofocus> <br>
+  <label for="lastname">Фамилия</label>
+  <input type="text" name="lastname" id="lastname" 
+          placeholder="Напишите здесь Вашу фамилию"><br>
+  <label for="age">Возраст:</label>
+  <input type="text" name="age" id="age" required> <br>
+  <input type="submit" value="Submit">
 </form>
 ```
 
@@ -1127,16 +1128,17 @@ HTML предоставляет специализированные поля:
 ```html
 <form action="show.php">
 <label for="age">Возраст:</label>
-<input type="number" min="0" max="99" step="1" value="18" name="age" required><br>
+<input type="number" min="0" max="99" step="1" value="18" name="age" id="age" 
+              required><br>
 <label for="birthday">День рождения:</label>
-<input type="date" name="birthday"><br>
+<input type="date" name="birthday" id="birthday"><br>
 <label for="wakeup">Время, в которое вы просыпаетесь:</label>
-<input type="time" name="wakeup"><br>
+<input type="time" name="wakeup" id="wakeup"><br>
 <label for="color">Любимый цвет:</label>
-<input type="color" name="color"> <br>
+<input type="color" name="color" id="color"> <br>
 <label for="mood">Ваше настроение</label>
-Ужасное <input type="range" min="0" max="100" step="5" value="50" name="mood"> 
-Отличное<br>
+Ужасное <input type="range" min="0" max="100" step="5" value="50" 
+        name="mood" id="mood">Отличное<br>
 <input type="submit" value="Отправить!">
 </form>
 ```
@@ -1443,80 +1445,7 @@ a:active {   background: purple; }
 ### Пример. псевдоклассы
 
 <iframe data-src="../examples/HTML/45css_pseudo_classes.html" width="100%" height="500px" style="border: 2px solid #ccc;"></iframe>
----
-### Блочная модель
 
-Каждый блочный элемент — прямоугольник из четырёх слоёв (изнутри наружу):
-
-- **content** — содержимое (текст, вложенные элементы);
-- **padding** — внутренние отступы;
-- **border** — рамка;
-- **margin** — внешние отступы.
-
-```css
-.card {
-  width: 300px;
-  padding: 16px;
-  border: 2px solid #333;
-  margin: 24px;
-}
-```
-
-По умолчанию `width` — ширина только содержимого. С `box-sizing: border-box`
-в `width` входят содержимое, padding и border — задавать размеры так проще.
-
----
-### Flexbox
-
-`display: flex` превращает элемент в flex-контейнер, его дети становятся flex-элементами.
-
-```css
-.row {
-  display: flex;
-  gap: 12px;              /* расстояния между элементами */
-  justify-content: space-between; /* главная ось */
-  align-items: center;           /* поперечная ось */
-}
-```
-
-- `flex-direction: column` — менять направление главной оси;
-- `flex: 1` — элемент занимает всё свободное место;
-- для сеток «строки×столбцы» удобнее CSS Grid (`display: grid`).
----
-### Позиционирование
-
-`position: relative` — смещение от обычного места; `position: absolute` — от ближайшего позиционированного предка:
-
-```css
-.badge {
-  position: absolute;
-  top: 8px;
-  right: 8px;
-}
-```
-
-Для макетов чаще используют flex/grid, absolute оставляют для оверлеев и бейджей.
-
----
-### Библиотеки CSS
-
-Вместо написания всего CSS вручную можно использовать готовые библиотеки и CSS-фреймворки.
-
-Примеры:
-
-- **Bootstrap**
-- **Foundation**
-- **Bulma**
-
-Они предоставляют готовые компоненты и стили, позволяющие быстрее создавать интерфейсы.
-
-> 💡 Библиотека CSS не заменяет знание самого CSS — она использует его возможности и задаёт готовые соглашения и компоненты.
-
-
----
-### Пример. таблица со стилями Bootstrap
-
-<iframe data-src="../examples/HTML/45_1css_style.html" width="100%" height="500px" style="border: 2px solid #ccc;"></iframe>
 ---
 ### `<div>` и `<span>`
 
@@ -1577,6 +1506,7 @@ font-family:Arial; width:50%">
 ### Пример. два div с разными стилями
 
 <iframe data-src="../examples/HTML/47div_2.html" width="100%" height="500px" style="border: 2px solid #ccc;"></iframe>
+
 ---
 ### DIV. Позиционирование
 - DIV – может быть помещен на любую позицию на странице
@@ -1588,13 +1518,13 @@ font-family:Arial; width:50%">
             position:absolute; top:60px; left:60px">
     This is a div with a yellow background
 </div>
-
 <div style="background:lightblue; font-size:18pt; 
             position:absolute; top:92px; left:80px">
     This is a div with a blue background
 </div>
 ```
 
+💡 Чтобы position: absolute срабатывал не от краев окна браузера, а от границ конкретного блока-родителя, родителю нужно задать position: relative.
 ---
 ### Пример. position: absolute
 
@@ -1604,6 +1534,7 @@ font-family:Arial; width:50%">
 ### Пример. position: relative
 
 <iframe data-src="../examples/HTML/49div_position_relative.html" width="100%" height="500px" style="border: 2px solid #ccc;"></iframe>
+
 ---
 ### SPAN
 - Также как и DIV не имеет свойств отображения по умолчанию
@@ -1622,15 +1553,274 @@ and this isn't</p>
 ### Пример. span
 
 <iframe data-src="../examples/HTML/50span.html" width="100%" height="500px" style="border: 2px solid #ccc;"></iframe>
----
-### Мини-практикум: карточка
 
-1. `<div class="card">`: картинка, заголовок, описание, кнопка «В корзину».
-2. Карточка — flex-колонка: `display: flex; flex-direction: column; gap: 8px;`
-   плюс `padding`, `border`, `border-radius` и `box-sizing: border-box`.
-3. Картинка — `width: 100%`, не забыть `alt`.
-4. Кнопку прижать вниз карточки: `margin-top: auto`.
-5. Ряд карточек: контейнер — `display: flex; gap: 16px;`.
+
+---
+### Блочная модель CSS
+Всё в HTML — это прямоугольники. Даже если элемент выглядит как круг (через border-radius), браузер всё равно выделяет под него прямоугольную область.
+Каждый такой прямоугольник (бокс) состоит из четырёх слоёв (изнутри наружу):
+- Content (Контент) — само содержимое элемента (текст, картинка). Размеры задаются через width и height.
+- Padding (Внутренний отступ) — пустое пространство между контентом и рамкой.
+- Border (Рамка) — линия, окружающая padding.
+- Margin (Внешний отступ) — прозрачное пространство снаружи элемента, отталкивающее его от соседей.
+
+---
+### Блочная модель CSS
+
+<svg width="100%" height="auto" viewBox="0 0 600 380" xmlns="http://www.w3.org/2000/svg" style="max-width: 600px; display: block; margin: 0 auto;">
+<!-- Margin (Внешний отступ) -->
+<rect x="20" y="20" width="560" height="340" fill="#ffeeba" stroke="#f8d7da" stroke-width="2" stroke-dasharray="8,4"/>
+<text x="30" y="40" font-family="monospace" font-size="18" fill="#856404">Margin (внешний отступ)</text>
+<!-- Border (Рамка) -->
+<rect x="80" y="70" width="440" height="240" fill="#d1ecf1" stroke="#0dcaf0" stroke-width="8"/>
+<text x="90" y="95" font-family="monospace" font-size="18" fill="#0c5460">Border (рамка)</text>
+<!-- Padding (Внутренний отступ) -->
+<rect x="110" y="100" width="380" height="180" fill="#d4edda" stroke="#198754" stroke-width="2" stroke-dasharray="6,4"/>
+<text x="120" y="125" font-family="monospace" font-size="18" fill="#155724">Padding (внутренний отступ)</text>
+<!-- Content (Контент) -->
+<rect x="160" y="150" width="280" height="80" fill="#fff3cd" stroke="#ffc107" stroke-width="2"/>
+<text x="240" y="195" text-anchor="middle" font-family="monospace" font-size="20" fill="#664d03">CONTENT</text>
+<text x="380" y="195" text-anchor="middle" font-family="monospace" font-size="14" fill="#664d03">(width / height)</text>
+</svg>
+
+> 💡 Свойства margin и padding работают по часовой стрелке: top (сверху), right (справа), bottom (снизу), left (слева). Например, padding: 10px 20px задаёт 10px сверху/снизу и 20px слева/справа.
+
+
+---
+### Проблема размеров: content-box (по умолчанию)
+Главная ловушка блочной модели: по умолчанию свойство width задает ширину только контента. Паддинги и рамки прибавляются сверху.
+
+```css
+.card {
+  width: 300px;
+  padding: 20px;
+  border: 5px solid black;
+  /* 
+    Итоговая ширина на экране:
+    300 (контент) + 40 (левый+правый padding) + 10 (левая+правая рамка) = 350px! 
+  */
+}
+```
+Если вы захотите поставить два таких блока в ряд (каждый по 300px), они не влезут в контейнер шириной 600px и второй блок «упадет» вниз.
+
+---
+### box-sizing: border-box
+Чтобы width означал фактическую ширину блока вместе с паддингами и рамками, используют свойство box-sizing.
+```css
+.card {
+  width: 300px;
+  padding: 20px;
+  border: 5px solid black;
+  box-sizing: border-box; 
+  /* 
+    Теперь итоговая ширина ровно 300px. 
+    Браузер сам сожмет контент до 250px (300 - 40 - 10).
+  */
+}
+```
+
+> ⚠️ Важно: В современных проектах это свойство применяют ко всем элементам на странице с помощью универсального селектора:
+
+```css
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+```
+
+---
+### Пример. Влияние отступов на размер
+
+В примере ниже два блока имеют одинаковую ширину 300px и одинаковые padding и border. Но первый блок выходит за красную границу контейнера, а второй — нет.
+
+<iframe data-src="../examples/HTML/box_model_sizing.html" width="100%" height="480px" style="border: 2px solid #ccc;"></iframe>
+
+---
+### Схлопывание маржинов (Margin Collapsing)
+Особенность вертикальных внешних отступов (margin-top и margin-bottom): если они соприкасаются, не складываются, а схлопываются.
+
+Браузер выбирает больший из двух отступов и применяет его как итоговый.
+```css
+.block-1 { margin-bottom: 50px; }
+.block-2 { margin-top: 30px; }
+/* Расстояние между ними будет 50px, а не 80px! */
+```
+> 💡 На заметку: Схлопывание работает только по вертикали (в обычном потоке документа). Горизонтальные margin всегда складываются. Также схлопывание не работает внутри Flexbox-контейнеров (об этом дальше).
+
+---
+#### Пример. Схлопывание маржинов
+<iframe data-src="../examples/HTML/box_model_margin_collapse.html" width="100%" height="690px" style="border: 2px solid #ccc;"></iframe>
+
+---
+### Flexbox
+Flexbox (Flexible Box Layout) предназначен для удобного выравнивания элементов внутри контейнера и распределения между ними свободного пространства.
+
+Чтобы включить Flexbox, нужно задать родителю display: flex. Тогда его прямые потомки становятся flex-элементами.
+
+```css
+.container {
+  display: flex;
+}
+```
+
+Главное правило Flexbox — наличие двух осей:
+- Главная ось (Main Axis) — направление, вдоль которого выкладываются элементы.
+- Поперечная ось (Cross Axis) — перпендикулярна главной.
+
+По умолчанию главная ось идет горизонтально (слева направо).
+
+---
+### Flexbox
+
+<svg width="100%" height="auto" viewBox="0 0 600 220" xmlns="http://www.w3.org/2000/svg" style="max-width: 600px; display: block; margin: 0 auto;">
+  <!-- Контейнер -->
+  <rect x="40" y="40" width="520" height="150" fill="#e9ecef" stroke="#adb5bd" stroke-width="2" rx="8"/>
+  <text x="50" y="62" font-family="sans-serif" font-size="14" fill="#6c757d">display: flex</text>
+    <!-- Элементы (сдвинуты вверх) -->
+  <rect x="80" y="85" width="80" height="40" fill="#6c757d" rx="4"/>
+  <rect x="180" y="85" width="80" height="40" fill="#6c757d" rx="4"/>
+  <rect x="280" y="85" width="80" height="40" fill="#6c757d" rx="4"/>
+  <rect x="380" y="85" width="80" height="40" fill="#6c757d" rx="4"/>
+    <!-- Главная ось (под элементами) -->
+  <line x1="50" y1="145" x2="540" y2="145" stroke="#dc3545" stroke-width="3" stroke-dasharray="8,4"/>
+  <polygon points="540,145 525,135 525,155" fill="#dc3545"/>
+  <text x="430" y="135" text-anchor="start" font-family="sans-serif" font-size="16" fill="#dc3545" font-weight="bold">Главная ось</text>
+    <!-- Поперечная ось (справа, текст вынесен наверх) -->
+  <line x1="490" y1="70" x2="490" y2="180" stroke="#0d6efd" stroke-width="3" stroke-dasharray="8,4"/>
+  <polygon points="490,70 480,85 500,85" fill="#0d6efd"/>
+  <text x="490" y="30" text-anchor="middle" font-family="sans-serif" font-size="16" fill="#0d6efd" font-weight="bold">Поперечная</text>
+</svg>
+
+> 💡 Свойство justify-content всегда работает по главной оси, а align-items — по поперечной. Запомните это, и 90% проблем с Flexbox исчезнет.
+
+---
+### Направление и выравнивание по главной оси
+Свойство flex-direction меняет направление главной оси.
+- row (по умолчанию) — слева направо.
+- column — сверху вниз (ось меняется местами).
+
+А свойство justify-content управляет тем, как распределяются элементы вдоль главной оси (если остается свободное место).
+
+```css
+.container {
+  display: flex;
+  justify-content: center; /* или space-between, flex-start и др. */
+}
+```
+
+---
+### Направление и выравнивание по главной оси
+Частые значения justify-content:
+- flex-start (по умолчанию) — элементы прижаты к началу.
+- center — элементы по центру.
+- flex-end — элементы прижаты к концу.
+- space-between — первый в начале, последний в конце, остальные равномерно между ними.
+- space-around — свободное пространство делится поровну вокруг каждого элемента.
+
+---
+### Выравнивание по поперечной оси
+Свойство align-items отвечает за выравнивание элементов поперек главной оси (по умолчанию — по вертикали).
+Это особенно полезно, когда flex-элементы имеют разную высоту.
+
+```css
+.container {
+  display: flex;
+  align-items: center; /* выровнять по центру поперечной оси */
+}
+```
+
+Основные значения:
+- stretch (по умолчанию) — элементы растягиваются на всю высоту контейнера.
+- flex-start — прижаты к верхнему краю.
+- center — выровнены строго по центру.
+- flex-end — прижаты к нижнему краю.
+
+---
+### Отступы и рост элементов (gap и flex)
+В современном CSS для отступов между flex-элементами не нужно задавать margin каждому ребенку. Используйте свойство gap на родителе:
+
+```css
+.container {
+  display: flex;
+  gap: 16px; /* отступ 16px между всеми элементами */
+}
+```
+
+Если вы хотите, чтобы элемент занял всё оставшееся свободное место в ряду, ему задают свойство flex-grow (или сокращенно flex: 1):
+
+```css
+.sidebar { width: 200px; }
+.content { flex: 1; } /* Займет всё оставшееся место справа */
+```
+
+---
+### Пример. justify-content и align-items
+В примере ниже можно увидеть, как элементы выстраиваются в ряд и как они выравниваются по центру, если задать контейнеру justify-content: center и align-items: center.
+
+<iframe data-src="../examples/HTML/flex_alignment.html" width="100%" height="450px" style="border: 2px solid #ccc;"></iframe>
+
+---
+### Пример. flex-grow и gap
+Здесь синий блок имеет фиксированную ширину, а зеленому задано свойство flex: 1. При растяжении окна браузера зеленый блок будет забирать всё свободное место. Отступы заданы через gap.
+
+<iframe data-src="../examples/HTML/flex_grow.html" width="100%" height="400px" style="border: 2px solid #ccc;"></iframe>
+
+---
+### CSS Grid: двумерная разметка
+Если Flexbox отлично подходит для выравнивания элементов в одном направлении (в ряд или в колонку), то CSS Grid создан для построения двумерных сеток (когда мы одновременно контролируем и строки, и столбцы).
+
+Чтобы включить Grid, родителю задается display: grid.
+
+```css
+.gallery {
+  display: grid;
+  /* Задаем 3 колонки одинаковой ширины */
+  grid-template-columns: 1fr 1fr 1fr; 
+  /* 1fr — это "фракция" (доля) свободного места */
+  gap: 15px;
+}
+```
+
+---
+### CSS Grid: двумерная разметка
+Главное свойство Grid — grid-template-columns. 
+Оно определяет, сколько колонок будет в макете и какой они будут ширины. Значение 1fr (fraction) работает как пропорция: три 1fr делят контейнер на три равные части.
+
+>💡 Правило хорошего тона: Используйте Grid для каркаса всей страницы (например, шапка, сайдбар и основной контент), а внутри этих блоков используйте Flexbox для выравнивания мелких элементов (кнопок, иконок, текста).
+
+---
+### Пример. Галерея на CSS Grid
+В примере ниже контейнер разделен на 3 равные колонки с помощью grid-template-columns. Обратите внимание: элементы сами выстраиваются в аккуратную сетку, переходя на новую строку, когда ряд заполняется. Отступы заданы через знакомый нам gap.
+
+<iframe data-src="../examples/HTML/css_grid_example.html" width="100%" height="450px" style="border: 2px solid #ccc;"></iframe>
+
+---
+
+### Библиотеки CSS
+
+Вместо написания всего CSS вручную можно использовать готовые библиотеки и CSS-фреймворки.
+
+Примеры:
+
+- **Bootstrap**
+- **Foundation**
+- **Bulma**
+
+Они предоставляют готовые компоненты и стили, позволяющие быстрее создавать интерфейсы.
+
+> 💡 Библиотека CSS не заменяет знание самого CSS — она использует его возможности и задаёт готовые соглашения и компоненты.
+
+
+---
+### Пример. таблица со стилями Bootstrap
+
+<iframe data-src="../examples/HTML/45_1css_style.html" width="100%" height="500px" style="border: 2px solid #ccc;"></iframe>
+
+
+
+---
+### Комплексный пример: карточка
+
+<iframe data-src="../examples/HTML/flex_example.html" width="100%" height="500px" style="border: 2px solid #ccc;"></iframe>
 
 > 💡 Ориентиры — слайды «Блочная модель» и «Flexbox».
 
@@ -1655,22 +1845,6 @@ and this isn't</p>
 - `<output>` — результат вычисления или действия;
 - `<datalist>` — варианты для поля ввода;
 - `<canvas>` — область для рисования с помощью JavaScript.
-
----
-### HTML5: некоторые элементы
-
-- [HTML\54article.html](../../HTML/54article.html)
-- [HTML\55aside.html](../../HTML/55aside.html)
-- [HTML\56menucommand.html](../../HTML/56menucommand.html)
-- [HTML\57datalist.html](../../HTML/57datalist.html)
-- [HTML\59figure.html](../../HTML/59figure.html)
-- [HTML\60footer.html](../../HTML/60footer.html)
-- [HTML\61nav.html](../../HTML/61nav.html)
-- [HTML\62output.html](../../HTML/62output.html)
-- [HTML\63progress.html](../../HTML/63progress.html)
-- [HTML\64summary.html](../../HTML/64summary.html)
-
-
 
 ---
 ### Пример. article
@@ -1733,8 +1907,6 @@ HTML предоставляет структуру страницы, но мно
 
 Исторически к таким возможностям относились:
 
-- HTML5 Offline Web Application
-  - Механизмы для реализации приложений в режиме «disconnected environment» (нужен javascript и поддержка сервера)
 - Drag and Drop;
 - File API;
 - Geolocation;

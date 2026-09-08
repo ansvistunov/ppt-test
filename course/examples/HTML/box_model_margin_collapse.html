@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Margin Collapsing</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background-color: #f4f4f9;
+      padding: 20px;
+    }
+
+    .block {
+      width: 300px;
+      padding: 15px;
+      color: white;
+      text-align: center;
+      font-family: monospace;
+      font-size: 16px;
+      border-radius: 4px;
+    }
+
+    .block-1 { background-color: #4caf50; margin-bottom: 50px; }
+    .block-2 { background-color: #2196f3; margin-top: 30px; }
+
+    /* Классы для второго примера со Flexbox */
+    .flex-container {
+      display: flex;
+      flex-direction: column; /* Элементы в колонку */
+      margin-top: 40px;
+    }
+    
+    .flex-block-1 { background-color: #ff9800; margin-bottom: 50px; }
+    .flex-block-2 { background-color: #9c27b0; margin-top: 30px; }
+
+    .separator {
+      margin: 30px 0;
+      border-top: 2px dashed #ccc;
+    }
+
+    .label {
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 10px;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+  <span class="label">1. Обычный поток (схлопывание):</span>
+  <div class="block block-1">
+    Блок 1<br>
+    margin-bottom: 50px
+  </div>
+  <div class="block block-2">
+    Блок 2<br>
+    margin-top: 30px
+  </div>
+  <p><b>Итоговый отступ между ними: 50px</b> (выбран больший из двух, а не 80px)</p>
+
+
+  <div class="separator"></div>
+
+
+  <span class="label">2. Поведение во Flexbox (без схлопывания):</span>
+  <!-- Добавляем родителя со свойством display: flex -->
+  <div class="flex-container">
+    <div class="block flex-block-1">
+      Блок 1 (внутри flex)<br>
+      margin-bottom: 50px
+    </div>
+    <div class="block flex-block-2">
+      Блок 2 (внутри flex)<br>
+      margin-top: 30px
+    </div>
+  </div>
+  <p><b>Итоговый отступ между ними: 80px</b> (50px + 30px сложились)</p>
+
+</body>
+</html>

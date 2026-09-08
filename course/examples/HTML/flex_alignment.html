@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Flexbox Alignment</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background-color: #f4f4f9;
+      padding: 20px;
+      margin: 0;
+    }
+
+    .container {
+      display: flex;
+      justify-content: center; /* Главная ось: по центру */
+      align-items: center;     /* Поперечная ось: по центру */
+      
+      height: 300px;
+      background-color: #e9ecef;
+      border: 2px dashed #6c757d;
+      border-radius: 8px;
+      /* Отступы между элементами */
+      gap: 15px; 
+    }
+
+    .box {
+      background-color: #0d6efd;
+      color: white;
+      padding: 15px;
+      border-radius: 6px;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    /* Делаем блоки разной высоты, чтобы показать align-items */
+    .box:nth-child(1) { height: 60px; }
+    .box:nth-child(2) { height: 100px; }
+    .box:nth-child(3) { height: 80px; }
+
+    .label {
+      margin-top: 20px;
+      font-weight: bold;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="label">Контейнер 300px высотой. Элементы разной высоты выровнены по центру обеих осей:</div>
+  
+  <div class="container">
+    <div class="box">Блок 1<br>(60px)</div>
+    <div class="box">Блок 2<br>(100px)</div>
+    <div class="box">Блок 3<br>(80px)</div>
+  </div>
+
+  <p>Попробуйте изменить размер окна браузера — элементы всегда останутся по центру.</p>
+
+</body>
+</html>
