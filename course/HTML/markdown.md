@@ -11,53 +11,193 @@
 - В HTML используются **элементы**, которые обычно обозначаются тегами, и **атрибуты**, задающие дополнительные свойства элементов.
 ---
 ### Что такое HTML?
-Например:
+
+<div style="display: flex; gap: 20px; align-items: flex-start;">
+
+<!-- Левая колонка: Код -->
+<div style="flex: 1; text-align: left;">
+Например, коду:
 
 ```html
 <html>
   <head>
-    <title>My first page</title>
+    <title>
+      My first page
+    </title>
   </head>
   <body>
-    <p>Hello, World!</p>
+    <p>
+      Hello, World!
+    </p>
   </body>
 </html>
 ```
 
-Этому коду соответствует примерно такая структура:
+</div>
 
-`html → head → title` и `html → body → p`.
+<!-- Правая колонка: SVG-диаграмма -->
+<div style="flex: 1; text-align: center;">
 
-![Структура HTML-документа](../img/html-dom.png)
+соответствует примерно такая структура:
 
-https://cs50.harvard.edu/web/ <!-- .element: class="copyright-reference"  -->
+<svg width="350" height="255" viewBox="0 0 700 450">
+  <ellipse cx="350" cy="50" rx="65" ry="30" fill="var(--r-link-color)" stroke="white" stroke-width="2"/>
+  <text x="350" y="59" text-anchor="middle" font-family="monospace" font-size="24" fill="white">html</text>
+  <ellipse cx="160" cy="150" rx="60" ry="30" fill="var(--r-link-color)" stroke="white"    stroke-width="2"/>
+  <text x="160" y="159" text-anchor="middle" font-family="monospace" font-size="24" fill="white">head</text>
+  <ellipse cx="540" cy="150" rx="60" ry="30" fill="var(--r-link-color)" stroke="white" stroke-width="2"/>
+  <text x="540" y="159" text-anchor="middle" font-family="monospace" font-size="24" fill="white">body</text>
+  <!-- title -->
+  <ellipse cx="160" cy="250" rx="60" ry="30"
+           fill="var(--r-link-color)"
+           stroke="white"
+           stroke-width="2"/>
+  <text x="160" y="259"
+        text-anchor="middle"
+        font-family="monospace"
+        font-size="24"
+        fill="white">title</text>
+  <!-- p -->
+  <ellipse cx="540" cy="250" rx="60" ry="30"
+           fill="var(--r-link-color)"
+           stroke="white"
+           stroke-width="2"/>
+  <text x="540" y="259"
+        text-anchor="middle"
+        font-family="monospace"
+        font-size="24"
+        fill="white">p</text>
+  <!-- arrows -->
+  <line x1="300" y1="70" x2="205" y2="130"
+        stroke="var(--r-main-color)" stroke-width="2"/>
+  <polygon points="205,130 215,124 213,136"
+           fill="white"/>
+  <line x1="400" y1="70" x2="495" y2="130"
+        stroke="var(--r-main-color)" stroke-width="2"/>
+  <polygon points="495,130 487,124 487,136"
+           fill="white"/>
+  <line x1="160" y1="180" x2="160" y2="220"
+        stroke="var(--r-main-color)" stroke-width="2"/>
+  <polygon points="160,220 154,210 166,210"
+           fill="white"/>
+  <line x1="540" y1="180" x2="540" y2="220"
+        stroke="var(--r-main-color)" stroke-width="2"/>
+  <polygon points="540,220 534,210 546,210"
+           fill="white"/>
+  <!-- text boxes -->
+  <rect x="40" y="330"
+        width="240" height="55"
+        fill="none"
+        stroke="var(--r-main-color)"
+        stroke-width="2"/>
+  <text x="160" y="365"
+        text-anchor="middle"
+        font-family="monospace"
+        font-size="22"
+        fill="var(--r-main-color)">My first page</text>
+  <rect x="420" y="330"
+        width="240" height="55"
+        fill="none"
+        stroke="var(--r-main-color)"
+        stroke-width="2"/>
+  <text x="540" y="365"
+        text-anchor="middle"
+        font-family="monospace"
+        font-size="22"
+        fill="var(--r-main-color)">Hello, World!</text>
+  <line x1="160" y1="280" x2="160" y2="330"
+        stroke="var(--r-main-color)" stroke-width="2"/>
+  <polygon points="160,330 154,320 166,320"
+           fill="white"/>
+  <line x1="540" y1="280" x2="540" y2="330"
+        stroke="var(--r-main-color)" stroke-width="2"/>
+  <polygon points="540,330 534,320 546,320"
+           fill="white"/>
+</svg>
+
+</div>
+</div>
 
 > 💡 **Важно:** HTML задаёт структуру документа, CSS — его оформление, а JavaScript — поведение и интерактивность.
 
 ---
 ### Как HTML используется в Web
-
 Браузер получает HTML по HTTP/HTTPS и отображает его пользователю.
-
 Упрощённая последовательность:
+- Пользователь открывает URL.
+- Браузер отправляет HTTP-запрос серверу.
+- Сервер возвращает HTML-документ.
+- Браузер разбирает HTML и строит DOM.
+- Встречая ссылки на CSS, JavaScript, изображения и другие ресурсы, браузер при необходимости запрашивает их отдельно.
+- Браузер формирует итоговое отображение страницы.
 
-1. Пользователь открывает URL.
-2. Браузер отправляет HTTP-запрос серверу.
-3. Сервер возвращает HTML-документ.
-4. Браузер разбирает HTML и строит DOM.
-5. Встречая ссылки на CSS, JavaScript, изображения и другие ресурсы, браузер при необходимости запрашивает их отдельно.
-6. Браузер формирует итоговое отображение страницы.
-
-![Клиент-серверная модель](https://commons.wikimedia.org/wiki/Special:FilePath/Client-server-model.svg)
+---
+### Как HTML используется в Web
+<div style="text-align: center; margin: 20px 0;">
+  <svg width="100%" height="auto" viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg" style="max-width: 800px;">
+    <defs>
+      <!-- Стрелка для сплошных линий -->
+      <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="strokeWidth">
+        <path d="M0,0 L10,5 L0,10 Z" fill="var(--r-main-color)" />
+      </marker>
+      <!-- Стрелка для пунктирных линий -->
+      <marker id="arrow-dash" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="strokeWidth">
+        <path d="M0,0 L10,5 L0,10 Z" fill="var(--r-main-color)" />
+      </marker>
+    </defs>
+    <!-- ЛЕВАЯ КОЛОНКА: КЛИЕНТ -->
+    <rect x="40" y="80" width="200" height="180" rx="15" ry="15" fill="var(--r-link-color)" stroke="none" />
+    <!-- Иконка браузера -->
+    <rect x="80" y="110" width="120" height="80" rx="5" fill="none" stroke="white" stroke-width="3"/>
+    <line x1="80" y1="128" x2="200" y2="128" stroke="white" stroke-width="3"/>
+    <circle cx="90" cy="119" r="3" fill="white"/>
+    <circle cx="100" cy="119" r="3" fill="white"/>
+    <circle cx="110" cy="119" r="3" fill="white"/>
+    <!-- Текстовые полосы внутри иконки -->
+    <rect x="92" y="140" width="60" height="6" rx="2" fill="white" opacity="0.8"/>
+    <rect x="92" y="152" width="100" height="6" rx="2" fill="white" opacity="0.8"/>
+    <rect x="92" y="164" width="80" height="6" rx="2" fill="white" opacity="0.8"/>
+    <!-- Подпись -->
+    <text x="140" y="225" text-anchor="middle" font-family="sans-serif" font-size="20" font-weight="bold" fill="white">Клиент (браузер)</text>
+    <!-- ПРАВАЯ КОЛОНКА: СЕРВЕР -->
+    <rect x="560" y="80" width="200" height="180" rx="15" ry="15" fill="var(--r-link-color)" stroke="none" />
+    <!-- Иконка сервера -->
+    <rect x="610" y="110" width="100" height="25" rx="4" fill="none" stroke="white" stroke-width="3"/>
+    <circle cx="620" cy="122.5" r="3" fill="white"/>
+    <rect x="610" y="145" width="100" height="25" rx="4" fill="none" stroke="white" stroke-width="3"/>
+    <circle cx="620" cy="157.5" r="3" fill="white"/>
+    <rect x="610" y="180" width="100" height="25" rx="4" fill="none" stroke="white" stroke-width="3"/>
+    <circle cx="620" cy="192.5" r="3" fill="white"/>
+    <!-- Подпись -->
+    <text x="660" y="225" text-anchor="middle" font-family="sans-serif" font-size="20" font-weight="bold" fill="white">Сервер</text>
+    <!-- СТРЕЛКА 1: ЗАПРОС (Слева направо) -->
+    <line x1="245" y1="140" x2="555" y2="140" stroke="var(--r-main-color)" stroke-width="3" marker-end="url(#arrow)" />
+    <text x="400" y="115" text-anchor="middle" font-family="sans-serif" font-size="16" fill="var(--r-main-color)">Клиент посылает серверу запрос</text>
+    <text x="400" y="135" text-anchor="middle" font-family="sans-serif" font-size="16" fill="var(--r-main-color)">(HTTP - request) для получения страницы</text>
+    <!-- СТРЕЛКА 2: ОТВЕТ (Справа налево) -->
+    <line x1="555" y1="210" x2="245" y2="210" stroke="var(--r-main-color)" stroke-width="3" marker-end="url(#arrow)" />
+    <text x="400" y="245" text-anchor="middle" font-family="sans-serif" font-size="16" fill="var(--r-main-color)">Сервер в ответ посылает страницу</text>
+    <text x="400" y="265" text-anchor="middle" font-family="sans-serif" font-size="16" fill="var(--r-main-color)">клиенту (HTTP - response)</text>
+    <!-- НИЖНИЙ БЛОК: ОТРИСОВКА -->
+    <path d="M 140 265 Q 140 320 300 350" fill="none" stroke="var(--r-main-color)" stroke-width="2" stroke-dasharray="6,6" marker-end="url(#arrow-dash)" />
+    <rect x="250" y="330" width="300" height="90" rx="10" ry="10" fill="none" stroke="var(--r-main-color)" stroke-width="2" stroke-dasharray="6,6" />
+    <text x="400" y="365" text-anchor="middle" font-family="sans-serif" font-size="18" fill="var(--r-main-color)">Клиент (браузер)</text>
+    <text x="400" y="390" text-anchor="middle" font-family="sans-serif" font-size="18" fill="var(--r-main-color)">отображает страницу</text>
+  </svg>
+</div>
 
 ---
 ### Стандартизация HTML
 
-HTML развивается как открытый веб-стандарт.
+- HTML разрабатывался World Wide Web Consortium (W3C) (до версии 5.2)
+- В настоящее время разрабатывается WHATWG (Web Hypertext Application Technology Working Group) 
+- В  мае 2019 года было достигнуто соглашение: 
+  - W3C признает "Живой стандарт" WHATWG единственной официальной версией HTML.
+  - WHATWG будет отвечать за разработку стандарта.
+  - W3C будет заниматься его формализацией, созданием "моментальных снимков" 
+- Живой стандарт HTML (WHATWG): https://html.spec.whatwg.org/multipage/ (~ 140 элементов)
+- Рекомендация HTML5.2 (W3C): https://www.w3.org/TR/html52/
 
-Исторически большую роль в стандартизации HTML играл **W3C (World Wide Web Consortium)**. Сегодня основная современная спецификация HTML развивается как **WHATWG HTML Living Standard**.
-
-> 💡 **HTML5** — важная версия/этап развития стандарта, а современный HTML развивается непрерывно.
 
 ---
 ### Основы HTML: элементы
@@ -100,8 +240,6 @@ HTML развивается как открытый веб-стандарт.
 <hr>
 ```
 
-> 💡 В современном HTML запись `<br>` является нормальной. Запись `<br />` также встречается и поддерживается, но обязательной она не является.
-
 ---
 ### Структура HTML-страницы
 
@@ -138,6 +276,8 @@ HTML развивается как открытый веб-стандарт.
   <meta name="author" content="Ivan Ivanov">
   <meta name="description" content="Пример HTML-страницы">
   <title>A Simple Web Page</title>
+  <!-- <link> подключает внешний файл стилей (например, основную тему сайта) -->
+  <link rel="stylesheet" href="styles/main.css">
 </head>
 ```
 
@@ -146,6 +286,30 @@ HTML развивается как открытый веб-стандарт.
 - `<title>` — заголовок страницы, отображаемый, например, во вкладке браузера.
 - `<meta>` — метаданные.
 - `<link>` — подключение внешних ресурсов, например CSS.
+
+
+---
+### Секция `<head>`
+```html
+<head>
+  <meta charset="utf-8">
+  <meta name="author" content="Ivan Ivanov">
+  <meta name="description" content="Пример HTML-страницы">
+  <title>A Simple Web Page</title>
+  <!-- <base> задает базовый URL для всех относительных ссылок на странице -->
+  <base href="https://example.com">
+  <style>
+        body {
+            font-family: Arial, sans-serif; margin: 40px;
+            background-color: #f4f4f9; color: #333;
+        }
+  </style>
+  <script>
+    document.addEventListener('DOMContentLoaded', 
+    () => document.getElementById('greetBtn').onclick = () => alert('Привет!'));
+  </script>
+</head>
+```
 - `<style>` — встроенные CSS-правила.
 - `<script>` — подключение или размещение JavaScript.
 - `<base>` — базовый URL для относительных ссылок.
@@ -171,18 +335,14 @@ HTML развивается как открытый веб-стандарт.
 <input type="text" name="username" required>
 ```
 
-Большинство строковых значений атрибутов рекомендуется заключать в двойные кавычки.
+Большинство строковых значений атрибутов рекомендуется заключать в двойные кавычки (но могут использоваться и одинарные).
 
 ---
 ### Просмотр исходного кода страницы
-
 Любую HTML-страницу можно посмотреть как исходный документ.
-
 В большинстве браузеров Windows:
-
-**Ctrl + U** — просмотр исходного HTML.
-
-Также доступны инструменты разработчика (**F12**), где можно посмотреть уже построенное браузером DOM-дерево, применённые CSS-правила и состояние элементов.
+ - **Ctrl + U** — просмотр исходного HTML.
+ - Также доступны инструменты разработчика (**F12**), где можно посмотреть уже построенное браузером DOM-дерево, применённые CSS-правила и состояние элементов.
 
 > 💡 **Исходный HTML и DOM — не совсем одно и то же.** Браузер может изменить структуру DOM при разборе HTML и добавить в неё элементы.
 
@@ -248,7 +408,7 @@ HTML предоставляет шесть уровней заголовков:
 ---
 ### Группировка: `<section>`
 
-`<section>` используется для логической секции документа:
+`<section>` используется для создания раздела (секции) документа:
 
 ```html
 <section>
@@ -257,7 +417,8 @@ HTML предоставляет шесть уровней заголовков:
 </section>
 ```
 
-Это **семантический** элемент: он сообщает о структуре документа, а не просто создаёт визуальный блок.
+- Это **семантический** элемент: он сообщает о структуре документа, а не просто создаёт визуальный блок.
+- Используется для группировки элементов. Зачем это нужно, обсудим позднее
 
 ---
 ### Списки
@@ -282,6 +443,8 @@ HTML предоставляет шесть уровней заголовков:
 </ol>
 ```
 
+---
+### Списки
 Для `<ol>` можно задавать начальное значение и направление нумерации:
 
 ```html
@@ -292,7 +455,7 @@ HTML предоставляет шесть уровней заголовков:
 </ol>
 ```
 
-Тип нумерации задаётся не атрибутом, а CSS-свойством `list-style-type` (`list-style-type: upper-alpha`) — атрибут `type` у `<ol>` в современном HTML считается устаревшим.
+- Тип нумерации задаётся не атрибутом, а CSS-свойством `list-style-type` (`list-style-type: upper-alpha`) — атрибут `type` у `<ol>` в современном HTML считается устаревшим.
 
 ---
 ### Форматирование текста
@@ -306,6 +469,8 @@ HTML содержит элементы для смыслового и визуа
 - `<mark>` — выделение как маркером.
 - `<u>` — подчёркнутый текст в соответствующих семантических случаях.
 
+---
+### Форматирование текста
 Пример:
 
 ```html
@@ -334,7 +499,7 @@ x<sup>2</sup>
 Результат:
 
 H₂O и x².
-
+---
 ### Вставленный и удалённый текст
 
 - `<ins>` — добавленный/вставленный текст.
@@ -416,6 +581,19 @@ H₂O и x².
 > 💡 `<hr>` — это не просто «горизонтальная линия». Семантически он обозначает **тематический переход** между частями документа.
 
 ---
+### Разделители. Примеры
+
+```html
+<p>Тетрагидропиранилциклопентилтетрагидропиридопиридиновые — слово из 55 букв, описывающее химическое вещество. Является самым длинным русским словом.</p>
+
+<p>Тетрагидропиранилциклопентилтетрагидропиридопиридиновые — слово из 55 букв, описывающее химическое вещество.<br> Является самым длинным русским словом.</p>
+
+<p>Тетрагидропиранилциклопентилтетрагидро<wbr>пиридопиридиновые — слово из 55 букв, описывающее химическое вещество. Является самым длинным русским словом.</p>
+
+<p>Тетрагидропиранилциклопентилтетрагидропиридопиридиновые — слово из 55 букв, описывающее химическое вещество.<hr> Является самым длинным русским словом.</p>
+```
+
+---
 ### Изображения
 
 Для вставки изображения используется `<img>`:
@@ -442,6 +620,7 @@ H₂O и x².
 
 > ⚠️ `alt` особенно важен для доступности: его используют, в частности, программы чтения с экрана.
 
+---
 ### Размер изображения
 
 Можно задать один размер, и браузер сохранит пропорции:
@@ -457,6 +636,17 @@ H₂O и x².
 ```
 
 В современном адаптивном дизайне размеры изображений обычно дополнительно контролируются CSS.
+
+---
+### Указание размера. Некоторые способы
+Абсолютные единицы: Не зависят от окружения. Менее гибкие.
+- px (пиксели) — самая распространенная. В некоторых элементах (img) используются по умолчанию
+- cm, mm, in (сантиметры, миллиметры, дюймы) — для печати.
+
+Относительные единицы: Очень гибкие, основа для адаптивного дизайна.
+- % — процент от размера родительского элемента.
+- vw (viewport width) — процент от ширины окна браузера. 50vw = 50% ширины окна.
+- vh (viewport height) — процент от высоты окна браузера
 
 ---
 ### Аудио
@@ -510,7 +700,7 @@ H₂O и x².
 - `<tr>` — строка.
 - `<th>` — заголовочная ячейка.
 - `<td>` — обычная ячейка.
-
+---
 Пример:
 
 ```html
@@ -558,24 +748,33 @@ HTML-форма позволяет пользователю ввести дан�
 
 ```html
 <form action="/login" method="post">
-  <label for="login">Логин:</label>
-  <input type="text" id="login" name="login">
+  . . . Здесь находятся элементы формы. . .
+  
 
   <button type="submit">Войти</button>
 </form>
 ```
 
 - `action` определяет адрес, куда отправляются данные.
+  - Например:
+  ```html 
+  <form action="http://www.server.ru/sub/prg.php">
+  ```
+  
+  - Если программа обработки формы на том же сервере, что и html-файл:
+  ```html
+  <form action="sub/prg.php">
+  ```
+  
 - `method` определяет HTTP-метод отправки.
-
-Основные варианты — `GET` и `POST`.
+  - Основные варианты — `GET` и `POST` (по умолчанию GET).
 
 ---
 ### GET и POST в формах
 
-При `GET` параметры формы обычно становятся частью URL:
+При использовании `GET` параметры формы становятся частью URL:
 
-```text
+```url
 https://example.com/search?text=HTML
 ```
 
@@ -583,7 +782,9 @@ https://example.com/search?text=HTML
 - URL можно сохранить или передать другому пользователю;
 - удобно для поиска и других запросов, не изменяющих состояние.
 
-При `POST` данные передаются в теле HTTP-запроса:
+---
+### GET и POST в формах
+При использовании `POST` данные передаются в теле HTTP-запроса:
 
 ```http
 POST /login HTTP/1.1
@@ -609,6 +810,21 @@ login=student&password=12345
 ```html
 <input type="text" name="username" required>
 ```
+---
+### Форма. Пример
+```html
+<form> Введите Ваше имя <br>
+<input type="text" name="feedback"> <br> <br>
+Ваши домашние животные <br>
+<input type="checkbox" name="items" value="cat">Кошка <br>
+<input type="checkbox" name="items" value="dog"> Собака <br>
+<input type="checkbox" name="items" value="fish"> Аквариумные рыбки <br> <br>
+Насколько хорошо вы знаете  HTML<br>
+<input type="radio" name="iq" value="high"> Отлично <br>
+<input type="radio" name="iq" value="medium" checked> Средне <br>
+<input type="radio" name="iq" value="low"> Посредственно <br> <br>
+</form>
+```
 
 ---
 ### Checkbox и Radio
@@ -619,6 +835,10 @@ login=student&password=12345
 <input type="checkbox" name="items" value="cat"> Кошка
 <input type="checkbox" name="items" value="dog"> Собака
 <input type="checkbox" name="items" value="fish"> Рыбки
+```
+При передаче:
+```url
+File:///30form.html?feedback=&items=cat&items=dog&items=fish
 ```
 
 **Radio** используется для выбора одного варианта из группы:
@@ -659,13 +879,16 @@ login=student&password=12345
 Пример:
 
 ```html
-<input
-  type="text"
-  name="firstname"
-  value="Иван"
-  autofocus
-  required
->
+<form>
+<p> Пожалуйста, заполните следующую информацию о себе </p>
+<label for="firstname">Имя</label>
+<input type="text" name="firstname" value="Иван" autofocus> <br>
+<label for="lastname">Фамилия</label>
+<input type="text" name="lastname" placeholder="Напишите здесь Вашу фамилию"> <br>
+<label for="age">Возраст:</label>
+<input type="text" name="age" required> <br>
+<input type="submit" value="Submit">
+</form>
 ```
 
 ---
@@ -720,18 +943,25 @@ HTML предоставляет специализированные поля:
 <input type="email">
 <input type="url">
 ```
-
+---
+### HTML5: дополнительные типы `<input>`
 Например:
 
 ```html
+<form action="show.php">
 <label for="age">Возраст:</label>
-<input
-  id="age"
-  type="number"
-  min="0"
-  max="99"
-  step="1"
->
+<input type="number" min="0" max="99" step="1" value="18" name="age" required><br>
+<label for="birthday">День рождения:</label>
+<input type="date" name="birthday"><br>
+<label for="wakeup">Время, в которое вы просыпаетесь:</label>
+<input type="time" name="wakeup"><br>
+<label for="color">Любимый цвет:</label>
+<input type="color" name="color"> <br>
+<label for="mood">Ваше настоение</label>
+Ужасное <input type="range" min="0" max="100" step="5" value="50" name="mood"> 
+Отличное<br>
+<input type="submit" value="Отправить!">
+</form>
 ```
 
 Браузер может предоставить подходящий интерфейс и выполнить базовую проверку введённых данных.
@@ -742,52 +972,44 @@ HTML предоставляет специализированные поля:
 `<fieldset>` объединяет связанные элементы формы, а `<legend>` задаёт название группы:
 
 ```html
-<fieldset>
-  <legend>Персональная информация</legend>
+<form> 
+  <fieldset>
+    <legend>Персональная информация</legend>
+      Имя: <input type="text" name="firstName"> <br>
+      Фамилия: <input type="text" name="lastName"> <br>
+  </fieldset> 
+<br>
+  <fieldset>
+    <legend>Ваши предпочтения</legend>
+      Любимый фильм <input type="text" name="favFilm"> <br>
+      Любимый …<input type="text" name="favSeason"> <br>
+  </fieldset> 
+  <br> 
+  <input type="submit" value="Отправить">
+</form>
 
-  <label for="firstname">Имя:</label>
-  <input id="firstname" name="firstname">
-
-  <label for="lastname">Фамилия:</label>
-  <input id="lastname" name="lastname">
-</fieldset>
 ```
 
 Эти элементы особенно полезны для доступности сложных форм.
 
 ---
-### CSS и разделение структуры и оформления
+### Стили
+- Стили применяются для визуального “оформления” страницы
+- При работе со стилями используют:
+  - Элементы link и style
+  - Атрибут id, имеющийся у любого элемента HTML
+- "Язык" для определения стилей в мире Web называется CSS (Cascading Style Sheets)
+- **Основная концепция состоит в отделении стиля ("оформления") от структуры страницы ("содержимого", "данных")**
 
-**CSS (Cascading Style Sheets)** используется для оформления HTML-документа.
-
-Основная идея:
-
-> **HTML описывает структуру и смысл, CSS — внешний вид.**
-
-Например:
-
-```css
-h1 {
-  color: purple;
-}
-
-p {
-  color: blue;
-}
-```
-
-CSS можно подключить из отдельного файла:
+---
+### CSS (Cascading Style Sheets)
+- CSS можно подключить из отдельного файла:
 
 ```html
 <link href="style.css" rel="stylesheet">
 ```
-
-Один CSS-файл может использоваться множеством HTML-страниц.
-
----
-### Встроенные CSS-стили
-
-CSS можно определить непосредственно в `<style>`:
+- Один CSS-файл может использоваться множеством HTML-страниц.
+- CSS можно определить непосредственно в `<style>`:
 
 ```html
 <head>
@@ -948,21 +1170,10 @@ ul li {
 Например:
 
 ```css
-a:link {
-  background: yellow;
-}
-
-a:visited {
-  background: pink;
-}
-
-a:hover {
-  background: lightgreen;
-}
-
-a:active {
-  background: purple;
-}
+a:link {   background: yellow; }
+a:visited {   background: pink; }
+a:hover {   background: lightgreen; }
+a:active {   background: purple; }
 ```
 
 Часто используются:
@@ -972,6 +1183,33 @@ a:active {
 - `:visited` — посещённая ссылка;
 - `:focus` — элемент получил фокус;
 - `:empty` — элемент не содержит содержимого.
+
+---
+### Псевдоклассы. Пример
+```html
+<html> 
+  <head>
+    <style> a:link {background:yellow} 
+            a:visited {background:pink}
+            a:hover {background:lightgreen} 
+            a:active {background:purple}
+            li:empty {background:brown} 
+    </style>
+</head>
+<body>
+<a href=“http://www.google.com">Google</a>
+<a href=“http://www.twitter.com">Twitter</a>
+<a href=“http://www.facebook.com">Facebook</a>
+<ol>
+  <li>One</li> 
+  <li>Two</li> 
+  <li>Three</li> 
+  <li></li>
+</ol>
+</body>
+</html>
+```
+
 
 ---
 ### Блочная модель
@@ -1012,7 +1250,7 @@ a:active {
 - `flex-direction: column` — менять направление главной оси;
 - `flex: 1` — элемент занимает всё свободное место;
 - для сеток «строки×столбцы» удобнее CSS Grid (`display: grid`).
-
+---
 ### Позиционирование
 
 `position: relative` — смещение от обычного места; `position: absolute` — от ближайшего позиционированного предка:
@@ -1065,6 +1303,62 @@ a:active {
   <span class="important">а это важный фрагмент</span>.
 </p>
 ```
+---
+### DIV
+- Не имеет стиля по умолчанию (соответственно свойства отображения всех элементов не заданы)
+- Может использоваться разработчиком страницы по своему усмотрению
+
+```html
+<p>Параграф перед определением div</p>
+<div> DIV без применения стиля </div>
+<p>Параграф после определения DIV</p>
+<div style="background:lightblue">
+DIV с примененным стилем
+</div>
+```
+
+```html
+<p>Параграф перед DIV</p>
+<div style="background:yellow; font-size:16pt; 
+    font-family:courier">
+    DIV с желтым фоном
+</div>
+<p>Параграф между двумя DIV</p>
+<div style="background:lightblue; font-size:18pt; 			
+font-family:Arial; width:50%">
+    DIV с голубым фоном
+</div>
+```
+
+---
+### DIV. Позиционирование
+- DIV – может быть помещен на любую позицию на странице
+- Атрибут position:absolute вместе с атрибутами top:xxx and left:yyy задают абсолютную позицию левого верхнего угла DIV
+- top:0 and left:0 означают, что DIV будет помещен в левый верхний угол контейнера
+
+```html
+<div style="background:yellow; font-size:16pt; font-family:courier; 
+            position:absolute; top:60px; left:60px">
+    This is a div with a yellow background
+</div>
+
+<div style="background:lightblue; font-size:18pt; 
+            position:absolute; top:92px; left:80px">
+    This is a div with a blue background
+</div>
+```
+---
+### SPAN
+- Также как и DIV не имеет свойств отображения по умолчанию
+- Используется для управления отображением «нескольких слов»
+
+```html
+<p>This is not span text <span>but this is</span> and this isn't</p>
+
+<p>This is not span text <span style="background:yellow">but this is</span> 
+and this isn't</p>
+```
+
 
 ---
 ### Мини-практикум: карточка
@@ -1079,7 +1373,7 @@ a:active {
 > 💡 Ориентиры — слайды «Блочная модель» и «Flexbox».
 
 ---
-### HTML5: семантические элементы
+### HTML5: некоторые элементы
 
 Современный HTML предоставляет элементы, описывающие смысл частей страницы:
 
@@ -1093,45 +1387,27 @@ a:active {
 - `<figure>` — самостоятельный иллюстративный материал с возможной подписью;
 - `<details>` — раскрываемый блок.
 
-Например:
-
-```html
-<header>Шапка сайта</header>
-
-<nav>Навигация</nav>
-
-<main>
-  <article>
-    <h1>Статья</h1>
-    <p>Содержание статьи...</p>
-  </article>
-
-  <aside>Дополнительная информация</aside>
-</main>
-
-<footer>Подвал сайта</footer>
-```
-
 ---
-### HTML5: интерактивные элементы
-
-Некоторые элементы позволяют создавать интерактивные интерфейсы без дополнительных библиотек.
-
-Например:
-
-```html
-<details>
-  <summary>Показать подробности</summary>
-  Здесь находится дополнительная информация.
-</details>
-```
-
-Другие элементы:
-
+### HTML5: некоторые элементы
 - `<progress>` — отображение прогресса;
 - `<output>` — результат вычисления или действия;
 - `<datalist>` — варианты для поля ввода;
 - `<canvas>` — область для рисования с помощью JavaScript.
+
+---
+### HTML5: некоторые элементы
+
+- [HTML\54article.html](../../HTML/54article.html)
+- [HTML\55aside.html](../../HTML/55aside.html)
+- [HTML\56menucommand.html](../../HTML/56menucommand.html)
+- [HTML\57datalist.html](../../HTML/57datalist.html)
+- [HTML\59figure.html](../../HTML/59figure.html)
+- [HTML\60footer.html](../../HTML/60footer.html)
+- [HTML\61nav.html](../../HTML/61nav.html)
+- [HTML\62output.html](../../HTML/62output.html)
+- [HTML\63progress.html](../../HTML/63progress.html)
+- [HTML\64summary.html](../../HTML/64summary.html)
+
 
 ---
 ### HTML5 и JavaScript
@@ -1140,6 +1416,8 @@ HTML предоставляет структуру страницы, но мно
 
 Исторически к таким возможностям относились:
 
+- HTML5 Offline Web Application
+  - Механизмы для реализации приложений в режиме «disconnected environment» (нужен javascript и поддержка сервера)
 - Drag and Drop;
 - File API;
 - Geolocation;
@@ -1150,22 +1428,22 @@ HTML предоставляет структуру страницы, но мно
 
 ---
 ### Drag and Drop
-
-Браузер позволяет реализовать перетаскивание элементов.
-
-Простейший пример:
-
 ```html
-<img
-  src="drag.png"
-  draggable="true"
-  id="drag1"
->
+<div id="div1"
+ondrop="return dropComplete(event)"
+ondragover="return allowDropStatus(event)">
+  <img src="drag.png" draggable="true"
+    ondragstart="return dragInitialize(event)"
+    width="250" height="150" id="drag1">
+</div>
+<div id="div2" ondrop="return dropComplete(event)"
+ondragover="return allowDropStatus(event)">
+</div>
 ```
 
 Для полноценной обработки событий используются JavaScript-обработчики, например `dragstart`, `dragover` и `drop`.
 
-> 💡 В современном коде обработчики событий обычно регистрируют через JavaScript (`addEventListener`), а не размещают непосредственно в HTML-атрибутах.
+[HTML\51drag-and-drop.html](../../HTML/51drag-and-drop.html)
 
 ---
 ### File API
@@ -1186,6 +1464,8 @@ JavaScript может получить выбранный файл и прочи
 - обработки данных перед загрузкой;
 - построения drag-and-drop загрузчиков.
 
+[HTML\52fileAPI.html](../../HTML/52fileAPI.html)
+
 ---
 ### Web Storage: `localStorage` и `sessionStorage`
 
@@ -1198,14 +1478,13 @@ JavaScript может получить выбранный файл и прочи
 
 ```javascript
 localStorage.setItem("theme", "dark");
-
 const theme = localStorage.getItem("theme");
-
 localStorage.removeItem("theme");
-
 localStorage.clear();
 ```
 
+---
+### Web Storage: `localStorage` и `sessionStorage`
 Для `sessionStorage` используются те же основные методы:
 
 ```javascript
@@ -1218,31 +1497,15 @@ sessionStorage.clear();
 > ⚠️ Web Storage подходит для небольших объёмов данных. Не следует хранить там пароли, токены и другую чувствительную информацию без понимания связанных с этим рисков.
 
 ---
-### Что нужно запомнить
+### Источники
 
-**HTML** отвечает прежде всего за структуру и смысл документа:
+- Полезные книги:
+  - Изучаем HTML, XHTML и CSS (Head First). Элизабет Робсон, Эрик Фримен
+  - HTML и CSS. Разработка и дизайн веб-сайтов. Джон Дакетт
+- Источники и полезные ссылки:
+  - http://www.w3.org/TR/html52/
+  - https://html.spec.whatwg.org/multipage/
+  - https://developer.mozilla.org/ru/docs/Learn/Getting_started_with_the_web/HTML_basics
+  - https://www.w3schools.com/html/
+  - http://htmlbook.ru/html
 
-- элементы и атрибуты;
-- структуру `<html>`, `<head>`, `<body>`;
-- заголовки, абзацы и списки;
-- ссылки и изображения;
-- таблицы;
-- формы;
-- семантическую структуру страницы.
-
-**CSS** отвечает за оформление:
-
-- цвета;
-- шрифты;
-- размеры;
-- расположение;
-- адаптивность.
-
-**JavaScript** отвечает за поведение:
-
-- обработку событий;
-- изменение DOM;
-- динамическое взаимодействие;
-- работу с API браузера.
-
-Вместе эти три технологии образуют фундамент клиентской части Web-приложений.
