@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Callback test</title>
+    <script>
+        function loadScript(src) {
+            let script = document.createElement('script');
+            script.src = src;
+            document.head.append(script);
+
+        }
+        loadScript('script.js')
+        testFunction(); // ?????
+    </script>
+
+</head>
+<body>
+
+</body>
+</html>
