@@ -120,7 +120,7 @@
 
 > 💡 **Важно:** HTML задаёт структуру документа, CSS — его оформление, а JavaScript — поведение и интерактивность.
 ---
-### Пример 1
+### Пример. Простейшая HTML-страница
 
 <iframe data-src="../examples/HTML/01Simple.html" width="100%" height="500px" style="border: 2px solid #ccc;"></iframe>
 
@@ -387,6 +387,11 @@ HTML предоставляет шесть уровней заголовков:
 
 Заголовки важны не только визуально, но и **семантически**: они помогают пользователю, поисковым системам и вспомогательным технологиям понять структуру документа.
 
+
+---
+### Пример. Заголовки
+
+<iframe data-src="../examples/HTML/02Heading.html" width="100%" height="500px" style="border: 2px solid #ccc;"></iframe>
 ---
 ### Абзацы: `<p>`
 
@@ -427,6 +432,11 @@ HTML предоставляет шесть уровней заголовков:
 - Это **семантический** элемент: он сообщает о структуре документа, а не просто создаёт визуальный блок.
 - Используется для группировки элементов. Зачем это нужно, обсудим позднее
 
+
+---
+### Пример. Секция section
+
+<iframe data-src="../examples/HTML/03Section.html" width="100%" height="500px" style="border: 2px solid #ccc;"></iframe>
 ---
 ### Списки
 
@@ -450,6 +460,16 @@ HTML предоставляет шесть уровней заголовков:
 </ol>
 ```
 
+
+---
+### Пример. Ненумерованный список
+
+<iframe data-src="../examples/HTML/04UnList.html" width="100%" height="500px" style="border: 2px solid #ccc;"></iframe>
+
+---
+### Пример. Нумерованный список
+
+<iframe data-src="../examples/HTML/05OrList.html" width="100%" height="500px" style="border: 2px solid #ccc;"></iframe>
 ---
 ### Списки
 Для `<ol>` можно задавать начальное значение и направление нумерации:
@@ -464,6 +484,21 @@ HTML предоставляет шесть уровней заголовков:
 
 - Тип нумерации задаётся не атрибутом, а CSS-свойством `list-style-type` (`list-style-type: upper-alpha`) — атрибут `type` у `<ol>` в современном HTML считается устаревшим.
 
+
+---
+### Пример. ol с атрибутом start
+
+<iframe data-src="../examples/HTML/06OrList.html" width="100%" height="500px" style="border: 2px solid #ccc;"></iframe>
+
+---
+### Пример. ol start reversed
+
+<iframe data-src="../examples/HTML/07OrList.html" width="100%" height="500px" style="border: 2px solid #ccc;"></iframe>
+
+---
+### Пример. ol с устаревшим атрибутом type
+
+<iframe data-src="../examples/HTML/08OrList.html" width="100%" height="500px" style="border: 2px solid #ccc;"></iframe>
 ---
 ### Форматирование текста
 
@@ -489,6 +524,26 @@ HTML содержит элементы для смыслового и визуа
 
 > 💡 Для современного HTML предпочтительно использовать семантические элементы там, где они подходят, а чисто визуальное оформление выполнять с помощью CSS.
 
+
+---
+### Пример. i и em
+
+<iframe data-src="../examples/HTML/09i-em.html" width="100%" height="500px" style="border: 2px solid #ccc;"></iframe>
+
+---
+### Пример. b и strong
+
+<iframe data-src="../examples/HTML/10b-strong.html" width="100%" height="500px" style="border: 2px solid #ccc;"></iframe>
+
+---
+### Пример. u
+
+<iframe data-src="../examples/HTML/11u.html" width="100%" height="500px" style="border: 2px solid #ccc;"></iframe>
+
+---
+### Пример. mark
+
+<iframe data-src="../examples/HTML/12mark.html" width="100%" height="500px" style="border: 2px solid #ccc;"></iframe>
 ---
 ### Верхние и нижние индексы
 
@@ -506,6 +561,11 @@ x<sup>2</sup>
 Результат:
 
 H₂O и x².
+
+---
+### Пример. sub и sup
+
+<iframe data-src="../examples/HTML/13SubSup.html" width="100%" height="500px" style="border: 2px solid #ccc;"></iframe>
 ---
 ### Вставленный и удалённый текст
 
@@ -521,6 +581,11 @@ H₂O и x².
 
 Эти элементы несут смысловую информацию, а не только меняют внешний вид.
 
+
+---
+### Пример. ins и del
+
+<iframe data-src="../examples/HTML/14InsDel.html" width="100%" height="500px" style="border: 2px solid #ccc;"></iframe>
 ---
 ### Гиперссылки
 
@@ -538,6 +603,11 @@ H₂O и x².
 - на файл;
 - на место внутри текущей страницы.
 
+
+---
+### Пример. ссылка на другой сайт
+
+<iframe data-src="../examples/HTML/15a.html" width="100%" height="500px" style="border: 2px solid #ccc;"></iframe>
 ---
 ### Навигация внутри страницы
 
@@ -556,6 +626,11 @@ H₂O и x².
 
 `id` должен быть уникальным в пределах документа.
 
+
+---
+### Пример. переход к id внутри страницы
+
+<iframe data-src="../examples/HTML/16a.html" width="100%" height="500px" style="border: 2px solid #ccc;"></iframe>
 ---
 ### Ссылка на фрагмент другой страницы
 
@@ -569,6 +644,11 @@ H₂O и x².
 
 Браузер откроет `chapter2.html` и попытается прокрутить страницу к элементу с `id="examples"`.
 
+
+---
+### Пример. ссылка на фрагмент другой страницы
+
+<iframe data-src="../examples/HTML/17a.html" width="100%" height="500px" style="border: 2px solid #ccc;"></iframe>
 ---
 ### Разделители: `<br>`, `<wbr>`, `<hr>`
 
@@ -600,6 +680,11 @@ H₂O и x².
 <p>Тетрагидропиранилциклопентилтетрагидропиридопиридиновые — слово из 55 букв, описывающее химическое вещество.<hr> Является самым длинным русским словом.</p>
 ```
 
+
+---
+### Пример. br, wbr, hr
+
+<iframe data-src="../examples/HTML/18br.html" width="100%" height="500px" style="border: 2px solid #ccc;"></iframe>
 ---
 ### Изображения
 
@@ -627,6 +712,11 @@ H₂O и x².
 
 > ⚠️ `alt` особенно важен для доступности: его используют, в частности, программы чтения с экрана.
 
+
+---
+### Пример. img
+
+<iframe data-src="../examples/HTML/19img.html" width="100%" height="500px" style="border: 2px solid #ccc;"></iframe>
 ---
 ### Размер изображения
 
@@ -644,6 +734,11 @@ H₂O и x².
 
 В современном адаптивном дизайне размеры изображений обычно дополнительно контролируются CSS.
 
+
+---
+### Пример. размеры img
+
+<iframe data-src="../examples/HTML/20imgWidth.html" width="100%" height="500px" style="border: 2px solid #ccc;"></iframe>
 ---
 ### Указание размера. Некоторые способы
 Абсолютные единицы: Не зависят от окружения. Менее гибкие.
@@ -674,6 +769,21 @@ H₂O и x².
 
 > 💡 Автоматическое воспроизведение (`autoplay`) браузеры часто ограничивают, особенно если звук включён.
 
+
+---
+### Пример. audio без элементов управления
+
+<iframe data-src="../examples/HTML/21audio.html" width="100%" height="500px" style="border: 2px solid #ccc;"></iframe>
+
+---
+### Пример. audio с controls
+
+<iframe data-src="../examples/HTML/22audio_controls.html" width="100%" height="500px" style="border: 2px solid #ccc;"></iframe>
+
+---
+### Пример. audio с autoplay
+
+<iframe data-src="../examples/HTML/22audio_autoplay.html" width="100%" height="500px" style="border: 2px solid #ccc;"></iframe>
 ---
 ### Видео
 
@@ -696,6 +806,26 @@ H₂O и x².
 
 Для видео вместо `alt` используются другие механизмы доступности, например субтитры через `<track>`.
 
+
+---
+### Пример. video без элементов управления
+
+<iframe data-src="../examples/HTML/23video.html" width="100%" height="500px" style="border: 2px solid #ccc;"></iframe>
+
+---
+### Пример. video с controls
+
+<iframe data-src="../examples/HTML/25video_controls.html" width="100%" height="500px" style="border: 2px solid #ccc;"></iframe>
+
+---
+### Пример. video с autoplay
+
+<iframe data-src="../examples/HTML/24video_autoplay.html" width="100%" height="500px" style="border: 2px solid #ccc;"></iframe>
+
+---
+### Пример. у video нет атрибута alt
+
+<iframe data-src="../examples/HTML/26video_alt.html" width="100%" height="500px" style="border: 2px solid #ccc;"></iframe>
 ---
 ### Таблицы
 
@@ -734,6 +864,11 @@ H₂O и x².
 
 > 💡 Таблицы следует использовать для **табличных данных**, а не для построения макета страницы.
 
+
+---
+### Пример. таблица
+
+<iframe data-src="../examples/HTML/27table.html" width="100%" height="500px" style="border: 2px solid #ccc;"></iframe>
 ---
 ### Формы
 
@@ -750,6 +885,16 @@ HTML-форма позволяет пользователю ввести дан�
 - `<label>` — подпись поля.
 - `<fieldset>` и `<legend>` — группировка элементов.
 
+
+---
+### Пример. textarea
+
+<iframe data-src="../examples/HTML/28form.html" width="100%" height="500px" style="border: 2px solid #ccc;"></iframe>
+
+---
+### Пример. textarea с отправкой на сервер
+
+<iframe data-src="../examples/HTML/29form.html" width="100%" height="500px" style="border: 2px solid #ccc;"></iframe>
 ---
 ### Структура формы
 
@@ -817,6 +962,11 @@ login=student&password=12345
 ```html
 <input type="text" name="username" required>
 ```
+
+---
+### Пример. поле password
+
+<iframe data-src="../examples/HTML/31form.html" width="100%" height="500px" style="border: 2px solid #ccc;"></iframe>
 ---
 ### Форма. Пример
 ```html
@@ -833,6 +983,11 @@ login=student&password=12345
 </form>
 ```
 
+
+---
+### Пример. checkbox и radio
+
+<iframe data-src="../examples/HTML/30form.html" width="100%" height="500px" style="border: 2px solid #ccc;"></iframe>
 ---
 ### Checkbox и Radio
 
@@ -871,6 +1026,11 @@ File:///30form.html?feedback=&items=cat&items=dog&items=fish
 
 Пользователь видит текст варианта, а сервер получает значение его атрибута `value`.
 
+
+---
+### Пример. выпадающий список
+
+<iframe data-src="../examples/HTML/32form.html" width="100%" height="500px" style="border: 2px solid #ccc;"></iframe>
 ---
 ### Атрибуты элементов формы
 
@@ -898,6 +1058,11 @@ File:///30form.html?feedback=&items=cat&items=dog&items=fish
 </form>
 ```
 
+
+---
+### Пример. атрибуты полей формы
+
+<iframe data-src="../examples/HTML/33form.html" width="100%" height="500px" style="border: 2px solid #ccc;"></iframe>
 ---
 ### Label: подпись поля
 
@@ -936,6 +1101,11 @@ File:///30form.html?feedback=&items=cat&items=dog&items=fish
 
 > 💡 `multipart/form-data` позволяет передавать в одном запросе текстовые поля и двоичные данные файлов.
 
+
+---
+### Пример. загрузка файла
+
+<iframe data-src="../examples/HTML/34form_upload.html" width="100%" height="500px" style="border: 2px solid #ccc;"></iframe>
 ---
 ### HTML5: дополнительные типы `<input>`
 
@@ -964,7 +1134,7 @@ HTML предоставляет специализированные поля:
 <input type="time" name="wakeup"><br>
 <label for="color">Любимый цвет:</label>
 <input type="color" name="color"> <br>
-<label for="mood">Ваше настоение</label>
+<label for="mood">Ваше настроение</label>
 Ужасное <input type="range" min="0" max="100" step="5" value="50" name="mood"> 
 Отличное<br>
 <input type="submit" value="Отправить!">
@@ -973,6 +1143,11 @@ HTML предоставляет специализированные поля:
 
 Браузер может предоставить подходящий интерфейс и выполнить базовую проверку введённых данных.
 
+
+---
+### Пример. поля HTML5
+
+<iframe data-src="../examples/HTML/35form_html5.html" width="100%" height="500px" style="border: 2px solid #ccc;"></iframe>
 ---
 ### Группировка: `<fieldset>` и `<legend>`
 
@@ -989,7 +1164,7 @@ HTML предоставляет специализированные поля:
   <fieldset>
     <legend>Ваши предпочтения</legend>
       Любимый фильм <input type="text" name="favFilm"> <br>
-      Любимый …<input type="text" name="favSeason"> <br>
+      Любимое время года<input type="text" name="favSeason"> <br>
   </fieldset> 
   <br> 
   <input type="submit" value="Отправить">
@@ -999,6 +1174,16 @@ HTML предоставляет специализированные поля:
 
 Эти элементы особенно полезны для доступности сложных форм.
 
+
+---
+### Пример. fieldset и legend в форме
+
+<iframe data-src="../examples/HTML/36form_grouping.html" width="100%" height="500px" style="border: 2px solid #ccc;"></iframe>
+
+---
+### Пример. fieldset и legend без полей ввода
+
+<iframe data-src="../examples/HTML/37fieldset.html" width="100%" height="500px" style="border: 2px solid #ccc;"></iframe>
 ---
 ### Стили
 - Стили применяются для визуального “оформления” страницы
@@ -1034,6 +1219,16 @@ HTML предоставляет специализированные поля:
 
 Но для больших проектов предпочтительно выносить общие стили в отдельные CSS-файлы.
 
+
+---
+### Пример. внешний файл стилей
+
+<iframe data-src="../examples/HTML/38css1.html" width="100%" height="500px" style="border: 2px solid #ccc;"></iframe>
+
+---
+### Пример. стили в head
+
+<iframe data-src="../examples/HTML/39css2.html" width="100%" height="500px" style="border: 2px solid #ccc;"></iframe>
 ---
 ### Основы CSS: свойства
 
@@ -1094,6 +1289,11 @@ p {
 
 > 💡 `id` должен быть уникальным в документе. Для группы элементов обычно лучше использовать `class`.
 
+
+---
+### Пример. селектор id
+
+<iframe data-src="../examples/HTML/40css_id.html" width="100%" height="500px" style="border: 2px solid #ccc;"></iframe>
 ---
 ### Встроенный стиль
 
@@ -1109,6 +1309,11 @@ CSS можно задать непосредственно через атриб
 
 Такой подход удобен для небольших локальных изменений, но при большом количестве элементов ухудшает поддержку страницы.
 
+
+---
+### Пример. inline-стиль
+
+<iframe data-src="../examples/HTML/43css_inline.html" width="100%" height="500px" style="border: 2px solid #ccc;"></iframe>
 ---
 ### Контекстные селекторы
 
@@ -1138,6 +1343,11 @@ ul li {
 
 Красными будут элементы `<li>` внутри `<ul>`.
 
+
+---
+### Пример. контекстный селектор
+
+<iframe data-src="../examples/HTML/44css_context.html" width="100%" height="500px" style="border: 2px solid #ccc;"></iframe>
 ---
 ### Классы CSS
 
@@ -1169,6 +1379,16 @@ ul li {
 </h1>
 ```
 
+
+---
+### Пример. классы
+
+<iframe data-src="../examples/HTML/41css_class.html" width="100%" height="500px" style="border: 2px solid #ccc;"></iframe>
+
+---
+### Пример. несколько классов у одного элемента
+
+<iframe data-src="../examples/HTML/42css_class2.html" width="100%" height="500px" style="border: 2px solid #ccc;"></iframe>
 ---
 ### Псевдоклассы
 
@@ -1204,9 +1424,9 @@ a:active {   background: purple; }
     </style>
 </head>
 <body>
-<a href=“http://www.google.com">Google</a>
-<a href=“http://www.twitter.com">Twitter</a>
-<a href=“http://www.facebook.com">Facebook</a>
+<a href="http://www.google.com">Google</a>
+<a href="http://www.twitter.com">Twitter</a>
+<a href="http://www.facebook.com">Facebook</a>
 <ol>
   <li>One</li> 
   <li>Two</li> 
@@ -1218,6 +1438,11 @@ a:active {   background: purple; }
 ```
 
 
+
+---
+### Пример. псевдоклассы
+
+<iframe data-src="../examples/HTML/45css_pseudo_classes.html" width="100%" height="500px" style="border: 2px solid #ccc;"></iframe>
 ---
 ### Блочная модель
 
@@ -1287,6 +1512,11 @@ a:active {   background: purple; }
 
 > 💡 Библиотека CSS не заменяет знание самого CSS — она использует его возможности и задаёт готовые соглашения и компоненты.
 
+
+---
+### Пример. таблица со стилями Bootstrap
+
+<iframe data-src="../examples/HTML/45_1css_style.html" width="100%" height="500px" style="border: 2px solid #ccc;"></iframe>
 ---
 ### `<div>` и `<span>`
 
@@ -1337,6 +1567,16 @@ font-family:Arial; width:50%">
 </div>
 ```
 
+
+---
+### Пример. div со стилем и без
+
+<iframe data-src="../examples/HTML/46div.html" width="100%" height="500px" style="border: 2px solid #ccc;"></iframe>
+
+---
+### Пример. два div с разными стилями
+
+<iframe data-src="../examples/HTML/47div_2.html" width="100%" height="500px" style="border: 2px solid #ccc;"></iframe>
 ---
 ### DIV. Позиционирование
 - DIV – может быть помещен на любую позицию на странице
@@ -1354,6 +1594,16 @@ font-family:Arial; width:50%">
     This is a div with a blue background
 </div>
 ```
+
+---
+### Пример. position: absolute
+
+<iframe data-src="../examples/HTML/48div_position.html" width="100%" height="500px" style="border: 2px solid #ccc;"></iframe>
+
+---
+### Пример. position: relative
+
+<iframe data-src="../examples/HTML/49div_position_relative.html" width="100%" height="500px" style="border: 2px solid #ccc;"></iframe>
 ---
 ### SPAN
 - Также как и DIV не имеет свойств отображения по умолчанию
@@ -1367,6 +1617,11 @@ and this isn't</p>
 ```
 
 
+
+---
+### Пример. span
+
+<iframe data-src="../examples/HTML/50span.html" width="100%" height="500px" style="border: 2px solid #ccc;"></iframe>
 ---
 ### Мини-практикум: карточка
 
@@ -1416,6 +1671,61 @@ and this isn't</p>
 - [HTML\64summary.html](../../HTML/64summary.html)
 
 
+
+---
+### Пример. article
+
+<iframe data-src="../examples/HTML/54article.html" width="100%" height="500px" style="border: 2px solid #ccc;"></iframe>
+
+---
+### Пример. aside
+
+<iframe data-src="../examples/HTML/55aside.html" width="100%" height="500px" style="border: 2px solid #ccc;"></iframe>
+
+---
+### Пример. menu
+
+<iframe data-src="../examples/HTML/56menucommand.html" width="100%" height="500px" style="border: 2px solid #ccc;"></iframe>
+
+---
+### Пример. datalist
+
+<iframe data-src="../examples/HTML/57datalist.html" width="100%" height="500px" style="border: 2px solid #ccc;"></iframe>
+
+---
+### Пример. details
+
+<iframe data-src="../examples/HTML/58details.html" width="100%" height="500px" style="border: 2px solid #ccc;"></iframe>
+
+---
+### Пример. figure и figcaption
+
+<iframe data-src="../examples/HTML/59figure.html" width="100%" height="500px" style="border: 2px solid #ccc;"></iframe>
+
+---
+### Пример. footer
+
+<iframe data-src="../examples/HTML/60footer.html" width="100%" height="500px" style="border: 2px solid #ccc;"></iframe>
+
+---
+### Пример. nav
+
+<iframe data-src="../examples/HTML/61nav.html" width="100%" height="500px" style="border: 2px solid #ccc;"></iframe>
+
+---
+### Пример. output
+
+<iframe data-src="../examples/HTML/62output.html" width="100%" height="500px" style="border: 2px solid #ccc;"></iframe>
+
+---
+### Пример. progress
+
+<iframe data-src="../examples/HTML/63progress.html" width="100%" height="500px" style="border: 2px solid #ccc;"></iframe>
+
+---
+### Пример. details с summary
+
+<iframe data-src="../examples/HTML/64summary.html" width="100%" height="500px" style="border: 2px solid #ccc;"></iframe>
 ---
 ### HTML5 и JavaScript
 
@@ -1452,6 +1762,11 @@ ondragover="return allowDropStatus(event)">
 
 [HTML\51drag-and-drop.html](../../HTML/51drag-and-drop.html)
 
+
+---
+### Пример. drag and drop
+
+<iframe data-src="../examples/HTML/51drag-and-drop.html" width="100%" height="500px" style="border: 2px solid #ccc;"></iframe>
 ---
 ### File API
 
@@ -1473,6 +1788,11 @@ JavaScript может получить выбранный файл и прочи
 
 [HTML\52fileAPI.html](../../HTML/52fileAPI.html)
 
+
+---
+### Пример. File API, предпросмотр изображений
+
+<iframe data-src="../examples/HTML/52fileAPI.html" width="100%" height="500px" style="border: 2px solid #ccc;"></iframe>
 ---
 ### Web Storage: `localStorage` и `sessionStorage`
 
@@ -1503,6 +1823,11 @@ sessionStorage.clear();
 
 > ⚠️ Web Storage подходит для небольших объёмов данных. Не следует хранить там пароли, токены и другую чувствительную информацию без понимания связанных с этим рисков.
 
+
+---
+### Пример. localStorage
+
+<iframe data-src="../examples/HTML/53HTML5%20local%20Storage.html" width="100%" height="500px" style="border: 2px solid #ccc;"></iframe>
 ---
 ### Источники
 
@@ -1515,4 +1840,3 @@ sessionStorage.clear();
   - https://developer.mozilla.org/ru/docs/Learn/Getting_started_with_the_web/HTML_basics
   - https://www.w3schools.com/html/
   - http://htmlbook.ru/html
-
