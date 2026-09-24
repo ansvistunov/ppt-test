@@ -1,3 +1,6 @@
+# JavaScript
+
+---
 ### Что такое JavaScript?
 
 JavaScript — язык программирования, который особенно широко используется при разработке Web-приложений.
@@ -12,17 +15,24 @@ JavaScript — язык программирования, который осо�
   - объектно-ориентированную;
   - функциональную;
 - в браузере работает совместно с HTML и CSS.
+---
+### Что такое JavaScript?
+
+![Популярность языков программирования](https://redmonk.com/rstephens/files/2026/04/rankings_labeled-768x549.png)
+
+RedMonk Top 20 Languages Over Time — January 2026 <!-- .element: class="copyright-reference"  -->
+
 
 ---
 ### Что такое JavaScript?
 
 JavaScript применяется не только в браузере:
 
-- в клиентской части Web-приложений;
-- в серверных приложениях;
+- (+) в клиентской части Web-приложений;
+- (+) в серверных приложениях;
 - для прикладного ПО;
-- в офисных приложениях;
-- в других средах выполнения.
+- в офисных приложениях (Microsoft Office, Open Office);
+- в других средах выполнения (существуют даже "браузерные ОС").
 
 ---
 ### JavaScript в браузере
@@ -47,16 +57,15 @@ JavaScript применяется не только в браузере:
 
 ---
 ### Подключение JavaScript к HTML
-Самый простой вариант — разместить JavaScript непосредственно внутри HTML:
+Использование элемента `<script>`
 
 ```html
-<script>
+<script type="application/javascript">
     alert('Hello, World!');
 </script>
 ```
 
-На странице может быть несколько элементов `<script>`.
-Атрибут `type` для обычного JavaScript сегодня не требуется:
+На странице может быть несколько элементов `<script>` (атрибут `type` для обычного JavaScript сегодня не требуется)
 
 Другой вариант — написать код непосредственно в обработчике события:
 ```html
@@ -77,7 +86,7 @@ JavaScript можно вынести в отдельный файл:
 </head>
 ```
 
-Это позволяет хранить HTML и JavaScript отдельно и повторно использовать один скрипт на разных страницах.
+Этот вариант самый предпочтительный, он позволяет хранить HTML и JavaScript отдельно и повторно использовать один скрипт на разных страницах.
 
 ---
 ###  `async` и `defer`
@@ -94,12 +103,16 @@ JavaScript можно вынести в отдельный файл:
 **`defer`**:
 - скрипт загружается параллельно разбору HTML;
 - выполнение откладывается;
-- отложенные скрипты выполняются после разбора документа;
+- скрипты выполняются после разбора документа;
 - порядок выполнения нескольких `defer`-скриптов сохраняется.
 
 ---
+
+## Элементы синтаксиса
+
+---
 ### Переменные
-Современный JavaScript использует `let` и `const`:
+Современный JavaScript использует `let` и `const` для объявления:
 
 ```javascript
 let cnt = 25;
@@ -108,7 +121,7 @@ const msg = 'Привет Мир!!!';
 let value;
 ```
 
-JavaScript является динамически типизированным языком: значение переменной может иметь один тип, а затем другой.
+JavaScript является динамически типизированным языком: переменная может "сменить тип".
 
 ```javascript
 let cnt = 25;
@@ -116,189 +129,20 @@ let cnt = 25;
 cnt = 'hello world!!!';
 ```
 
----
-### Условия
-Основная конструкция:
-
-```javascript
-if (year < 1961) {
-    alert("Это слишком рано");
-} else if (year > 1961) {
-    alert("Это слишком поздно");
-} else {
-    alert("Да, точно!");
-}
-```
-
----
-### Циклы. while
-
-```javascript
-let i = 0;
-
-while (i < 3) {
-    alert(i);
-    i++;
-}
-```
-
----
-### `do...while`
-
-Тело выполняется хотя бы один раз:
-
-```javascript
-let i = 0;
-
-do {
-    alert(i);
-    i++;
-} while (i < 3);
-```
-
----
-### `for`
-
-```javascript
-for (let i = 0; i < 3; i++) {
-    alert(i);
-}
-```
-
-Части цикла `for` можно опускать:
-
-```javascript
-let i = 0;
-
-for (; i < 3; i++) {
-    alert(i);
-}
-```
-
----
-###  `break` и `continue`
-`break` завершает цикл:
-
-```javascript
-while (true) {
-    let value = prompt("Введи число");
-
-    if (!value) {
-        break;
-    }
-}
-```
-
-`continue` пропускает текущую итерацию:
-
-```javascript
-for (let i = 0; i < 100; i++) {
-    if (i % 2 === 0) {
-        continue;
-    }
-
-    alert(i);
-}
-```
----
-### Метки
-Метка позволяет выйти из внешнего цикла:
-
-```javascript
-outer:
-for (let i = 0; i < 3; i++) {
-    for (let j = 0; j < 3; j++) {
-        let input = prompt("Введите значение");
-
-        if (!input) {
-            break outer;
-        }
-    }
-}
-```
-
----
-### `switch`
-`switch` используется для выбора одного из вариантов:
-
-```javascript
-let a = parseInt(prompt("2 + 2 = ?"));
-
-switch (a) {
-    case 3:
-        alert("Маловато");
-        break;
-
-    case 4:
-        alert("В точку!");
-        break;
-
-    case 5:
-        alert("Перебор");
-        break;
-
-    default:
-        alert("Совсем далеко...");
-}
-```
-
-Сравнение в `switch` производится по строгому равенству.
-
----
-### `typeof`
-Оператор `typeof` позволяет определить тип значения:
-
-```javascript
-typeof 100;       // "number"
-typeof "hello";   // "string"
-typeof false;     // "boolean"
-typeof undefined; // "undefined"
-```
-
-Особенность:
-
-```javascript
-typeof null; // "object"
-```
-
-Это историческая особенность JavaScript.
-
----
-### Обработка ошибок: `try...catch`
-Конструкция:
-
-```javascript
-try {
-    // код, в котором может возникнуть ошибка
-} catch (err) {
-    // обработка ошибки
-}
-```
-
-Если в `try` возникает исключение, выполнение блока прерывается и управление передаётся в `catch`.
-
-```javascript
-try {
-    someFunction();
-} catch (err) {
-    alert(err.message);
-}
-```
-
-Объект ошибки содержит информацию о произошедшем.
-
+Повторное объявление переменной с таким же именем вызывает ошибку
 
 ---
 ###  Объявление через `var`
 
-В старом коде часто встречается `var`:
+В старом коде часто встречается объявление переменных с помощью ключевого слова `var`:
 
 ```javascript
 var cnt = 10;
 ```
 
-Главное отличие от `let` — область видимости.
-`var` имеет **функциональную область видимости**, а `let` — **блочную**.
+Главное отличие от `let` — область видимости:
+- `var` имеет **функциональную область видимости**
+- `let` — **блочную**.
 
 ```javascript
 if (true) {
@@ -307,22 +151,35 @@ if (true) {
 
 alert(test); // Привет
 ```
----
-###  Объявление через `let`
+В новом коде обычно используют let и const, а var необходимо знать прежде всего для понимания старого JavaScript и особенностей области видимости.
 
-А с `let`:
+---
+### Область видимости let и var
+`let` имеет блочную область видимости:
 
 ```javascript
-if (true) {
-    let test = 'Привет';
+for (let i = 0; i < 3; i++) {
+    let j = i * 2;
 }
 
-alert(test); // ошибка
+// i и j здесь недоступны
 ```
-Поэтому в новом коде обычно используют `let` и `const`, а `var` необходимо знать прежде всего для понимания старого JavaScript и особенностей области видимости.
+
+`var` имеет функциональную область видимости:
+
+```javascript
+function cnt() {
+    for (var i = 0; i < 3; i++) {
+        var j = i * 2;
+    }
+
+    alert(i); // 3
+    alert(j); // 4
+}
+```
 
 ---
-### Поднятие объявлений
+### Поднятие объявлений (var)
 
 Для `var` характерно поднятие объявления:
 
@@ -378,18 +235,478 @@ firstManInSpace = '05.05.1961'; // ошибка
 
 Вложенные комментарии не поддерживаются.
 
+
+---
+### Операторы языка
+
+К привычным операторам относятся:
+
+```text
++  -  *  /  %
+++ --
+=  +=  -=  *=  /=  %=
+== !=
+> < >= <=
+&& || !
+```
+
+Есть и специальные операторы:
+
+```javascript
+typeof
+delete
+void
+in
+instanceof
+===
+```
+
+---
+### Операторы языка
+Современный JavaScript также поддерживает деструктуризацию:
+
+```javascript
+let [a, b] = [10, 20];
+
+let {name, age} = {
+    name: "Маша",
+    age: 25
+};
+```
+
+---
+### Простое взаимодействие с пользователем 
+> Это элементы BOM (не являются частью языка)
+- `alert()`: показывает сообщение:
+```javascript
+alert("Привет!");
+```
+- `confirm()` : показывает вопрос с кнопками OK/Cancel и возвращает `true` или `false`:
+
+```javascript
+let result = confirm("Вы согласны?");
+
+if (result) {
+    alert("Вы согласились");
+}
+```
+
+---
+### Простое взаимодействие с пользователем
+- `prompt()` : запрашивает ввод пользователя:
+
+```javascript
+let name = prompt("Как вас зовут?");
+
+alert("Привет, " + name);
+```
+
+---
+### Вывод в консоль: console.log()
+console.log() — главный инструмент разработчика для вывода информации:
+
+```javascript
+let total = 2 + 2;
+console.log(total);        // 4
+console.log("Сумма:", total); // Сумма: 4
+
+```
+
+Консоль открывается клавишей F12 (или правый клик → «Просмотреть код») → вкладка Console.
+
+Также есть:
+
+```javascript
+console.warn("предупреждение");
+console.error("ошибка");
+```
+
+
+---
+### console.log() или alert()?
+- alert():
+    - блокирует выполнение страницы;
+    - любое значение показывает в виде строки;
+    - для отладки неудобен.
+
+- console.log():
+    - ничего не блокирует;
+    - объекты и массивы показываются в развёрнутом виде;
+    - можно вывести сразу несколько значений.
+- В реальной разработке для отладки используют console.log().
+
+---
+
+### Оператор if\then\else
+Основная конструкция:
+
+```javascript
+if (year < 1961) {
+    alert("Это слишком рано");
+} else if (year > 1961) {
+    alert("Это слишком поздно");
+} else {
+    alert("Да, точно!");
+}
+```
+
+### Циклы. while
+
+```javascript
+let i = 0;
+
+while (i < 3) {
+    alert(i);
+    i++;
+}
+```
+
+---
+### Циклы. `do...while`
+
+Тело выполняется хотя бы один раз:
+
+```javascript
+let i = 0;
+
+do {
+    alert(i);
+    i++;
+} while (i < 3);
+```
+
+### Циклы. `for`
+
+```javascript
+for (let i = 0; i < 3; i++) {
+    alert(i);
+}
+```
+
+Части цикла `for` можно опускать:
+
+```javascript
+let i = 0;
+
+for (; i < 3; i++) {
+    alert(i);
+}
+```
+
+---
+### Цикл for...of
+Перебирает элементы массива:
+
+```javascript
+let holidays = ["1 января", "8 марта", "23 февраля"];
+for (let day of holidays) {
+        console.log(day);
+}
+```
+
+Работает и со строками:
+
+```javascript
+for (let ch of "ABC") {    
+    console.log(ch); // A, B, C
+}
+```
+---
+### for...in и for...of — не путать
+for...in перебирает перечисляемые строковые свойства объекта, включая унаследованные свойства:
+
+```javascript
+let user = { name: "Маша", age: 25 };
+for (let key in user) {    
+    console.log(key, user[key]);
+}
+```
+
+for...of перебирает значения (массивы, строки):
+
+```javascript
+let arr = [10, 20, 30];
+for (let value of arr) {    
+    console.log(value); // 10, 20, 30
+}
+```
+
+> ⚠️ По массиву for...in вернёт индексы "0", "1", "2" — строки. Для массивов используйте for...of.
+
+
+---
+###  `break` и `continue` в циклах 
+`break` завершает цикл:
+
+```javascript
+while (true) {
+    let value = prompt("Введи число");
+
+    if (!value) {
+        break;
+    }
+}
+```
+
+`continue` пропускает текущую итерацию:
+
+```javascript
+for (let i = 0; i < 100; i++) {
+    if (i % 2 === 0) {
+        continue;
+    }
+
+    alert(i);
+}
+```
+---
+### Метки в циклах 
+Метка позволяет выйти из внешнего цикла:
+
+```javascript
+outer:
+for (let i = 0; i < 3; i++) {
+    for (let j = 0; j < 3; j++) {
+        let input = prompt("Введите значение");
+
+        if (!input) {
+            break outer;
+        }
+    }
+}
+```
+
+---
+### Оператор `switch`
+`switch` используется для выбора одного из вариантов:
+
+```javascript
+let a = parseInt(prompt("2 + 2 = ?"));
+
+switch (a) {
+    case 3:
+        alert("Маловато");
+        break;
+
+    case 4:
+        alert("В точку!");
+        break;
+
+    case 5:
+        alert("Перебор");
+        break;
+
+    default:
+        alert("Совсем далеко...");
+}
+```
+
+Сравнение в `switch` производится по строгому равенству.
+
+---
+### Оператор `typeof`
+Оператор `typeof` позволяет определить тип значения:
+
+```javascript
+typeof 100;       // "number"
+typeof "hello";   // "string"
+typeof false;     // "boolean"
+typeof undefined; // "undefined"
+```
+
+Особенность:
+
+```javascript
+typeof null; // "object"
+```
+
+Это историческая особенность JavaScript.
+---
+
+### Нестрогое == и строгое === равенство
+- == приводит типы перед сравнением:
+
+```javascript
+5 == "5";    // true  — строка приведена к числу
+0 == false;  // true
+"" == 0;     // true
+```
+
+- === сравнивает и тип, и значение:
+
+```javascript
+
+5 === "5";   // false
+0 === false; // false
+5 === 5;     // true
+
+```
+
+> ⚠️ Правило: в современном коде используйте === и !==. Нестрогое == полезно знать (например, x == null проверяет и null, и undefined), но обычно не нужно.
+
+---
+### null и undefined
+undefined — значение «не присвоено»:
+
+```javascript
+let x;
+console.log(x); // undefined
+```
+
+null — «значения нет», присваивается намеренно:
+
+```javascript
+let user = null; // пользователя нет
+```
+
+При сравнении:
+
+```javascript
+null == undefined;  // true
+null === undefined; // false
+```
+
+---
+### Оператор ??
+a ?? b возвращает a, если оно не null/undefined, иначе b:
+
+```javascript
+let name = null;
+let result = name ?? "Аноним";
+console.log(result); // "Аноним"
+```
+
+Отличие от || — в трактовке «ложных» значений:
+```javascript
+0 || "запасное";  // "запасное" — 0 считается ложным
+0 ?? "запасное";  // 0         — 0 не null/undefined
+```
+
+?? удобен для значений по умолчанию.
+
+---
+### Оператор ?. (опциональная цепочка)
+Позволяет безопасно обратиться к вложенному свойству:
+
+```javascript
+let user = {}; // свойства address нет
+user.address.street;  // ошибка TypeError!
+user.address?.street; // undefined
+```
+
+Работает и с методами:
+
+```javascript
+user.sayHi?.(); // вызовется, только если метод есть
+```
+
+Без ?. пришлось бы писать проверку: 
+```javascript
+user.address && user.address.street
+```
+
+---
+
+### Тернарный оператор ? :
+Короткая запись выбора из двух значений:
+
+```javascript
+let age = 20;
+let status = age >= 18 ? "взрослый" : "ребёнок";
+```
+Эквивалентно:
+```javascript
+let status;
+if (age >= 18) {
+    status = "взрослый";
+} else {    
+    status = "ребёнок";
+}
+```
+Вложенные тернарники допустимы, но плохо читаются — для сложной логики используйте if/else или switch.
+
+
+---
+### Обработка ошибок: `try...catch`
+Конструкция:
+
+```javascript
+try {
+    // код, в котором может возникнуть ошибка
+} catch (err) {
+    // обработка ошибки
+}
+```
+
+Если в `try` возникает исключение, выполнение блока прерывается и управление передаётся в `catch`.
+
+```javascript
+try {
+    someFunction();
+} catch (err) {
+    alert(err.message);
+}
+```
+
+Объект ошибки содержит информацию о произошедшем.
+
+---
+### Блок finally
+Выполняется всегда: и при ошибке, и без неё:
+
+```javascript
+try {    
+    // рабочий код
+} catch (err) {    
+    // обработка ошибки
+} finally {    
+    // выполнится в любом случае
+}
+```
+
+Типичное применение: скрыть индикатор загрузки, разблокировать кнопку, закрыть соединение,...
+
+---
+### Генерация ошибок: throw
+Исключение можно выбросить самому:
+
+```javascript
+function divide(a, b) {    
+    if (b === 0) {
+        throw new Error("Деление на ноль!");    
+    }    
+    return a / b;
+}
+
+try {
+    divide(10, 0);
+} catch (err) {
+    alert(err.message); // Деление на ноль!
+}
+```
+
+Обычно бросают экземпляр Error. 
+- Полезные свойства объекта ошибки:
+    - name    — тип ("Error", "TypeError", ...)
+    - message — текст ошибки
+    - stack   — стек вызовов
+
 ---
 
 ### Встроенные типы
+<div style="flex: 1; text-align: center; font-size: 80%;">
 
 К основным типам JavaScript относятся:
-
-- `Number` — числа;
-- `String` — строки;
-- `Boolean` — логические значения;
-- `Null`;
-- `Undefined`;
-- `Object`.
+- Примитивные:
+    - undefined
+    - null
+    - boolean
+    - number
+    - bigint
+    - string
+    - symbol
+- Объектный:
+    - object
 
 Также существуют встроенные объекты, например:
 
@@ -397,6 +714,7 @@ firstManInSpace = '05.05.1961'; // ошибка
 - `Array`;
 - `Function`.
 
+</div>
 ---
 ###  Number
 
@@ -454,8 +772,10 @@ Number("3.14");         // 3.14
 Проверка `NaN`:
 
 ```javascript
-isNaN(3.14 / 0); // false
-isNaN(0 / 0);    // true
+Number.isNaN(3.14 / 0); // false
+Number.isNaN(0 / 0);    // true
+Number.isNaN("hello"); // false
+Number.isNaN(NaN);     // true
 ```
 
 ---
@@ -483,6 +803,32 @@ Escape-последовательности:
 ```javascript
 "2" + "3"; // "23"
 ```
+
+---
+### Шаблонные строки
+Обратные кавычки позволяют вставлять значения через ${...}:
+
+```javascript
+let name = "Маша";
+let age = 25;
+let msg = `Привет, ${name}! Тебе ${age} лет.`;
+console.log(msg); // Привет, Маша! Тебе 25 лет.
+```
+
+Внутри ${} — любое выражение:
+
+```javascript
+console.log(`2 + 2 = ${2 + 2}`); // 2 + 2 = 4
+```
+Шаблонные строки могут занимать несколько строк без \n:
+
+```javascript
+let list = `1. Первый пункт
+2. Второй пункт`;
+```
+
+Предпочтительный способ формирования строк вместо "a" + x + "b".
+
 
 ---
 ### String
@@ -665,79 +1011,84 @@ splice()
 ```javascript
 [5, 3, 40, 1, 10, 100].sort((a, b) => a - b);
 ```
+---
+### Методы массивов: forEach и map
+forEach вызывает функцию для каждого элемента (ничего не возвращает):
+
+```javascript
+let numbers = [1, 2, 3];
+numbers.forEach(num => console.log(num));
+```
+
+map возвращает новый массив из результатов:
+
+```javascript
+let doubled = numbers.map(n => n * 2);
+console.log(doubled); // [2, 4, 6]
+```
+map() не изменяет сам массив и возвращает новый массив. Однако элементы исходного массива могут быть объектами, и callback может изменить эти объекты.. Колбэку передаются (элемент, индекс, массив).
 
 ---
-### Операторы
-
-К привычным операторам относятся:
-
-```text
-+  -  *  /  %
-++ --
-=  +=  -=  *=  /=  %=
-== !=
-> < >= <=
-&& || !
-```
-
-Есть и специальные операторы:
+### filter и find
+filter — новый массив из «подходящих» элементов:
 
 ```javascript
-typeof
-delete
-void
-in
-instanceof
-===
+let numbers = [5, 12, 8, 130, 44];
+let big = numbers.filter(n => n > 10);
+console.log(big); // [12, 130, 44]
 ```
 
+find — первый подходящий элемент (или undefined):
+
+```javascript
+let first = numbers.find(n => n > 10);
+console.log(first); // 12
+```
 ---
-### Операторы
-Современный JavaScript также поддерживает деструктуризацию:
+### some и every
+some — есть ли хотя бы один подходящий элемент:
 
 ```javascript
-let [a, b] = [10, 20];
-
-let {name, age} = {
-    name: "Маша",
-    age: 25
-};
+[1, 2, 3, 4].some(n => n > 3);  // true
+[1, 2, 3, 4].some(n => n > 10); // false
 ```
 
----
-### Простое взаимодействие с пользователем
-
-`alert()`
-
-Показывает сообщение:
+every — подходят ли все элементы:
 
 ```javascript
-alert("Привет!");
-```
-
-`confirm()`
-
-Показывает вопрос с кнопками OK/Cancel и возвращает `true` или `false`:
-
-```javascript
-let result = confirm("Вы согласны?");
-
-if (result) {
-    alert("Вы согласились");
-}
+[1, 2, 3, 4].every(n => n > 0); // true
+[1, 2, 3, 4].every(n => n > 1); // false
 ```
 
 ---
-### Простое взаимодействие с пользователем
-`prompt()`
-
-Запрашивает ввод пользователя:
+### reduce
+Сворачивает массив в одно значение:
 
 ```javascript
-let name = prompt("Как вас зовут?");
-
-alert("Привет, " + name);
+let numbers = [1, 2, 3, 4];
+let sum = numbers.reduce( (acc, current) => acc + current,    0 
+                                // начальное значение аккумулятора
+                        );
+console.log(sum); // 10
 ```
+Аккумулятор acc последовательно принимает значения: 0, 1, 3, 6, 10.
+
+---
+### Цепочки вызовов
+map и filter возвращают новый массив — их можно соединять:
+
+```javascript
+let users = [{name: "Маша", age: 25},    
+                 {name: "Вася", age: 17},    
+                 {name: "Петя", age: 30}];
+let adultNames = users
+            .filter(user => user.age >= 18)
+            .map(user => user.name);
+console.log(adultNames); // ["Маша", "Петя"]
+```
+
+Такой стиль заменяет большинство «ручных» циклов по массиву.
+
 
 ---
 ### Функции
@@ -795,6 +1146,22 @@ go(1, 2, 3); // третий аргумент не используется
 ```
 
 ---
+### Параметры по умолчанию
+Вместо проверки if (text === undefined) значение задаётся прямо в объявлении:
+
+```javascript
+function showMessage(from, text = "текст не передан") {    
+    alert(from + ": " + text);
+}
+
+showMessage("Маша");            // Маша: текст не передан
+showMessage("Маша", "Привет!"); // Маша: Привет!
+```
+
+По умолчанию можно указать и выражение — оно вычислится при вызове, если аргумент не передан.
+
+
+---
 ### Аргументы функции
 В JavaScript нет традиционной перегрузки функций:
 
@@ -826,6 +1193,48 @@ hello("Маша", "Света");
 ```
 
 `arguments` — не настоящий массив, поэтому методы массива непосредственно к нему не применяются.
+
+---
+### Остаточные параметры: ...
+Собирает «все остальные» аргументы в настоящий массив:
+
+```javascript
+function sum(...numbers) {
+        let result = 0;    
+        for (let num of numbers) {
+                    result += num;    
+        }    
+        return result;
+}
+sum(1, 2, 3); // 6
+sum();        // 0
+```
+
+Обычные параметры объявляются перед ...:
+
+```javascript
+function greet(greeting, ...names) { /* ... */ }
+```
+
+В отличие от arguments, это полноценный массив. В стрелочных функциях arguments недоступен — используйте именно ...
+---
+### Spread-оператор
+Оператор ... при вызове функции разворачивает массив в отдельные аргументы:
+
+```javascript
+let nums = [3, 1, 8, 5];
+Math.max(...nums); // 8
+```
+
+Также используется для копирования и объединения массивов:
+
+```javascript
+let copy = [...nums];
+let combined = [...nums, 100, ...copy];
+```
+
+Один и тот же "оператор" ... работает в двух ролях: собрать остаток (rest) или развернуть (spread).
+
 
 ---
 ### Возвращаемое значение
@@ -876,30 +1285,6 @@ showMessage();
 alert(msg); // ошибка
 ```
 
----
-### Область видимости
-`let` имеет блочную область видимости:
-
-```javascript
-for (let i = 0; i < 3; i++) {
-    let j = i * 2;
-}
-
-// i и j здесь недоступны
-```
-
-`var` имеет функциональную область видимости:
-
-```javascript
-function cnt() {
-    for (var i = 0; i < 3; i++) {
-        var j = i * 2;
-    }
-
-    alert(i); // 3
-    alert(j); // 4
-}
-```
 
 ---
 ### Внешние переменные
@@ -935,7 +1320,7 @@ function test() {
 ```
 
 ---
-### Функция как объект
+### Функциональная переменная
 С функцией можно работать как со значением:
 
 ```javascript
@@ -948,7 +1333,7 @@ let f = hello;
 f();
 ```
 
-Функции можно передавать в другие функции и хранить в переменных.
+Функции можно передавать (как аргумент) в другие функции и хранить в переменных.
 
 ---
 ### Function Declaration и Function Expression
@@ -999,7 +1384,7 @@ let hello = function(name) {
 Анонимная функция:
 
 ```javascript
-function() {
+const f = function() {
     alert("Привет!");
 }
 ```
@@ -1035,11 +1420,15 @@ ask(
 let f = function hello() {
     // внутри функции доступно имя hello
 };
+
+alert( hello ); 
+    // снаружи имя - не видно (ошибка: undefined variable 'hello')
+
 ```
 
 ---
 ### Создание функции через `Function`
-Функцию можно создать динамически:
+- Функцию можно создать динамически:
 
 ```javascript
 let sum = new Function(
@@ -1051,6 +1440,18 @@ let result = sum(1, 2);
 ```
 
 Такой способ встречается значительно реже обычных объявлений функций.
+
+- Получение кода функции
+
+```javascript
+function hello() {alert( "Привет" );}
+    alert( hello ); 
+    
+```
+будет выведен код функции
+---
+
+## Интеграция с HTML. События
 
 
 ---
@@ -1065,8 +1466,17 @@ let result = sum(1, 2);
 - изменение значения поля;
 - загрузка документа;
 - отправка формы.
+- ...
 
 JavaScript в браузере использует событийную модель.
+---
+### Обработчики событий
+
+- Событие может быть переадресовано обработчику событий
+- Для этого обработчик должен быть специальным образом назначен
+- Существует несколько способов назначить обработчик для события
+
+
 
 ---
 ### Обработчики событий. HTML-атрибут
@@ -1078,7 +1488,7 @@ JavaScript в браузере использует событийную мод�
     onclick="alert('Привет!')">
 ```
 
-Можно вызвать отдельную функцию:
+Можно сначала определить отдельную функцию:
 
 ```html
 <script>
@@ -1098,19 +1508,34 @@ function hello() {
 ---
 ### Обработчики событий.Свойство элемента
 
-```javascript
-button.onclick = function() {
-    alert("Привет!");
-};
+```html
+<input type="button" id="buttonScript" 
+            value="Кнопка" />
 ```
 
-Недостаток: через одно свойство `onclick` можно хранить только один обработчик.
+```javascript
+<script>
+  buttonScript.onclick = function() {
+    alert( 'Привет!' );
+  };
+</script>
+```
+
+Недостаток: через одно свойство `onclick` можно назначить только один обработчик.
 
 ---
 <!-- .slide: class="code-sm" -->
 
 ###  Обработчики событий. addEventListener()
 Предпочтительный универсальный способ:
+- element.addEventListener(event, handler[, useCapture]);
+    - Event -имя события, например click
+    - Handler - ссылка на функцию, которую надо поставить обработчиком.
+    - useCapture - необязательный аргумент (по умолчанию false), «фаза», на которой обработчик должен сработать. Этот аргумент редко нужен, мы его рассмотрим позже.
+
+
+---
+###  Обработчики событий. addEventListener()
 
 ```javascript
 element.addEventListener("click", handler);
@@ -1155,12 +1580,17 @@ element.removeEventListener("click", function() {
 Можно:
 
 ```javascript
-function handler() {
-    alert("Привет!");
-}
+<input id="elem" type="button" value="Нажми меня"/>
+<script>
+  function handler1() {alert('Спасибо!');};
+  function handler2() {alert('Спасибо ещё раз!');}
+  elem.onclick = function() { alert("Привет"); };
+  elem.addEventListener("click", handler1); 
+// Спасибо!
+  elem.addEventListener("click", handler2); 
+// Спасибо ещё раз!
+</script>
 
-element.addEventListener("click", handler);
-element.removeEventListener("click", handler);
 ```
 
 `addEventListener()` позволяет назначить несколько обработчиков одного события.
@@ -1178,6 +1608,8 @@ element.removeEventListener("click", handler);
 ---
 
 ### Объект события
+
+<div style="flex: 1; text-align: center; font-size: 80%;">
 
 Обработчик получает объект `event`:
 
@@ -1197,12 +1629,19 @@ event.clientX
 event.clientY
 ```
 
-`event.target` — элемент, на котором произошло исходное событие.
+- event.type -тип события (в данном случае click)
+- event.currentTarget -элемент, на котором сработал обработчик. Значение такое же, как и у this, но бывают ситуации, когда обработчик является методом объекта и его this при помощи bind привязан к этому объекту, тогда используется event.currentTarget.
+- event.clientX / event.clientY -координаты курсора в момент клика (относительно окна)
 
-`event.currentTarget` — элемент, чей обработчик сейчас выполняется.
+</div>
 
 ---
 ### Всплытие и захват событий
+
+<div style="display: flex; gap: 20px; align-items: flex-start;">
+
+<!-- Левая колонка: Код -->
+<div style="flex: 1; text-align: left;">
 
 Событие в DOM проходит несколько фаз:
 
@@ -1210,7 +1649,13 @@ event.clientY
 2. **target** — достижение целевого элемента;
 3. **bubble** — распространение обратно вверх.
 
-![Фазы распространения DOM-события](https://www.w3.org/TR/2003/NOTE-DOM-Level-3-Events-20031107/images/eventflow.png)<!-- .element: class="img-fit-m" -->
+</div>
+<div style="flex: 1; text-align: center;">
+
+![Фазы распространения DOM-события](https://www.w3.org/TR/2003/NOTE-DOM-Level-3-Events-20031107/images/eventflow.png)
+
+
+</div>
 
 ---
 ### Всплытие и захват событий
@@ -1232,38 +1677,56 @@ element.addEventListener("click", handler, { capture: true });
 
 ### Остановка распространения
 
-Распространение события можно остановить:
+- Распространение события можно остановить с помощью вызова stopPropagation():
 
 ```javascript
-event.stopPropagation();
+<body onclick="alert('сюда обработка не дойдёт')">
+  <button onclick="event.stopPropagation()">
+    Кликни меня
+</button> </body>
 ```
 
-Если у элемента несколько обработчиков, `stopPropagation()` не отменяет выполнение остальных обработчиков этого же элемента.
+- Если у элемента несколько обработчиков, `stopPropagation()` не отменяет выполнение остальных обработчиков этого же элемента.
 
-Для немедленной остановки обработки используется:
+- Для немедленной остановки обработки используется stopImmediatePropagation() - прекращает дальнейшее
+распространение события и предотвращает вызов остальных обработчиков этого события на текущем объекте..
 
-```javascript
-event.stopImmediatePropagation();
-```
 
 ---
 ### Порядок обработки событий
 
-JavaScript в браузере выполняет обычный код последовательно.
-Если обработка события занимает много времени, интерфейс может перестать реагировать.
-Упрощённо можно представить работу браузера так:
-- выполняется текущий JavaScript;
-- события и другие асинхронные операции ожидают своей очереди;
-- когда основной поток освобождается, браузер выполняет ожидающий обработчик.
+- JavaScript выполняет синхронный код последовательно.
+- Длительная синхронная операция блокирует основной поток:
+пока она выполняется, интерфейс не может нормально
+обрабатывать другие задачи и обновляться.
+- Асинхронные API позволяют запланировать продолжение
+работы после завершения операции.
+- Этим, в частности, управляет event loop.
+> Web Workers позволяют выполнять JavaScript в отдельных worker-контекстах, не блокируя основной поток страницы.
+
 
 ---
 ### Порядок обработки событий
-![JavaScript Event Loop](https://upload.wikimedia.org/wikipedia/commons/8/83/JavaScript_Event_Loop.png)<!-- .element: class="img-fit-m" -->
+<div style="display: flex; gap: 20px; align-items: flex-start;">
 
-Это связано с понятием **event loop** — цикла обработки событий.
+<!-- Левая колонка: Код -->
+<div style="flex: 1; text-align: left;">
+
+![JavaScript Event Loop](https://upload.wikimedia.org/wikipedia/commons/8/83/JavaScript_Event_Loop.png)
+
+</div>
+<div style="flex: 1; text-align: center; font-size: 80%;">
+
+- Когда происходит событие, оно попадает в очередь.
+- Цикл обработчика событий очереди для каждого события запускает его обработчик (обработчики). Обычно события очереди обрабатываются в порядке поступления
+- Если событие инициируется кодом JavaScript оно, как правило, обрабатывается синхронно, то есть прямо сейчас
+- Это связано с понятием **event loop** — цикла обработки событий.
+
+</div>
+
 
 ---
-### Синхронные и отложенные действия
+### Синхронные события
 Если JavaScript непосредственно вызывает действие, оно может выполниться сразу.
 Например:
 
@@ -1279,15 +1742,44 @@ button.onclick = function() {
 
 Если `focus()` вызывает другое событие, оно может быть обработано непосредственно во время текущего вызова.
 
+Порядок: в onclick , !focus!, из onclick 
+---
+### Функция `setTimeout()`
+
 `setTimeout()` позволяет запланировать функцию:
 
 ```javascript
-setTimeout(function() {
-    text.focus();
-}, 0);
+<input type="button" id="button" value="Нажми меня">
+<input type="text" id="text" size="60">
+<script>
+  button.onclick = function() {
+    text.value += ' onclick ';
+    setTimeout(function() {text.focus();}, 0);
+    text.value += 'из onclick ';
+  };
+  text.onfocus = function(){text.value+='!focus! ';};
+</script>
+
 ```
 
 Даже `setTimeout(..., 0)` не означает «выполнить прямо сейчас». Функция будет поставлена в очередь и выполнится после завершения текущего кода.
+
+Порядок: в onclick ,из onclick, !focus!
+---
+### Всплытие событий
+
+При наступлении события обработчики сначала срабатывают на самом вложенном элементе, затем на его родителе, и так далее, вверх по цепочке вложенности.
+
+```html
+<form onclick="alert('form')">FORM
+  <div onclick="alert('div')">DIV
+    <p onclick="alert('p')">P</p>
+  </div>
+</form>
+```
+
+При нажатии на текст последовательно будут вызваны обработчики P, DIV и FORM
+
 
 ---
 ### События мыши
@@ -1407,12 +1899,15 @@ submit
 `submit` связан с отправкой формы.
 
 ---
-
-<!-- .slide: class="code-sm cols" -->
-
 ### DOM — Document Object Model
-
 DOM — объектное представление HTML-документа.
+
+<div style="display: flex; gap: 20px; align-items: flex-start;">
+
+<!-- Левая колонка: Код -->
+<div style="flex: 1; text-align: left;">
+
+
 Например, HTML:
 
 ```html
@@ -1428,9 +1923,24 @@ DOM — объектное представление HTML-документа.
 </html>
 ```
 
+
+
+
+
+</div>
+
+<div style="flex: 1; text-align: center; font-size: 80%;">
+
 представляется браузером как дерево узлов.
 
-![Пример дерева DOM](https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/DOM_tree.svg/960px-DOM_tree.svg.png)<!-- .element: class="img-fit-m" -->
+![Пример дерева DOM](https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/DOM_tree.svg/960px-DOM_tree.svg.png)
+
+
+</div>
+
+
+---
+### DOM — Document Object Model
 
 DOM позволяет JavaScript:
 - находить элементы;
@@ -1439,6 +1949,7 @@ DOM позволяет JavaScript:
 - добавлять и удалять узлы;
 - изменять CSS;
 - назначать обработчики событий.
+
 
 ---
 ### Узлы DOM
@@ -1498,6 +2009,12 @@ element.hidden = true;
 
 ### Навигация по DOM
 
+<div style="display: flex; gap: 20px; align-items: flex-start;">
+
+<!-- Левая колонка: Код -->
+<div style="flex: 1; text-align: left;">
+
+
 Для перемещения по дереву используются свойства:
 
 - Дети
@@ -1522,7 +2039,34 @@ parentNode
 parentElement
 ```
 
-![Навигация по дереву DOM](https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5a/DOM-model.svg/960px-DOM-model.svg.png)<!-- .element: class="img-fit-s" -->
+</div>
+
+<div style="flex: 1; text-align: center; font-size: 80%;">
+
+![Навигация по дереву DOM](https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5a/DOM-model.svg/960px-DOM-model.svg.png)
+
+</div>
+
+---
+### childNodes и children
+В childNodes попадают все узлы — включая текстовые (пробелы, переносы строк!):
+
+```html
+<div id="elem">
+  Текст <b>Жирный</b>
+</div>
+```
+
+```javascript
+let elem = document.getElementById("elem");
+elem.childNodes.length; // 3 — переносы строк тоже узлы!
+elem.children.length;   // 1 — только элементы (теги)
+elem.firstChild;        // текстовый узел (перенос строки)
+elem.firstElementChild; // <b>Жирный</b>
+```
+
+> ⚠️ Работая с тегами, используйте «элементные» варианты: children, firstElementChild, previousElementSibling, nextElementSibling, parentElement.
+
 
 ---
 ### Поиск элементов
@@ -1560,11 +2104,91 @@ document.querySelectorAll("p");
 ```
 
 `querySelector()` возвращает первый найденный элемент, а `querySelectorAll()` — все подходящие элементы.
+---
+### Создание и добавление элементов
+```javascript
+let div = document.createElement("div"); // элемент ещё НЕ на странице
+div.className = "message";
+div.textContent = "Привет!";
+document.body.append(div); // теперь добавлен на страницу
+```
+
+- Основные методы:
+    - node.append(...)  — вставить в конец
+    - node.prepend(...) — вставить в начало
+    - node.before(...)  — перед узлом
+    - node.after(...)   — после узла
+    - node.remove()     — удалить узел
+
+---
+### Пример: список из массива
+```javascript
+let items = ["Хлеб", "Молоко", "Сыр"];
+let list = document.createElement("ul");
+for (let item of items) {
+     let li = document.createElement("li");    
+     li.textContent = item;    
+     list.append(li);
+     }
+document.body.append(list);
+```
+
+---
+### Атрибуты элементов
+
+```javascript
+elem.getAttribute("href");      // прочитать
+elem.setAttribute("href", url); // установить
+elem.hasAttribute("href");      // проверить наличие
+elem.removeAttribute("href");   // удалить
+```
+
+У стандартных атрибутов есть одноимённые свойства:
+
+```javascript
+link.href = "https://ya.ru";
+input.value = "текст";
+input.disabled = true;
+```
+
+*Пользовательские атрибуты data-\* доступны через elem.dataset.*
+
+---
+### Классы и стили
+Классами управляют через classList — это предпочтительный способ:
+
+```javascript
+elem.classList.add("highlight");
+elem.classList.remove("highlight");
+elem.classList.toggle("active");   // добавить / убрать
+elem.classList.contains("active"); // true / false
+```
+
+Точечные стили задаются через style (имена — в camelCase):
+
+```javascript
+elem.style.color = "red";
+elem.style.backgroundColor = "#eee";
+```
+
+> ⚠️ «Разбрасывать» стили по коду неудобно — лучше менять класс, а оформление описывать в CSS.
+
+---
+### innerHTML: осторожно с пользовательскими данными!
+innerHTML разбирает строку как HTML:
+
+```javascript
+let name = '<img src=x onerror="alert(1)">';
+elem.innerHTML = "Привет, " + name;  // HTML выполнится!
+elem.textContent = "Привет, " + name; // просто текст — безопасно
+```
+
+> ⚠️ Небезопасная вставка непроверенных пользовательских данных через innerHTML может привести к XSS. Если нужно вставить именно текст, используйте textContent.
 
 ---
 ### BOM — Browser Object Model
-BOM предоставляет JavaScript доступ к возможностям браузера.
-Главный объект:
+BOM (Browser Object Model) — традиционное, неформальное название набора браузерных API, связанных с окном и окружением страницы.
+В браузерном окружении глобальный объект доступен через globalThis; в обычном контексте окна globalThis связан с объектом window.
 
 ```javascript
 window
@@ -1609,6 +2233,34 @@ let b = 10;
 
 window.b; // undefined — let/const не создают свойств window
 ```
+---
+### localStorage и sessionStorage
+
+localStorage хранит пары «ключ — значение» между перезагрузками страницы:
+
+```javascript
+localStorage.setItem("name", "Маша");
+let name = localStorage.getItem("name"); // "Маша"
+localStorage.removeItem("name");
+localStorage.clear(); // очистить всё хранилище
+```
+
+Значения всегда сохраняются как строки:
+
+```javascript
+localStorage.setItem("age", 25);
+localStorage.getItem("age"); // "25"
+```
+
+Объекты сохраняют через JSON:
+
+```javascript
+let user = {name: "Маша", age: 25};
+localStorage.setItem("user", JSON.stringify(user));
+let saved = JSON.parse(localStorage.getItem("user"));
+```
+
+sessionStorage — то же самое, но данные живут только в рамках текущей вкладки.
 
 ---
 ### Асинхронные операции
@@ -1715,6 +2367,35 @@ promise.finally(function() {
 Это удобно для действий, которые должны выполняться и после успеха, и после ошибки: например, скрыть индикатор загрузки.
 
 ---
+### Промисификация: callback → Promise
+
+Перепишем `loadScript` так, чтобы он возвращал Promise:
+
+```javascript
+function loadScript(src) {
+    return new Promise(function(resolve, reject) {
+        let script = document.createElement("script");
+
+        script.src = src;
+
+        script.onload = () => resolve(script);
+        script.onerror = () => reject(
+            new Error("Ошибка загрузки " + src)
+        );
+
+        document.head.append(script);
+    });
+}
+
+loadScript("script.js").then(script => {
+    testFunction();
+});
+```
+
+Такой приём называют **промисификацией**: обёртка callback-операции в Promise.
+
+
+---
 ### `async/await`
 
 `async/await` делает код работы с Promise похожим на последовательный код.
@@ -1731,13 +2412,37 @@ async function test() {
 
 ```javascript
 async function testAsync() {
-    await loadScript("script.js");
+    let script = await loadScript("script.js");
 
     testFunction();
 }
+
+testAsync();
 ```
 
 `await` можно использовать внутри `async`-функции.
+---
+### Ошибки в async-функциях: try...catch
+
+`await` пробрасывает ошибку rejected-Promise — её ловит обычный `try...catch`:
+
+```javascript
+async function testAsync() {
+    try {
+        await loadScript("script.js");
+
+        testFunction();
+    } catch (err) {
+        alert(err.message);
+    }
+}
+
+testAsync();
+```
+
+Сравните с цепочкой `.then(...).catch(...)` — код стал линейным.
+
+
 
 ---
 ### Объекты JavaScript
@@ -1783,7 +2488,6 @@ delete user.city;
 "name" in user;
 ```
 
----
 ### Перебор свойств
 
 Для перебора используется `for...in`:
@@ -1885,13 +2589,8 @@ admin.g();  // Админ
 <!-- .slide: class="code-sm" -->
 
 ### Преобразование объектов
-В некоторых операциях объект преобразуется в примитив.
-Это может происходить при:
-- строковом преобразовании;
-- числовых операциях;
-- логических операциях.
-
-В логическом контексте объекты являются истинными:
+При строковых и числовых операциях объект в некоторых случаях преобразуется в примитив.
+В логическом контексте объекты всегда являются truthy, включая пустые объекты и массивы.
 
 ```javascript
 if ({}) {
@@ -1924,7 +2623,7 @@ let user = {
 alert(user);
 ```
 
-Для числового преобразования используется `valueOf()`, а при его отсутствии применяются дальнейшие правила преобразования, включая `toString()`.
+Для числового преобразования сначала вызывается `valueOf()`; если он не вернул примитив — вызывается `toString()`.
 
 ---
 
@@ -2161,80 +2860,155 @@ func.apply(context, [arg1, arg2]);
 <!-- .slide: class="code-sm" -->
 
 ### Прототипы
-Объекты JavaScript могут образовывать цепочки прототипов.
-Если свойство не найдено непосредственно в объекте, JavaScript ищет его в прототипе.
+В JavaScript объект может иметь прототип — другой объект, из которого он может получать свойства и методы.
+
+Если свойство не найдено непосредственно в объекте, JavaScript ищет его в прототипе, затем в прототипе прототипа и так далее.
 
 ```javascript
-let animal = {
-    eats: true
+const animal = {
+    eats: true,
+    
+    walk() {
+        console.log("Животное идёт");
+    }
 };
 
-let rabbit = {
+const rabbit = {
     jumps: true
 };
 
-rabbit.__proto__ = animal;
-
-alert(rabbit.jumps); // true
-alert(rabbit.eats);  // true
+Object.setPrototypeOf(rabbit, animal);
+console.log(rabbit.jumps); // true — собственное свойство
+console.log(rabbit.eats);  // true — найдено в прототипе
+rabbit.walk();             // Животное идёт
 ```
+Таким образом, rabbit использует свойства и методы объекта animal, не копируя их в себя.
 
 ---
 ### Прототипы
-> ⚠️ `__proto__` — легаси-нетандарт; в новом коде используйте `Object.setPrototypeOf(rabbit, animal)`.
+Цепочка прототипов
 
 ![Цепочка прототипов JavaScript](https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/JS_Prototype_Chain.svg/960px-JS_Prototype_Chain.svg.png)<!-- .element: class="img-fit-m" -->
+Например, при обращении: 
+
+rabbit.toString();
+
+метод toString() не находится непосредственно в rabbit.
+
+JavaScript продолжает поиск по цепочке прототипов и находит его в Object.prototype.
 
 ---
-### Прототипы
-`rabbit` имеет собственное свойство `jumps`, а `eats` получает через прототип.
+### Собственные свойства и свойства прототипа
+Свойство может принадлежать самому объекту или быть получено через прототип.
 
-Запись свойства происходит непосредственно в объект:
 
+```javascript
+const animal = {
+    eats: true
+};
+
+const rabbit = {
+    jumps: true
+};
+
+Object.setPrototypeOf(rabbit, animal);
+
+console.log(rabbit.jumps); // true
+console.log(rabbit.eats);  // true
+```
+
+При этом:
+
+```javascript
+Object.hasOwn(rabbit, "jumps"); // true
+Object.hasOwn(rabbit, "eats");  // false
+```
+
+Object.hasOwn() проверяет только собственные свойства объекта.
+---
+### Изменение свойства
+Если изменить свойство через объект:
 ```javascript
 rabbit.eats = false;
 ```
+новое значение записывается непосредственно в rabbit.
+```javascript
+console.log(rabbit.eats); // false
+console.log(animal.eats); // true
+```
+Прототип при этом не изменяется:
+```javascript
+console.log(rabbit.eats); // false
+console.log(animal.eats); // true
+```
+Если собственного свойства нет, значение снова будет найдено в прототипе:
+```javascript
+delete rabbit.eats;
 
-Теперь:
+console.log(rabbit.eats); // true
+```
+---
+### `for...in` и собственные свойства
+
+for...in перечисляет перечисляемые свойства, включая свойства, полученные через цепочку прототипов.
 
 ```javascript
-rabbit.eats; // false
+const animal = {
+    eats: true
+};
+
+const rabbit = {
+    jumps: true
+};
+
+Object.setPrototypeOf(rabbit, animal);
+
+for (const key in rabbit) {
+    console.log(key);
+}
+```
+Результат может включать:
+```javascript
+jumps
+eats
 ```
 
 ---
 ### `for...in` и собственные свойства
-
-При использовании `for...in` могут учитываться свойства, полученные через цепочку прототипов.
-
-Проверить, принадлежит ли свойство самому объекту, можно через:
+Если нужно работать только с собственными свойствами, можно использовать:
 
 ```javascript
-obj.hasOwnProperty("name");
+for (const key in rabbit) {
+    if (Object.hasOwn(rabbit, key)) {
+        console.log(key);
+    }
+}
 ```
-
+Для перебора элементов массивов при этом обычно используют for...of или методы массивов.
 ---
-### Прототип конструктора
+### Свойство prototype у конструктора
 
-Для функции-конструктора используется свойство `prototype`:
+У функций, которые используются как конструкторы, есть специальное свойство prototype.
 
 ```javascript
-function Rabbit(name) {
+function User(name) {
     this.name = name;
 }
 
-let animal = {
-    eats: true
+User.prototype.sayHi = function() {
+    console.log("Привет, " + this.name);
 };
 
-Rabbit.prototype = animal;
+const ivan = new User("Иван");
+const petr = new User("Пётр");
 
-let rabbit = new Rabbit("Кролик");
-
-rabbit.eats; // true
+ivan.sayHi(); // Привет, Иван
+petr.sayHi(); // Привет, Пётр
 ```
 
-Все экземпляры конструктора могут использовать методы, размещённые в его прототипе.
-
+- Метод sayHi не создаётся заново для каждого объекта.
+Оба объекта используют один метод из: User.prototype
+- Это позволяет эффективно хранить общие методы объектов.
 ---
 ### Наследование методов
 
@@ -2291,6 +3065,142 @@ Rabbit.prototype.run = function() {
     this.jump();
 };
 ```
+---
+### Классы: class
+В современном JavaScript для создания объектов с общими методами обычно используют class
+
+```javascript
+class User {    
+    constructor(name) { this.name = name;}    
+    sayHi() { alert("Привет, " + this.name);}
+}
+let ivan = new User("Иван");
+ivan.sayHi(); // Привет, Иван
+```
+
+Методы класса при этом всё равно связаны с прототипом:
+
+```javascript
+User.prototype.sayHi
+```
+
+То есть class не отменяет прототипы — он предоставляет более удобный синтаксис для работы с ними.
+
+---
+### Наследование с extends
+
+```javascript
+class Animal {
+    constructor(name) {
+        this.name = name;
+    }
+
+    run() {
+        console.log(this.name + " бежит");
+    }
+}
+
+class Rabbit extends Animal {
+    jump() {
+        console.log(this.name + " прыгает");
+    }
+}
+
+const rabbit = new Rabbit("Кролик");
+
+rabbit.run();  // Кролик бежит
+rabbit.jump(); // Кролик прыгает
+```
+Rabbit наследует методы класса Animal и может добавлять собственные.
+
+---
+### Вызов конструктора родителя: super
+Если в классе-наследнике есть собственный конструктор, для инициализации родительской части объекта используется super().
+
+```javascript
+class Animal {
+    constructor(name) {
+        this.name = name;
+    }
+    run() {
+        console.log(this.name + " бежит");
+    }
+}
+
+class Rabbit extends Animal {
+    constructor(name, earLength) {
+        super(name);
+        this.earLength = earLength;
+    }
+    jump() {
+        console.log(this.name + " прыгает");
+    }
+}
+
+const rabbit = new Rabbit("Кролик", 10);
+console.log(rabbit.name);      // Кролик
+console.log(rabbit.earLength); // 10
+```
+
+---
+### Вызов конструктора родителя: super
+В конструкторе производного класса нельзя использовать this до вызова super():
+
+
+```javascript
+class Rabbit extends Animal {
+    constructor(name) {
+        super(name);
+
+        this.type = "rabbit";
+    }
+}
+```
+---
+### Вызов метода родителя: super
+super используется не только для конструктора.
+
+С его помощью можно вызвать метод родительского класса.
+```javascript
+class Animal {
+    run() {
+        console.log("Животное бежит");
+    }
+}
+class Rabbit extends Animal {
+    run() {
+        super.run();
+        console.log("Кролик прыгает на ходу");
+    }
+}
+const rabbit = new Rabbit();
+rabbit.run();
+```
+Результат:
+```javascript
+Животное бежит
+Кролик прыгает на ходу
+```
+Таким образом, наследник может переопределить метод родителя и при необходимости использовать его реализацию.
+
+
+---
+### Проверка типа: instanceof
+Оператор instanceof позволяет проверить, находится ли прототип конструктора в цепочке прототипов объекта.
+
+```javascript
+class Animal {}
+
+class Rabbit extends Animal {}
+
+const rabbit = new Rabbit();
+
+console.log(rabbit instanceof Rabbit); // true
+console.log(rabbit instanceof Animal); // true
+console.log(rabbit instanceof Object); // true
+
+```
+Поскольку Rabbit наследуется от Animal, объект rabbit является экземпляром обоих классов.
 
 ---
 ### Порядок инициализации программы
@@ -2414,6 +3324,45 @@ counter(); // 5
 Современный JavaScript использует встроенные **ES-модули** (`import` / `export`).
 
 ---
+### ES-модули: export
+Модуль — отдельный файл со своим пространством имён.
+
+Файл user.js:
+
+```javascript
+export let name = "Маша";
+export function sayHi() {
+    console.log("Привет!");
+}
+```
+
+Экспорт «по умолчанию» (не более одного на файл):
+```javascript
+export default class User { /* ... */ }
+```
+---
+### ES-модули: import
+Файл main.js:
+
+```javascript
+import User from "./user.js";            // default-экспорт
+import { name, sayHi } from "./user.js"; // именованные экспорты
+```
+
+На страницу модуль подключается так:
+```html
+<script type="module" src="main.js"></script>
+```
+---
+### Что даёт type="module"
+- скрипт выполняется после разбора HTML (как defer);
+- каждый модуль — изолированное пространство имён, глобальная область не «засоряется»;
+- всегда включён строгий режим;
+- наружу виден только явно экспортированный код.
+
+
+
+---
 ### Canvas
 
 `<canvas>` — HTML-элемент, позволяющий рисовать средствами JavaScript.
@@ -2527,18 +3476,37 @@ let text = JSON.stringify(user);
 ---
 ### Запросы: `fetch()`
 
-`fetch()` — встроенный в браузер способ выполнить HTTP-запрос (именно он используется в колоде Node):
+`fetch()` — API для выполнения HTTP-запросов.
+Он встроен в современные браузеры и доступен в современных версиях Node.js.:
 
 ```javascript
 fetch("/api/city")
-    .then(response => response.json())
-    .then(cities => console.log(cities));
+    .then(response => {
+        if (!response.ok) { throw new Error(`HTTP error: ${response.status}`); }
+        return response.json();
+    })
+    .then(cities => console.log(cities))
+    .catch(error => console.error(error));
 ```
 
 - Возвращает Promise, который разрешается в объект `Response`;
 - `.json()` читает тело ответа как JSON (тоже возвращает Promise);
 - на HTTP-ошибке (404, 500) Promise **не** отклоняется — проверяйте `response.ok`.
 
+---
+### Запросы: `fetch()`
+Или по другому:
+```javascript
+async function loadCities() {
+    const response = await fetch("/api/city");
+
+    if (!response.ok) {
+        throw new Error(`HTTP error: ${response.status}`);
+    }
+
+    return await response.json();
+}
+```
 Запрос с телом:
 
 ```javascript
@@ -2550,20 +3518,23 @@ fetch("/api/city", {
 ```
 
 ---
-### Что важно запомнить
-JavaScript в браузере связывает три основных мира:
+### `fetch()` и Promise.all()
+Дожидаемся выполнения сразу нескольких запросов асинхронно
 
-```text
-HTML
-  ↓
-DOM ← JavaScript → BOM
+```javascript
+const [users, cities] = await Promise.all([
+    fetch("/api/users").then(r => r.json()),
+    fetch("/api/cities").then(r => r.json())
+]);
 ```
 
 
-
+---
 ### Материалы
 
-- [learn.javascript.ru](https://learn.javascript.ru)
-- [Coursera — HTML, CSS, JavaScript](https://www.coursera.org/learn/html-css-javascript/home/welcome)
-- [MDN — JavaScript](https://developer.mozilla.org/ru/docs/Web/JavaScript)
-- [JavaScript.com](https://www.javascript.com)
+- [learn.javascript.ru](https://learn.javascript.ru) — подробный учебник по JavaScript
+- [MDN — JavaScript](https://developer.mozilla.org/ru/docs/Web/JavaScript) — документация и справочник
+- [ECMAScript Language Specification](https://tc39.es/ecma262/) — официальная спецификация JavaScript
+- [Can I use](https://caniuse.com/) — проверка поддержки возможностей JavaScript в браузерах
+
+
