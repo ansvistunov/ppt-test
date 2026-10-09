@@ -24,6 +24,7 @@ https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Server
  - CGI (Common Gateway Interface ) является стандартом интерфейса внешней прикладной программы с WWW сервером.
  - CGI-программа - это обычная программа, которая выполняется на Web-сервере в ответ на запрос, сделанный браузером. Для написания такой программы можно использовать почти любой язык программирования - CGI определяет стандарт интерфейса между Web-сервером и CGI-программой. 
 
+---
 ### Подходы. CGI
  - CGI-программа может возвращать данные любого типа, например HTML-текст, рисунки в формате GIF, простой текст, документы Microsoft Word, аудиофайлы и т.д. 
  - Заголовок типа возвращаемых данных сообщает браузеру о типе данных, для того чтобы обеспечивать их правильную обработку.
@@ -96,6 +97,67 @@ int main(int argc, char* argv[]){
 }
 ```
 ---
+### Пример 3. Демонстрация
+- Передача параметров (метод GET)
+- Работа через переменные окружения
+http://localhost:8080/test/form_get.html
+
+```c 
+int main(int arcg, char* argv[]){
+    entry entries[MAX_ENTRIES];
+    printf("Content-type: text/html%c%c",10,10);
+    printf("<h1>HelloWorld</h1>\n\n");
+    printf("<h2>QUERY_STRING=%s</h2>",getenv("QUERY_STRING"));
+    int cl = strlen(getenv("QUERY_STRING")); int x,m;
+    for(x=0;cl;x++){ 
+        m=x;
+        entries[x].val = fmakeword(getenv("QUERY_STRING"),'&',&cl);
+        plustospace(entries[x].val);
+        unescape_url(entries[x].val);
+        entries[x].name = makeword(entries[x].val,'=');
+    }
+    printf("<H1>Query Results</H1>");
+    printf("You submitted the following name/value tags:<p>%c",10);
+    printf("<ul>%c",10);
+    for(x=0; x <= m; x++) printf("<li> <code>%s = %s</code>%c",entries[x].name, 
+                                                            entries[x].val,10);
+    printf("</ul>%c",10); return 0;
+}
+
+```
+---
+### Пример 4. Демонстрация
+- Передача параметров (метод POST)
+- Работа через стандартный поток ввода
+http://localhost:8080/test/form_post.html
+
+```c 
+int main(int arcg, char* argv[]){
+    entry entries[MAX_ENTRIES];
+    printf("Content-type: text/html%c%c",10,10);
+    printf("<h1>HelloWorld</h1>\n\n");
+    int cl = atoi(getenv("CONTENT_LENGTH"));
+    int x,m;
+    for(x=0;cl && (!feof(stdin));x++){
+        m=x;
+        entries[x].val = fmakeword(stdin,'&',&cl);
+        plustospace(entries[x].val);
+        unescape_url(entries[x].val);
+        entries[x].name = makeword(entries[x].val,'=');
+    }
+    printf("<H1>Query Results</H1>");
+    printf("You submitted the following name/value pairs:<p>%c",10);
+    printf("<ul>%c",10);
+    for(x=0; x <= m; x++) printf("<li> <code>%s = %s</code>%c",entries[x].name, 
+                                                                entries[x].val,10);
+    printf("</ul>%c",10);
+    return 0;}
+
+```
+
+
+
+---
 ### Проблемы “чистого” CGI и пути их решения
  - Код HTML «встроен» в код программы
      - Сложность поддержки
@@ -115,7 +177,6 @@ int main(int argc, char* argv[]){
   </html>
 ```
 
-### Шаблоны
  - Использование шаблонов решает часть проблем - отделяет разметку от логики формирования данных
  - При  практическом использовании шаблонов возникает желание строить «сложные» шаблоны. Как результат появляются специальные языки управления шаблонами
  - Следующий логический шаг – встроить в шаблоны полнофункциональный язык программирования. Типичные представители подхода – php, jsp, asp, …
@@ -125,11 +186,11 @@ int main(int argc, char* argv[]){
  - JSP файл – это текстовый документ, содержимое которого можно разбить на две части
      - статический текст (каркас) – создается при помощи специальных редакторов
      - динамический (генерируемый во время выполнения страницы) – обычно пишется в среде разработки программирования
-
+---
 ### Пример 5. JSP
 http://localhost:8080/tests/ex1.jsp
----
-### Принцип работы
+
+Принцип работы:
  - HTTP-запрос обрабатывается веб-сервером и передаётся контейнеру сервлетов (например, Tomcat)
  - При первом обращении JSP-страница транслируется в сервлет и компилируется, далее используется готовый класс
  - Сервлет формирует HTML-ответ, который возвращается клиенту
@@ -179,6 +240,7 @@ out.write("\n  <!-- This is a HTML comment -->"
  - Нельзя использовать поля для хранения значений, использующихся в рамках одного запроса
  - При работе с внутренними классами есть особенности
 
+---
 ### JSP-страница с объявлениями
  - JSP-страница 
 ```js 
@@ -206,6 +268,7 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
  - Синтаксически являются фрагментами обычных Java-методов
  - Каждая завершенная инструкция заканчивается знаком точки с запятой
 
+---
 ### JSP-страница со скриптлетами
  - JSP-страница 
 ```html 
@@ -231,6 +294,7 @@ out.write("</body></html>\n");
  - Синтаксически являются вычислимыми выражениями Java, для которых может быть получено текстовое представление
  - В конце выражений точки с запятой нет!
 
+---
 ### JSP-страница с выражениями
  - JSP-страница 
 ```html 
@@ -261,7 +325,7 @@ out.write("</body></html>\n");
      - Страница для обработки ошибок
          - Является ли данная страница обработчиком
          - Какая страница используется как обработчик
-
+---
 ### Тип отклика, кодировка и импорт типов
  - JSP-страница 
 ```html 
@@ -285,6 +349,8 @@ import java.lang.reflect.*;
  - **application** имеет тип javax.servlet.ServletContext, определяет контекст сервлета
  - **pageContext** имеет тип javax.servlet.jsp.PageContext, определяет контекст jsp-страницы
 
+---
+### Стандартные объекты
  - **session** имеет тип javax.servlet.http.HttpSession, представляет текущую сессию
  - **request** имеет тип javax.servlet.http.HttpServletRequest, представляет текущий запрос
  - **response** имеет тип javax.servlet.http.HttpServletResponse, представляет текущий отклик
