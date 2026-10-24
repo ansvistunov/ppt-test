@@ -320,6 +320,26 @@ server.on('request',function(req,res){
 });
 ```
 ---
+В node начиная с 24 версии при использовании url.parse вы получите предупреждение безопасности. Для разбора URL сейчас лучше использовать стандартный глобальный конструктор new URL()
+
+```javascript
+const myUrl = new URL('http://localhost:4848/echo?message=ttt');
+
+// Получаем основные компоненты:
+console.log('Протокол (Protocol):', myUrl.protocol); // 'http:'
+console.log('Хост с портом (Host):', myUrl.host);     // 'localhost:4848'
+console.log('Имя хоста (Hostname):', myUrl.hostname); // 'localhost'
+console.log('Порт (Port):', myUrl.port);             // '4848'
+console.log('Путь (Pathname):', myUrl.pathname);     // '/echo'
+console.log('Строка запроса (Search):', myUrl.search); // '?message=ttt'
+
+// Разбор параметров (Query parameters):
+const messageValue = myUrl.searchParams.get('message');
+console.log('Значение параметра message:', messageValue); // 'ttt'
+
+```
+
+---
 ### Часто используемые модули. fs
 FS позволяет<!-- .element: class="left"  -->
  - Выполнять операции с элементами файловой системы
